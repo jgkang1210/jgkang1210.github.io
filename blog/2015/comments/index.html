@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>Robotics blog</title>
+<title>Robotics blog | a post with comments</title>
 <meta name="description" content="Share info about robotics
 ">
 
@@ -31,7 +31,7 @@
 
 <link rel="stylesheet" href="/al-folio/assets/css/main.css">
 
-<link rel="canonical" href="/al-folio/404.html">
+<link rel="canonical" href="/al-folio/blog/2015/comments/">
 
 <!-- JQuery -->
 <!-- jQuery -->
@@ -96,7 +96,7 @@
           </li>
           
           <!-- Blog -->
-          <li class="nav-item ">
+          <li class="nav-item active">
             <a class="nav-link" href="/al-folio/blog/">
               blog
               
@@ -166,25 +166,35 @@
     <!-- Content -->
 
     <div class="container mt-5">
-      <style type="text/css" media="screen">
-  .container {
-    margin: 10px auto;
-    max-width: 600px;
-    text-align: center;
-  }
-  h1 {
-    margin: 30px 0;
-    font-size: 4em;
-    line-height: 1;
-    letter-spacing: -1px;
-  }
-</style>
+      
 
-<div class="container">
-  <h1>404</h1>
+<div class="post">
 
-  <p><strong>Page not found :(</strong></p>
-  <p>The requested page could not be found.</p>
+  <header class="post-header">
+    <h1 class="post-title">a post with comments</h1>
+    <p class="post-meta">October 20, 2015</p>
+  </header>
+
+  <article class="post-content">
+    <p>This post shows how to add DISQUS comments.</p>
+
+  </article>
+
+  
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_shortname  = 'al-folio';
+      var disqus_identifier = '/blog/2015/comments';
+      var disqus_title      = "a post with comments";
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+
 </div>
 
     </div>
