@@ -3,7 +3,8 @@ layout: page
 title: Robotics using matlab
 description: robotics using matlab
 img: /assets/img/proj2_prof.jpg
-importance: 1
+comments: true
+importance: 2
 category: work
 ---
 

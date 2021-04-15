@@ -3,6 +3,7 @@ layout: page
 title: Social Venture
 description: soceial venture competition in 2020
 img: /assets/img/12.jpg
+comments: true
 importance: 1
 category: work
 ---
