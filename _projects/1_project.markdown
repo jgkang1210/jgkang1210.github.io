@@ -1,35 +1,52 @@
 ---
 layout: page
-title: Social Venture
-description: soceial venture competition in 2020
+title: project 1
+description: a project with a background image
 img: /assets/img/12.jpg
-comments: true
 importance: 1
 category: work
 ---
 
-2020년도 소셜벤처 경연대회 출품작.
+Every project has a beautiful feature showcase page.
+It's easy to include images in a flexible 3-column grid format.
+Make your photos 1/3, 2/3, or full width.
 
-## 2020 소셜벤처 경연대회
+To give your project a background in the portfolio page, just add the img tag to the front matter like so:
 
-주제 : 물체 인식 기능을 이용한 시각장애인용 안경
-기간 : 2020.07.13 ~ 2020.09.05
+    ---
+    layout: page
+    title: project
+    description: a project with a background image
+    img: /assets/img/12.jpg
+    ---
 
-Opencv 와 아루코마커를 이용하여 시각장애인들이 사용할 수 있게 일체형 안경을 제작.
-안경에는 라즈베리파이 zero w 를 탑재하여 아루코마커의 인식을 통해 주변 사물이 무엇인지 알려주고, 이를 앱을 통해 사용자에게 소리로 전달해준다.
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/1.jpg' | relative_url }}" alt="" title="example image"/>
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/3.jpg' | relative_url }}" alt="" title="example image"/>
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/5.jpg' | relative_url }}" alt="" title="example image"/>
+    </div>
+</div>
+<div class="caption">
+    Caption photos easily. On the left, a road goes through a tunnel. Middle, leaves artistically fall in a hipster photoshoot. Right, in another hipster photoshoot, a lumberjack grasps a handful of pine needles.
+</div>
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/5.jpg' | relative_url }}" alt="" title="example image"/>
+    </div>
+</div>
+<div class="caption">
+    This image can also have a caption. It's like magic.
+</div>
 
+You can also put regular text between your rows of images.
+Say you wanted to write a little bit about your project before you posted the rest of the images.
+You describe how you toiled, sweated, *bled* for your project, and then... you reveal it's glory in the next row of images.
 
-## 영상
-https://youtu.be/N39_Hc4jSvc
-
-
-## 기능
-
-사용자가 어떤 물체를 잡았는지 탐지하는 기능.
---> 화면 속 모든 아루코 마커를 인식하여 속도 벡터를 검출해내고, 이 중 평균 속도보다 가장 빨리 움직이는 속도 벡터를 가지는 아루코 마커가 사용자가 잡은 물체임을 알려준다.
-
-화면 속의 마커들의 상대위치를 통해 시각장애인이 찾고자 하는 물건이 어느 위치에 있는지 알려준다.
-ex) 꽃병이 책의 오른쪽에 있으면 그 위치를 알려준다.
 
 <div class="row justify-content-sm-center">
     <div class="col-sm-8 mt-3 mt-md-0">
@@ -39,3 +56,23 @@ ex) 꽃병이 책의 오른쪽에 있으면 그 위치를 알려준다.
         <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/11.jpg' | relative_url }}" alt="" title="example image"/>
     </div>
 </div>
+<div class="caption">
+    You can also have artistically styled 2/3 + 1/3 images, like these.
+</div>
+
+
+The code is simple.
+Just wrap your images with `<div class="col-sm">` and place them inside `<div class="row">` (read more about the <a href="https://getbootstrap.com/docs/4.4/layout/grid/" target="_blank">Bootstrap Grid</a> system).
+To make images responsive, add `img-fluid` class to each; for rounded corners and shadows use `rounded` and `z-depth-1` classes.
+Here's the code for the last row of images above:
+
+```html
+<div class="row justify-content-sm-center">
+    <div class="col-sm-8 mt-3 mt-md-0">
+        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/6.jpg' | relative_url }}" alt="" title="example image"/>
+    </div>
+    <div class="col-sm-4 mt-3 mt-md-0">
+        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/11.jpg' | relative_url }}" alt="" title="example image"/>
+    </div>
+</div>
+```
