@@ -1,78 +1,64 @@
 ---
 layout: page
-title: project 2
-description: a project with a background image
-img: /assets/img/3.jpg
+title: Robotics using matlab
+description: robotics using matlab
+img: /assets/img/proj2_prof.jpg
+comments: true
 importance: 2
 category: work
 ---
 
-Every project has a beautiful feature showcase page.
-It's easy to include images in a flexible 3-column grid format.
-Make your photos 1/3, 2/3, or full width.
+[git repo](https://github.com/jgkang1210/ME439)
 
-To give your project a background in the portfolio page, just add the img tag to the front matter like so:
+## Robotics using matlab library
 
-    ---
-    layout: page
-    title: project
-    description: a project with a background image
-    img: /assets/img/12.jpg
-    ---
-
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/1.jpg' | relative_url }}" alt="" title="example image"/>
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/3.jpg' | relative_url }}" alt="" title="example image"/>
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/5.jpg' | relative_url }}" alt="" title="example image"/>
-    </div>
-</div>
-<div class="caption">
-    Caption photos easily. On the left, a road goes through a tunnel. Middle, leaves artistically fall in a hipster photoshoot. Right, in another hipster photoshoot, a lumberjack grasps a handful of pine needles.
-</div>
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/5.jpg' | relative_url }}" alt="" title="example image"/>
-    </div>
-</div>
-<div class="caption">
-    This image can also have a caption. It's like magic.
-</div>
-
-You can also put regular text between your rows of images.
-Say you wanted to write a little bit about your project before you posted the rest of the images.
-You describe how you toiled, sweated, *bled* for your project, and then... you reveal it's glory in the next row of images.
+Based on : 
+[http://hades.mech.northwestern.edu/index.php/Modern_Robotics](http://hades.mech.northwestern.edu/index.php/Modern_Robotics)
 
 
+Matlab library를 활용하여 inverse kinematics, forward kinematics 등등 구현.
+
+
+## 기능
+1. coppelia sim scene for controlling the Indy 7 manipulator
+2. MATLAB assignments for solving problems
+
+### 2R open chain manipulator sim
+Using Matlab
+
+Can calculate the 2R open chane robot's configuration with manipulibility elipsoid and 1st, 2nd, 3rd measure of the manipulability.
+
+ex) when L1 = 1, L2 = 1, theta 1 = -10, theta 2 = 10
 <div class="row justify-content-sm-center">
-    <div class="col-sm-8 mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/6.jpg' | relative_url }}" alt="" title="example image"/>
-    </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/11.jpg' | relative_url }}" alt="" title="example image"/>
+    <div class="col-sm-8 mt-8 mt-md-0">
+        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/-1020.png' | relative_url }}" alt="" title="example image"/>
     </div>
 </div>
-<div class="caption">
-    You can also have artistically styled 2/3 + 1/3 images, like these.
-</div>
 
-
-The code is simple.
-Just wrap your images with `<div class="col-sm">` and place them inside `<div class="row">` (read more about the <a href="https://getbootstrap.com/docs/4.4/layout/grid/" target="_blank">Bootstrap Grid</a> system).
-To make images responsive, add `img-fluid` class to each; for rounded corners and shadows use `rounded` and `z-depth-1` classes.
-Here's the code for the last row of images above:
-
-```html
+ex) when L1 = 1, L2 = 1, theta 1 = 60, theta 2 = 60
 <div class="row justify-content-sm-center">
-    <div class="col-sm-8 mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/6.jpg' | relative_url }}" alt="" title="example image"/>
-    </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/11.jpg' | relative_url }}" alt="" title="example image"/>
+    <div class="col-sm-8 mt-8 mt-md-0">
+        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/6060.png' | relative_url }}" alt="" title="example image"/>
     </div>
 </div>
-```
+
+ex) when L1 = 1, L2 = 1, theta 1 = 135, theta 2 = 90
+<div class="row justify-content-sm-center">
+    <div class="col-sm-8 mt-8 mt-md-0">
+        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/13590.png' | relative_url }}" alt="" title="example image"/>
+    </div>
+</div>
+
+ex) when L1 = 1, L2 = 1, theta 1 = 190, theta 2 = 160
+<div class="row justify-content-sm-center">
+    <div class="col-sm-8 mt-8 mt-md-0">
+        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/190160.png' | relative_url }}" alt="" title="example image"/>
+    </div>
+</div>
+
+ex) complex case
+<div class="row justify-content-sm-center">
+    <div class="col-sm-8 mt-8 mt-md-0">
+        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/complex.png' | relative_url }}" alt="" title="example image"/>
+    </div>
+</div>
