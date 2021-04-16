@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>Robotics Basis | Robotics Basis</title>
+<title>Robotics Basis | Robotics using matlab</title>
 <meta name="description" content="blog post about robotics basis
 ">
 
@@ -31,7 +31,7 @@
 
 <link rel="stylesheet" href="/assets/css/main.css">
 
-<link rel="canonical" href="/blog/">
+<link rel="canonical" href="/projects/2_project/">
 
 <!-- JQuery -->
 <!-- jQuery -->
@@ -96,7 +96,7 @@
           </li>
           
           <!-- Blog -->
-          <li class="nav-item active">
+          <li class="nav-item ">
             <a class="nav-link" href="/blog/">
               blog
               
@@ -104,8 +104,6 @@
           </li>
           
           <!-- Other pages -->
-          
-          
           
           
           
@@ -162,24 +160,68 @@
     <div class="container mt-5">
       <div class="post">
 
-  <div class="header-bar">
-    <h1>Robotics Basis</h1>
-    <h2>share idea and basis knowledge for robotics</h2>
-  </div>
+  <header class="post-header">
+    <h1 class="post-title">Robotics using matlab</h1>
+    <p class="post-description">robotics using matlab</p>
+  </header>
 
+  <article>
+    <p><a href="https://github.com/jgkang1210/ME439">git repo</a></p>
 
-  <ul class="post-list">
-    
-      <li>
-        <h3><a class="post-title" href="/blog/2021/test-post/">test post</a></h3>
-        <p class="post-meta">April 14, 2021</p>
-        <p>test post</p>
-      </li>
-    
-  </ul>
+<h2 id="robotics-using-matlab-library">Robotics using matlab library</h2>
 
-  
+<p>Based on : 
+<a href="http://hades.mech.northwestern.edu/index.php/Modern_Robotics">http://hades.mech.northwestern.edu/index.php/Modern_Robotics</a></p>
 
+<p>Matlab library를 활용하여 inverse kinematics, forward kinematics 등등 구현.</p>
+
+<h2 id="기능">기능</h2>
+<ol>
+  <li>coppelia sim scene for controlling the Indy 7 manipulator</li>
+  <li>MATLAB assignments for solving problems</li>
+</ol>
+
+<h3 id="2r-open-chain-manipulator-sim">2R open chain manipulator sim</h3>
+<p>Using Matlab</p>
+
+<p>Can calculate the 2R open chane robot’s configuration with manipulibility elipsoid and 1st, 2nd, 3rd measure of the manipulability.</p>
+
+<p>ex) when L1 = 1, L2 = 1, theta 1 = -10, theta 2 = 10</p>
+<div class="row justify-content-sm-center">
+    <div class="col-sm-8 mt-8 mt-md-0">
+        <img class="img-fluid rounded z-depth-1" src="/assets/img/-1020.png" alt="" title="example image" />
+    </div>
+</div>
+
+<p>ex) when L1 = 1, L2 = 1, theta 1 = 60, theta 2 = 60</p>
+<div class="row justify-content-sm-center">
+    <div class="col-sm-8 mt-8 mt-md-0">
+        <img class="img-fluid rounded z-depth-1" src="/assets/img/6060.png" alt="" title="example image" />
+    </div>
+</div>
+
+<p>ex) when L1 = 1, L2 = 1, theta 1 = 135, theta 2 = 90</p>
+<div class="row justify-content-sm-center">
+    <div class="col-sm-8 mt-8 mt-md-0">
+        <img class="img-fluid rounded z-depth-1" src="/assets/img/13590.png" alt="" title="example image" />
+    </div>
+</div>
+
+<p>ex) when L1 = 1, L2 = 1, theta 1 = 190, theta 2 = 160</p>
+<div class="row justify-content-sm-center">
+    <div class="col-sm-8 mt-8 mt-md-0">
+        <img class="img-fluid rounded z-depth-1" src="/assets/img/190160.png" alt="" title="example image" />
+    </div>
+</div>
+
+<p>ex) complex case</p>
+<div class="row justify-content-sm-center">
+    <div class="col-sm-8 mt-8 mt-md-0">
+        <img class="img-fluid rounded z-depth-1" src="/assets/img/complex.png" alt="" title="example image" />
+    </div>
+</div>
+
+  </article>
 
 </div>
 
