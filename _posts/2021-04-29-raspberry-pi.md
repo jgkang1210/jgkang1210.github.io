@@ -1,0 +1,235 @@
+---
+layout: post
+title: raspberry pi & DHT_11 & flask
+date: 2021-04-28 22:54:00-0400
+description: raspberry pi & DHT_11 & flask
+comments: true
+---
+
+<hr>
+## <span style="color:#3459eb">Description</span>
+
+이번 과제는 raspberry pi 를 이용하여 .
+
+이번 과제를 해결하기 위해서는 아래 3가지 개념이 중요하다.
+* PWM
+* Pull up resistor
+* Debounce
+
+<hr>
+
+### <span style="color:#3459eb">PWM</span>
+
+컨트롤러에서 주로 사용되는 디지털 신호는 0과 1의 개념으로 이루어져 있다. 이러한 디지털 신호를 이용해서 LED를 점등한다면 LED는 켜지거나 꺼지게만 조절할 수 있다. 이러한 LED를 켜고 끄는 것에서 더 나아가 깜빡이고 싶다면 어떻게 해야할까? 그럴때 사용할 수 있는 것이 PWM 기술이다.
+
+PWM 이란 Pulse width modulation 의 약자로, pulse의 폭을 변조 시켜서 디지털 신호를 마치 아날로그 신호와 같이 사용할 수 있게 해주는 기술이다.
+
+<hr>
+<p align="center">
+  <img width="200" height="150" src="https://upload.wikimedia.org/wikipedia/commons/0/02/PWM_duty_cycle_with_label.gif">
+  <div style="bottom: 10px; right: 19px;font-size: 13px;">
+    <p align="right">출처 : 위키피디아</p>
+  </div>
+</p>
+<hr>
+
+위의 그림을 보면 이해가 더 쉽다. 영어 문자 D는 듀티비를 나타내고 그 옆에 퍼센트로 듀티비를 알려준다.
+듀티비가 100%라는 것은 digital high 신호만을 나타내는 것이고, 0%라는 것은 0이라는 신호만 준다. gif를 보면 duty 비 변화에 따라 1인 구간의 비율과 0인 구간의 비율이 달라지는 것을 볼 수 있다.
+
+실제로 LED를 켜고 끄는 상황을 생각해보자. 우리가 1의 신호를 주면 LED가 켜지고, 0의 신호를 주면 LED는 꺼진다. (전원을 주면 커지고 끊으면 꺼진다.) 근데 만약에 이런 LED를 0.5초동안 키고 0.5초동안 끄고 다시 0.5초동안 킨다고 생각해보자.
+
+그렇다면 단위시간(1초)동안 밝기의 평균은 켜진 상태와 꺼진 상태의 중간값일 것이다.
+
+그리고 만약 이 키고 끄는 주기를 굉장히 줄인다면 (0.001초 키고 0.001 끈다면?) 밝기의 평균은 50%가 되고, 우리 눈은 그렇게 빠른 LED의 점등을 인식하지 못하기 때문에 그냥 밝기만 50% 인 LED라고 착각하게 된다.
+
+결국 디지털 신호를 이용하여, 아날로그 신호의 흉내를 내기 위해서 PWM 신호가 만들어졌다고 보면 된다.
+
+이 외에도 다양한 센서의 output으로 주로 사용된다.
+
+<hr>
+
+### <span style="color:#3459eb">Pull up resistor</span>
+
+기본적으로 우리 세상은 다양한 전하들이 둥둥 떠다니고 있다고 봐도 무방하다. 만약 전선에 배터리를 연결하지 않는다면 전선 내부의 전압은 알 수 없는 랜덤값들을 가질 것이다.
+
+따라서 이렇게 floating 되어 있는 전압을 직접 읽는다면 상당히 랜덤한 전압 값들을 읽을 수 있을 것이다.
+
+이를 해결하기 위해서 pull up resistor가 필요하다.
+
+<hr>
+<p align="center">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/5/5a/Pullup_Resistor.png">
+  <div style="bottom: 10px; right: 19px;font-size: 13px;">
+    <p align="right">출처 : 위키피디아</p>
+  </div>
+</p>
+<hr>
+
+위 그림을 보면 Vin 은 Pull up resistor를 통해 Vout에 연결 되어 있다. 그리고 아래 switch는 처음에 open 되어 있다고 생각해보자.
+
+그렇다면 Vin에서 들어온 전압은 저항을 거쳐서 Vout을 통과할 것이고, Vout은 스위치를 누르지 않는 이상 일정한 값을 가질 것이다.
+
+하지만 만약 스위치를 누른다면 Vin은 모두 스위치 쪽으로 흐를 것이고 (다이오드 통과하는 것보다 쉽다.) 이로 인해 Vout에는 0V가 걸릴 것이다.
+
+이렇게 기본 상태, 즉 switch가 open 되어있을 때 pull up 되어 있게 만들어 주는 저항이 바로 pull up 저항이다.
+
+이 와 반대되는 개념은 바로 pull down 저항이다.
+
+<hr>
+
+### <span style="color:#3459eb">Debounce resistor</span>
+
+Debounce는 무엇일까 우선 아래 그림은 우리가 버튼을 눌렀을 때 생기는 전압의 파형을 오실로 스코프로 관찰해본 것이다.
+
+우리가 만약 Pull down resistor를 연결한 회로에 버튼을 누른다면 버튼을 누르기 전에는 off 상태였다가, 버튼을 누르면 on 상태가 될것이라고 생각한다. 아래 그림을 보면 실제로 off 상태에서 on 상태로 (0에서 1로) 변화하는 모습을 볼 수 있다.
+
+하지만 0에서 1로 이동하는 과정에서 무수히 많은 voltage spike와 함께 noise들이 발생하는 모습을 볼 수 있는데 이는 버튼을 누르는 과정에서 접점이 완벽하게 일치하지 않거나, 국부적인 역기전력이 전압 변화를 방해하여 발생할 수 있다.
+
+따라서 0에서 1이 되기 위해서는 해당 noise가 사라질때 까지 기다려야 한다.
+
+<hr>
+<p align="center">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Bouncy_Switch.png">
+  <div style="bottom: 10px; right: 19px;font-size: 13px;">
+    <p align="right">출처 : 위키피디아</p>
+  </div>
+</p>
+<hr>
+
+우리가 만약 아두이노 코드를 이용해서 1에서 0으로 변하면 led 밝기를 밝게하는 코드를 작성하였다고 생각해보자.
+
+그렇다면 사용자는 버튼을 1번 누를때마다 밝기가 1번식 변하기를 기대할 것이다.
+하지만 저렇게 bouncing이 일어나는 영역에서는 1에서 0으로 사용자가 생각한 것보다 훨씬 많이 transition이 일어나고, 이로 인해 led 의 밝기가 1회가 아니라 아두이노가 인식하는 한 더 많은 횟수만큼 밝아질 것이다.
+
+이를 해결하기 위해서는 의도적으로 버튼을 누르면 아주 짧은 시간동안 delay를 줘서 노이즈가 지나가길 기다린 후에 전압의 변화상태를 다시 한 번 읽어보면 된다.
+
+아래는 이를 활용한 코드이다.
+
+아두이노 기본 코드와 예제들을 사용하였다.
+
+[PWM 참조](https://www.arduino.cc/en/Tutorial/Foundations/PWM)
+
+[Debounce 참조](https://www.arduino.cc/en/Tutorial/BuiltInExamples/Debounce)
+
+<hr>
+
+## <span style="color:#3459eb">Code </span>
+
+우선 setup 부분은 많은 내용이 있지는 않다.
+
+Button으로 사용할 핀과, 해당 핀의 상태를 저장할 변수 그리고, 버튼의 지난 상태를 저장하고 있을 변수가 필요하다. (debounce를 하기 위해서)
+
+밝기를 위한 변수와 밝기 변화를 조절하는 fade amount가 있고
+
+LED 핀번호도 지정해준다.
+
+{% highlight c++ linenos %}
+// 20190348 Jungill Kang
+// Switch Fading using inturrupt pin
+
+// Reference Fade, Debounce, Interrupt examples on arduino
+
+// interrupt pin
+int button = 2;
+int buttonState;             // the current reading from the input pin
+int lastButtonState = LOW;   // the previous reading from the input pin
+
+// initial brightness
+int brightness = 0;
+
+// amount of fade
+int fadeAmount = 2;
+
+ // PWM output led pin
+int ledPin = 9;
+{% endhighlight %}
+
+그리고 debounceDelay라는 변수를 이용하여, 버튼이 눌렸을때 부터 (꼭 버튼이 눌린게 아니더라도 전압 변화가 생겼을때 부터) 50ms를 기다린 다음 상태를 비교해본다.
+
+전압 변화에는 두 가지 상황이 존재한다.
+* 만약 노이즈였다면? --> 아주 잠간 전압이 높아졌다가 다시 원래 전압으로 돌아온다. 즉, 과거 상태 == 현재 상태
+
+*  만약 사용자가 버튼을 누른것이라면? --> 버튼을 누른 직후에는 전압이 랜덤하다가 일정시간 이 후 일정해진다. 즉, 과거 상태 != 현재상태
+
+{% highlight c++ linenos %}
+// the following variables are unsigned longs because the time, measured in
+// milliseconds, will quickly become a bigger number than can be stored in an int.
+unsigned long lastDebounceTime = 0;  // the last time the output pin was toggled
+unsigned long debounceDelay = 50;    // the debounce time; increase if the output flickers
+
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+  pinMode(ledPin, OUTPUT);
+  pinMode(button, INPUT_PULLUP);
+}
+{% endhighlight %}
+
+루프문에서는 위에서 배운 모든 개념을 이용하면 된다.
+
+11번 줄에서는 전압 변화를 감지하고, 17번 줄에서는 11번 줄이 발동 된지 50ms 뒤에 현재상태와 과거상태르 비교하여 debounce를 해준다. 그리고, 밝기를 실제로 변경해주면 된다.
+
+{% highlight c++ linenos %}
+void loop() {
+  // Don't need to use digital read and use interrupt
+  // button value, 1 : Button not pushed (PULL_UP), 0 : button pushed
+  int buttonVal = digitalRead(button);
+  
+  // check to see if you just pressed the button
+  // (i.e. the input went from LOW to HIGH), and you've waited long enough
+  // since the last press to ignore any noise:
+
+  // If the switch changed, due to noise or pressing:
+  if (buttonVal != lastButtonState) {
+    // reset the debouncing timer
+    lastDebounceTime = millis();
+  }
+
+  // checl if it is really button clicking or noise
+  if ((millis() - lastDebounceTime) > debounceDelay) {
+    // whatever the reading is at, it's been there for longer than the debounce
+    // delay, so take it as the actual current state:
+
+    // if the button state has changed:
+    if (buttonVal != buttonState) {
+      buttonState = buttonVal;
+
+      // only toggle the LED if the new button state is LOW (Pull up_resistor)
+      if (buttonState == LOW) {
+        if (brightness <= 0) {
+          fadeAmount = 2;
+        }
+        else if(brightness >= 20){
+          fadeAmount = -2;
+         }
+        brightness = brightness + fadeAmount;
+      }
+    }
+  }
+{% endhighlight %}
+
+밝기의 정도를 pwm 신호로 출력해주기 위해서는 Analog write을 해주면 된다.
+
+{% highlight c++ linenos %}
+  Serial.print("brightness : ");
+  Serial.print(brightness);
+  Serial.print(", buttonVal : ");
+  Serial.println(buttonVal);
+  
+  analogWrite(ledPin, brightness);
+   
+  // save the reading. Next time through the loop, it'll be the lastButtonState:
+  lastButtonState = buttonVal;
+}
+{% endhighlight %}
+
+<hr>
+## <span style="color:#3459eb">Video </span>
+
+<hr>
+<p align="center">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/Vn5oejKMRZU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
+<hr>
+
+<hr>
