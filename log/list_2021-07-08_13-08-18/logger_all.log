@@ -1,0 +1,488 @@
+[0.223s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'list', '-p', '--base-paths', '/home/kang/ws/git/jgkang1210.github.io']
+[0.223s] DEBUG:colcon:Parsed command line arguments: Namespace(base_paths=['/home/kang/ws/git/jgkang1210.github.io'], build_base='build', ignore_user_meta=False, log_base=None, log_level=None, main=<bound method ListVerb.main of <colcon_package_information.verb.list.ListVerb object at 0x7f90c72c8580>>, metas=['./colcon.meta'], names_only=False, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_end=None, packages_ignore=None, packages_ignore_regex=None, packages_select=None, packages_select_build_failed=False, packages_select_by_dep=None, packages_select_regex=None, packages_select_test_failures=False, packages_skip=None, packages_skip_build_finished=False, packages_skip_by_dep=None, packages_skip_regex=None, packages_skip_test_passed=False, packages_skip_up_to=None, packages_start=None, packages_up_to=None, packages_up_to_regex=None, paths=None, paths_only=True, topological_graph=False, topological_graph_density=False, topological_graph_dot=False, topological_graph_dot_cluster=False, topological_graph_dot_include_skipped=False, topological_graph_legend=False, topological_order=False, verb_extension=<colcon_package_information.verb.list.ListVerb object at 0x7f90c72c8580>, verb_name='list', verb_parser=<colcon_defaults.argument_parser.defaults.DefaultArgumentsDecorator object at 0x7f90c713a550>)
+[0.250s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.250s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.250s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.250s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.250s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.250s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/kang/ws/git/jgkang1210.github.io'
+[0.250s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io) by extensions ['ignore', 'ignore_ament_install']
+[0.250s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io) by extension 'ignore'
+[0.250s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io) by extension 'ignore_ament_install'
+[0.250s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io) by extensions ['colcon_pkg']
+[0.251s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io) by extension 'colcon_pkg'
+[0.251s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io) by extensions ['colcon_meta']
+[0.251s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io) by extension 'colcon_meta'
+[0.251s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io) by extensions ['ros']
+[0.251s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io) by extension 'ros'
+[0.261s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io) by extensions ['cmake', 'python']
+[0.261s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io) by extension 'cmake'
+[0.261s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io) by extension 'python'
+[0.261s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io) by extensions ['python_setup_py']
+[0.261s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io) by extension 'python_setup_py'
+[0.261s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_bibliography) by extensions ['ignore', 'ignore_ament_install']
+[0.261s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_bibliography) by extension 'ignore'
+[0.261s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_bibliography) by extension 'ignore_ament_install'
+[0.261s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_bibliography) by extensions ['colcon_pkg']
+[0.261s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_bibliography) by extension 'colcon_pkg'
+[0.261s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_bibliography) by extensions ['colcon_meta']
+[0.261s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_bibliography) by extension 'colcon_meta'
+[0.261s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_bibliography) by extensions ['ros']
+[0.261s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_bibliography) by extension 'ros'
+[0.261s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_bibliography) by extensions ['cmake', 'python']
+[0.261s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_bibliography) by extension 'cmake'
+[0.261s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_bibliography) by extension 'python'
+[0.261s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_bibliography) by extensions ['python_setup_py']
+[0.261s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_bibliography) by extension 'python_setup_py'
+[0.262s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_data) by extensions ['ignore', 'ignore_ament_install']
+[0.262s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_data) by extension 'ignore'
+[0.262s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_data) by extension 'ignore_ament_install'
+[0.262s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_data) by extensions ['colcon_pkg']
+[0.262s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_data) by extension 'colcon_pkg'
+[0.262s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_data) by extensions ['colcon_meta']
+[0.262s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_data) by extension 'colcon_meta'
+[0.262s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_data) by extensions ['ros']
+[0.262s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_data) by extension 'ros'
+[0.262s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_data) by extensions ['cmake', 'python']
+[0.262s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_data) by extension 'cmake'
+[0.262s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_data) by extension 'python'
+[0.262s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_data) by extensions ['python_setup_py']
+[0.262s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_data) by extension 'python_setup_py'
+[0.262s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_includes) by extensions ['ignore', 'ignore_ament_install']
+[0.262s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_includes) by extension 'ignore'
+[0.262s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_includes) by extension 'ignore_ament_install'
+[0.262s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_includes) by extensions ['colcon_pkg']
+[0.262s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_includes) by extension 'colcon_pkg'
+[0.262s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_includes) by extensions ['colcon_meta']
+[0.262s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_includes) by extension 'colcon_meta'
+[0.262s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_includes) by extensions ['ros']
+[0.262s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_includes) by extension 'ros'
+[0.263s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_includes) by extensions ['cmake', 'python']
+[0.263s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_includes) by extension 'cmake'
+[0.263s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_includes) by extension 'python'
+[0.263s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_includes) by extensions ['python_setup_py']
+[0.263s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_includes) by extension 'python_setup_py'
+[0.263s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_includes/scripts) by extensions ['ignore', 'ignore_ament_install']
+[0.263s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_includes/scripts) by extension 'ignore'
+[0.263s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_includes/scripts) by extension 'ignore_ament_install'
+[0.263s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_includes/scripts) by extensions ['colcon_pkg']
+[0.263s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_includes/scripts) by extension 'colcon_pkg'
+[0.263s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_includes/scripts) by extensions ['colcon_meta']
+[0.263s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_includes/scripts) by extension 'colcon_meta'
+[0.263s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_includes/scripts) by extensions ['ros']
+[0.263s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_includes/scripts) by extension 'ros'
+[0.263s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_includes/scripts) by extensions ['cmake', 'python']
+[0.263s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_includes/scripts) by extension 'cmake'
+[0.263s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_includes/scripts) by extension 'python'
+[0.263s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_includes/scripts) by extensions ['python_setup_py']
+[0.263s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_includes/scripts) by extension 'python_setup_py'
+[0.263s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_layouts) by extensions ['ignore', 'ignore_ament_install']
+[0.263s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_layouts) by extension 'ignore'
+[0.263s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_layouts) by extension 'ignore_ament_install'
+[0.264s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_layouts) by extensions ['colcon_pkg']
+[0.264s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_layouts) by extension 'colcon_pkg'
+[0.264s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_layouts) by extensions ['colcon_meta']
+[0.264s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_layouts) by extension 'colcon_meta'
+[0.264s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_layouts) by extensions ['ros']
+[0.264s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_layouts) by extension 'ros'
+[0.264s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_layouts) by extensions ['cmake', 'python']
+[0.264s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_layouts) by extension 'cmake'
+[0.264s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_layouts) by extension 'python'
+[0.264s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_layouts) by extensions ['python_setup_py']
+[0.264s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_layouts) by extension 'python_setup_py'
+[0.264s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_news) by extensions ['ignore', 'ignore_ament_install']
+[0.264s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_news) by extension 'ignore'
+[0.264s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_news) by extension 'ignore_ament_install'
+[0.264s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_news) by extensions ['colcon_pkg']
+[0.264s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_news) by extension 'colcon_pkg'
+[0.264s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_news) by extensions ['colcon_meta']
+[0.264s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_news) by extension 'colcon_meta'
+[0.264s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_news) by extensions ['ros']
+[0.264s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_news) by extension 'ros'
+[0.264s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_news) by extensions ['cmake', 'python']
+[0.264s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_news) by extension 'cmake'
+[0.264s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_news) by extension 'python'
+[0.265s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_news) by extensions ['python_setup_py']
+[0.265s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_news) by extension 'python_setup_py'
+[0.265s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_pages) by extensions ['ignore', 'ignore_ament_install']
+[0.265s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_pages) by extension 'ignore'
+[0.265s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_pages) by extension 'ignore_ament_install'
+[0.265s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_pages) by extensions ['colcon_pkg']
+[0.265s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_pages) by extension 'colcon_pkg'
+[0.265s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_pages) by extensions ['colcon_meta']
+[0.265s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_pages) by extension 'colcon_meta'
+[0.265s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_pages) by extensions ['ros']
+[0.265s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_pages) by extension 'ros'
+[0.265s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_pages) by extensions ['cmake', 'python']
+[0.265s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_pages) by extension 'cmake'
+[0.265s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_pages) by extension 'python'
+[0.265s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_pages) by extensions ['python_setup_py']
+[0.265s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_pages) by extension 'python_setup_py'
+[0.265s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_posts) by extensions ['ignore', 'ignore_ament_install']
+[0.265s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_posts) by extension 'ignore'
+[0.265s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_posts) by extension 'ignore_ament_install'
+[0.265s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_posts) by extensions ['colcon_pkg']
+[0.265s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_posts) by extension 'colcon_pkg'
+[0.266s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_posts) by extensions ['colcon_meta']
+[0.266s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_posts) by extension 'colcon_meta'
+[0.266s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_posts) by extensions ['ros']
+[0.266s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_posts) by extension 'ros'
+[0.266s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_posts) by extensions ['cmake', 'python']
+[0.266s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_posts) by extension 'cmake'
+[0.266s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_posts) by extension 'python'
+[0.266s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_posts) by extensions ['python_setup_py']
+[0.266s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_posts) by extension 'python_setup_py'
+[0.266s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_projects) by extensions ['ignore', 'ignore_ament_install']
+[0.266s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_projects) by extension 'ignore'
+[0.266s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_projects) by extension 'ignore_ament_install'
+[0.266s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_projects) by extensions ['colcon_pkg']
+[0.266s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_projects) by extension 'colcon_pkg'
+[0.266s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_projects) by extensions ['colcon_meta']
+[0.266s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_projects) by extension 'colcon_meta'
+[0.266s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_projects) by extensions ['ros']
+[0.266s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_projects) by extension 'ros'
+[0.266s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_projects) by extensions ['cmake', 'python']
+[0.266s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_projects) by extension 'cmake'
+[0.267s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_projects) by extension 'python'
+[0.267s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_projects) by extensions ['python_setup_py']
+[0.267s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_projects) by extension 'python_setup_py'
+[0.267s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_sass) by extensions ['ignore', 'ignore_ament_install']
+[0.267s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_sass) by extension 'ignore'
+[0.267s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_sass) by extension 'ignore_ament_install'
+[0.267s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_sass) by extensions ['colcon_pkg']
+[0.267s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_sass) by extension 'colcon_pkg'
+[0.267s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_sass) by extensions ['colcon_meta']
+[0.267s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_sass) by extension 'colcon_meta'
+[0.267s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_sass) by extensions ['ros']
+[0.267s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_sass) by extension 'ros'
+[0.267s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_sass) by extensions ['cmake', 'python']
+[0.267s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_sass) by extension 'cmake'
+[0.267s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_sass) by extension 'python'
+[0.267s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_sass) by extensions ['python_setup_py']
+[0.267s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_sass) by extension 'python_setup_py'
+[0.267s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site) by extensions ['ignore', 'ignore_ament_install']
+[0.268s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site) by extension 'ignore'
+[0.268s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site) by extension 'ignore_ament_install'
+[0.268s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site) by extensions ['colcon_pkg']
+[0.268s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site) by extension 'colcon_pkg'
+[0.268s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site) by extensions ['colcon_meta']
+[0.268s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site) by extension 'colcon_meta'
+[0.268s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site) by extensions ['ros']
+[0.268s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site) by extension 'ros'
+[0.268s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site) by extensions ['cmake', 'python']
+[0.268s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site) by extension 'cmake'
+[0.268s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site) by extension 'python'
+[0.268s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site) by extensions ['python_setup_py']
+[0.268s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site) by extension 'python_setup_py'
+[0.268s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog) by extensions ['ignore', 'ignore_ament_install']
+[0.269s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog) by extension 'ignore'
+[0.269s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog) by extension 'ignore_ament_install'
+[0.269s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog) by extensions ['colcon_pkg']
+[0.269s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog) by extension 'colcon_pkg'
+[0.269s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog) by extensions ['colcon_meta']
+[0.269s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog) by extension 'colcon_meta'
+[0.269s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog) by extensions ['ros']
+[0.269s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog) by extension 'ros'
+[0.269s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog) by extensions ['cmake', 'python']
+[0.269s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog) by extension 'cmake'
+[0.269s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog) by extension 'python'
+[0.269s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog) by extensions ['python_setup_py']
+[0.269s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog) by extension 'python_setup_py'
+[0.269s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021) by extensions ['ignore', 'ignore_ament_install']
+[0.269s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021) by extension 'ignore'
+[0.270s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021) by extension 'ignore_ament_install'
+[0.270s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021) by extensions ['colcon_pkg']
+[0.270s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021) by extension 'colcon_pkg'
+[0.270s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021) by extensions ['colcon_meta']
+[0.270s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021) by extension 'colcon_meta'
+[0.270s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021) by extensions ['ros']
+[0.270s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021) by extension 'ros'
+[0.270s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021) by extensions ['cmake', 'python']
+[0.270s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021) by extension 'cmake'
+[0.270s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021) by extension 'python'
+[0.270s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021) by extensions ['python_setup_py']
+[0.270s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021) by extension 'python_setup_py'
+[0.270s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/arduino-make) by extensions ['ignore', 'ignore_ament_install']
+[0.271s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/arduino-make) by extension 'ignore'
+[0.271s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/arduino-make) by extension 'ignore_ament_install'
+[0.271s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/arduino-make) by extensions ['colcon_pkg']
+[0.271s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/arduino-make) by extension 'colcon_pkg'
+[0.271s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/arduino-make) by extensions ['colcon_meta']
+[0.271s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/arduino-make) by extension 'colcon_meta'
+[0.271s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/arduino-make) by extensions ['ros']
+[0.271s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/arduino-make) by extension 'ros'
+[0.271s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/arduino-make) by extensions ['cmake', 'python']
+[0.271s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/arduino-make) by extension 'cmake'
+[0.271s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/arduino-make) by extension 'python'
+[0.271s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/arduino-make) by extensions ['python_setup_py']
+[0.271s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/arduino-make) by extension 'python_setup_py'
+[0.271s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/arduino-make2) by extensions ['ignore', 'ignore_ament_install']
+[0.272s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/arduino-make2) by extension 'ignore'
+[0.272s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/arduino-make2) by extension 'ignore_ament_install'
+[0.272s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/arduino-make2) by extensions ['colcon_pkg']
+[0.272s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/arduino-make2) by extension 'colcon_pkg'
+[0.272s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/arduino-make2) by extensions ['colcon_meta']
+[0.272s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/arduino-make2) by extension 'colcon_meta'
+[0.272s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/arduino-make2) by extensions ['ros']
+[0.272s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/arduino-make2) by extension 'ros'
+[0.272s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/arduino-make2) by extensions ['cmake', 'python']
+[0.272s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/arduino-make2) by extension 'cmake'
+[0.272s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/arduino-make2) by extension 'python'
+[0.272s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/arduino-make2) by extensions ['python_setup_py']
+[0.272s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/arduino-make2) by extension 'python_setup_py'
+[0.272s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/cite201-week7) by extensions ['ignore', 'ignore_ament_install']
+[0.272s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/cite201-week7) by extension 'ignore'
+[0.272s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/cite201-week7) by extension 'ignore_ament_install'
+[0.272s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/cite201-week7) by extensions ['colcon_pkg']
+[0.273s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/cite201-week7) by extension 'colcon_pkg'
+[0.273s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/cite201-week7) by extensions ['colcon_meta']
+[0.273s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/cite201-week7) by extension 'colcon_meta'
+[0.273s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/cite201-week7) by extensions ['ros']
+[0.273s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/cite201-week7) by extension 'ros'
+[0.273s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/cite201-week7) by extensions ['cmake', 'python']
+[0.273s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/cite201-week7) by extension 'cmake'
+[0.273s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/cite201-week7) by extension 'python'
+[0.273s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/cite201-week7) by extensions ['python_setup_py']
+[0.273s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/cite201-week7) by extension 'python_setup_py'
+[0.273s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/engine) by extensions ['ignore', 'ignore_ament_install']
+[0.273s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/engine) by extension 'ignore'
+[0.273s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/engine) by extension 'ignore_ament_install'
+[0.273s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/engine) by extensions ['colcon_pkg']
+[0.273s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/engine) by extension 'colcon_pkg'
+[0.273s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/engine) by extensions ['colcon_meta']
+[0.273s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/engine) by extension 'colcon_meta'
+[0.273s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/engine) by extensions ['ros']
+[0.273s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/engine) by extension 'ros'
+[0.273s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/engine) by extensions ['cmake', 'python']
+[0.273s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/engine) by extension 'cmake'
+[0.273s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/engine) by extension 'python'
+[0.273s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/engine) by extensions ['python_setup_py']
+[0.274s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/engine) by extension 'python_setup_py'
+[0.274s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/raspberry-pi) by extensions ['ignore', 'ignore_ament_install']
+[0.274s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/raspberry-pi) by extension 'ignore'
+[0.274s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/raspberry-pi) by extension 'ignore_ament_install'
+[0.274s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/raspberry-pi) by extensions ['colcon_pkg']
+[0.274s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/raspberry-pi) by extension 'colcon_pkg'
+[0.274s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/raspberry-pi) by extensions ['colcon_meta']
+[0.274s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/raspberry-pi) by extension 'colcon_meta'
+[0.274s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/raspberry-pi) by extensions ['ros']
+[0.274s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/raspberry-pi) by extension 'ros'
+[0.274s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/raspberry-pi) by extensions ['cmake', 'python']
+[0.274s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/raspberry-pi) by extension 'cmake'
+[0.274s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/raspberry-pi) by extension 'python'
+[0.274s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/raspberry-pi) by extensions ['python_setup_py']
+[0.274s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/raspberry-pi) by extension 'python_setup_py'
+[0.274s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/test-post) by extensions ['ignore', 'ignore_ament_install']
+[0.274s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/test-post) by extension 'ignore'
+[0.274s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/test-post) by extension 'ignore_ament_install'
+[0.274s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/test-post) by extensions ['colcon_pkg']
+[0.274s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/test-post) by extension 'colcon_pkg'
+[0.274s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/test-post) by extensions ['colcon_meta']
+[0.274s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/test-post) by extension 'colcon_meta'
+[0.275s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/test-post) by extensions ['ros']
+[0.275s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/test-post) by extension 'ros'
+[0.275s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/test-post) by extensions ['cmake', 'python']
+[0.275s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/test-post) by extension 'cmake'
+[0.275s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/test-post) by extension 'python'
+[0.275s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/test-post) by extensions ['python_setup_py']
+[0.275s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/blog/2021/test-post) by extension 'python_setup_py'
+[0.275s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/news) by extensions ['ignore', 'ignore_ament_install']
+[0.275s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/news) by extension 'ignore'
+[0.275s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/news) by extension 'ignore_ament_install'
+[0.275s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/news) by extensions ['colcon_pkg']
+[0.275s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/news) by extension 'colcon_pkg'
+[0.275s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/news) by extensions ['colcon_meta']
+[0.275s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/news) by extension 'colcon_meta'
+[0.275s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/news) by extensions ['ros']
+[0.275s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/news) by extension 'ros'
+[0.275s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/news) by extensions ['cmake', 'python']
+[0.275s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/news) by extension 'cmake'
+[0.275s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/news) by extension 'python'
+[0.275s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/news) by extensions ['python_setup_py']
+[0.275s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/news) by extension 'python_setup_py'
+[0.275s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/news/announcement_1) by extensions ['ignore', 'ignore_ament_install']
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/news/announcement_1) by extension 'ignore'
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/news/announcement_1) by extension 'ignore_ament_install'
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/news/announcement_1) by extensions ['colcon_pkg']
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/news/announcement_1) by extension 'colcon_pkg'
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/news/announcement_1) by extensions ['colcon_meta']
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/news/announcement_1) by extension 'colcon_meta'
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/news/announcement_1) by extensions ['ros']
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/news/announcement_1) by extension 'ros'
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/news/announcement_1) by extensions ['cmake', 'python']
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/news/announcement_1) by extension 'cmake'
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/news/announcement_1) by extension 'python'
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/news/announcement_1) by extensions ['python_setup_py']
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/news/announcement_1) by extension 'python_setup_py'
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/projects) by extensions ['ignore', 'ignore_ament_install']
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/projects) by extension 'ignore'
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/projects) by extension 'ignore_ament_install'
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/projects) by extensions ['colcon_pkg']
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/projects) by extension 'colcon_pkg'
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/projects) by extensions ['colcon_meta']
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/projects) by extension 'colcon_meta'
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/projects) by extensions ['ros']
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/projects) by extension 'ros'
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/projects) by extensions ['cmake', 'python']
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/projects) by extension 'cmake'
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/projects) by extension 'python'
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/projects) by extensions ['python_setup_py']
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/projects) by extension 'python_setup_py'
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/projects/1_project) by extensions ['ignore', 'ignore_ament_install']
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/projects/1_project) by extension 'ignore'
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/projects/1_project) by extension 'ignore_ament_install'
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/projects/1_project) by extensions ['colcon_pkg']
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/projects/1_project) by extension 'colcon_pkg'
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/projects/1_project) by extensions ['colcon_meta']
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/projects/1_project) by extension 'colcon_meta'
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/projects/1_project) by extensions ['ros']
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/projects/1_project) by extension 'ros'
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/projects/1_project) by extensions ['cmake', 'python']
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/projects/1_project) by extension 'cmake'
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/projects/1_project) by extension 'python'
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/projects/1_project) by extensions ['python_setup_py']
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/projects/1_project) by extension 'python_setup_py'
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/projects/2_project) by extensions ['ignore', 'ignore_ament_install']
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/projects/2_project) by extension 'ignore'
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/projects/2_project) by extension 'ignore_ament_install'
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/projects/2_project) by extensions ['colcon_pkg']
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/projects/2_project) by extension 'colcon_pkg'
+[0.278s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/projects/2_project) by extensions ['colcon_meta']
+[0.278s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/projects/2_project) by extension 'colcon_meta'
+[0.278s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/projects/2_project) by extensions ['ros']
+[0.278s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/projects/2_project) by extension 'ros'
+[0.278s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/projects/2_project) by extensions ['cmake', 'python']
+[0.278s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/projects/2_project) by extension 'cmake'
+[0.278s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/projects/2_project) by extension 'python'
+[0.278s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/projects/2_project) by extensions ['python_setup_py']
+[0.278s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/projects/2_project) by extension 'python_setup_py'
+[0.278s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/publications) by extensions ['ignore', 'ignore_ament_install']
+[0.278s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/publications) by extension 'ignore'
+[0.278s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/publications) by extension 'ignore_ament_install'
+[0.278s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/publications) by extensions ['colcon_pkg']
+[0.278s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/publications) by extension 'colcon_pkg'
+[0.278s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/publications) by extensions ['colcon_meta']
+[0.278s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/publications) by extension 'colcon_meta'
+[0.278s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/publications) by extensions ['ros']
+[0.278s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/publications) by extension 'ros'
+[0.278s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/publications) by extensions ['cmake', 'python']
+[0.278s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/publications) by extension 'cmake'
+[0.278s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/publications) by extension 'python'
+[0.278s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/publications) by extensions ['python_setup_py']
+[0.278s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/publications) by extension 'python_setup_py'
+[0.278s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/teaching) by extensions ['ignore', 'ignore_ament_install']
+[0.279s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/teaching) by extension 'ignore'
+[0.279s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/teaching) by extension 'ignore_ament_install'
+[0.279s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/teaching) by extensions ['colcon_pkg']
+[0.279s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/teaching) by extension 'colcon_pkg'
+[0.279s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/teaching) by extensions ['colcon_meta']
+[0.279s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/teaching) by extension 'colcon_meta'
+[0.279s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/teaching) by extensions ['ros']
+[0.279s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/teaching) by extension 'ros'
+[0.279s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/teaching) by extensions ['cmake', 'python']
+[0.279s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/teaching) by extension 'cmake'
+[0.279s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/teaching) by extension 'python'
+[0.279s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/teaching) by extensions ['python_setup_py']
+[0.279s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/_site/teaching) by extension 'python_setup_py'
+[0.279s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/assets) by extensions ['ignore', 'ignore_ament_install']
+[0.279s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/assets) by extension 'ignore'
+[0.279s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/assets) by extension 'ignore_ament_install'
+[0.279s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/assets) by extensions ['colcon_pkg']
+[0.279s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/assets) by extension 'colcon_pkg'
+[0.279s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/assets) by extensions ['colcon_meta']
+[0.279s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/assets) by extension 'colcon_meta'
+[0.279s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/assets) by extensions ['ros']
+[0.279s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/assets) by extension 'ros'
+[0.279s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/assets) by extensions ['cmake', 'python']
+[0.280s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/assets) by extension 'cmake'
+[0.280s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/assets) by extension 'python'
+[0.280s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/assets) by extensions ['python_setup_py']
+[0.280s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/assets) by extension 'python_setup_py'
+[0.280s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/bin) by extensions ['ignore', 'ignore_ament_install']
+[0.280s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/bin) by extension 'ignore'
+[0.280s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/bin) by extension 'ignore_ament_install'
+[0.280s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/bin) by extensions ['colcon_pkg']
+[0.280s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/bin) by extension 'colcon_pkg'
+[0.280s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/bin) by extensions ['colcon_meta']
+[0.280s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/bin) by extension 'colcon_meta'
+[0.280s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/bin) by extensions ['ros']
+[0.280s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/bin) by extension 'ros'
+[0.280s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/bin) by extensions ['cmake', 'python']
+[0.280s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/bin) by extension 'cmake'
+[0.280s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/bin) by extension 'python'
+[0.280s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/bin) by extensions ['python_setup_py']
+[0.280s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/bin) by extension 'python_setup_py'
+[0.280s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/blog) by extensions ['ignore', 'ignore_ament_install']
+[0.280s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/blog) by extension 'ignore'
+[0.280s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/blog) by extension 'ignore_ament_install'
+[0.281s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/blog) by extensions ['colcon_pkg']
+[0.281s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/blog) by extension 'colcon_pkg'
+[0.281s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/blog) by extensions ['colcon_meta']
+[0.281s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/blog) by extension 'colcon_meta'
+[0.281s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/blog) by extensions ['ros']
+[0.281s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/blog) by extension 'ros'
+[0.281s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/blog) by extensions ['cmake', 'python']
+[0.281s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/blog) by extension 'cmake'
+[0.281s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/blog) by extension 'python'
+[0.281s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/blog) by extensions ['python_setup_py']
+[0.281s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/blog) by extension 'python_setup_py'
+[0.281s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/log) by extensions ['ignore', 'ignore_ament_install']
+[0.281s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/log) by extension 'ignore'
+[0.281s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/log) ignored
+[0.281s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/news) by extensions ['ignore', 'ignore_ament_install']
+[0.281s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/news) by extension 'ignore'
+[0.281s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/news) by extension 'ignore_ament_install'
+[0.281s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/news) by extensions ['colcon_pkg']
+[0.281s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/news) by extension 'colcon_pkg'
+[0.282s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/news) by extensions ['colcon_meta']
+[0.282s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/news) by extension 'colcon_meta'
+[0.282s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/news) by extensions ['ros']
+[0.282s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/news) by extension 'ros'
+[0.282s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/news) by extensions ['cmake', 'python']
+[0.282s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/news) by extension 'cmake'
+[0.282s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/news) by extension 'python'
+[0.282s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/news) by extensions ['python_setup_py']
+[0.282s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/news) by extension 'python_setup_py'
+[0.282s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/projects) by extensions ['ignore', 'ignore_ament_install']
+[0.282s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/projects) by extension 'ignore'
+[0.282s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/projects) by extension 'ignore_ament_install'
+[0.282s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/projects) by extensions ['colcon_pkg']
+[0.282s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/projects) by extension 'colcon_pkg'
+[0.282s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/projects) by extensions ['colcon_meta']
+[0.282s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/projects) by extension 'colcon_meta'
+[0.282s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/projects) by extensions ['ros']
+[0.282s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/projects) by extension 'ros'
+[0.282s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/projects) by extensions ['cmake', 'python']
+[0.282s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/projects) by extension 'cmake'
+[0.282s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/projects) by extension 'python'
+[0.282s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/projects) by extensions ['python_setup_py']
+[0.282s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/projects) by extension 'python_setup_py'
+[0.283s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/publications) by extensions ['ignore', 'ignore_ament_install']
+[0.283s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/publications) by extension 'ignore'
+[0.283s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/publications) by extension 'ignore_ament_install'
+[0.283s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/publications) by extensions ['colcon_pkg']
+[0.283s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/publications) by extension 'colcon_pkg'
+[0.283s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/publications) by extensions ['colcon_meta']
+[0.283s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/publications) by extension 'colcon_meta'
+[0.283s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/publications) by extensions ['ros']
+[0.283s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/publications) by extension 'ros'
+[0.283s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/publications) by extensions ['cmake', 'python']
+[0.283s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/publications) by extension 'cmake'
+[0.283s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/publications) by extension 'python'
+[0.283s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/publications) by extensions ['python_setup_py']
+[0.283s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/publications) by extension 'python_setup_py'
+[0.283s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/teaching) by extensions ['ignore', 'ignore_ament_install']
+[0.284s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/teaching) by extension 'ignore'
+[0.284s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/teaching) by extension 'ignore_ament_install'
+[0.284s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/teaching) by extensions ['colcon_pkg']
+[0.284s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/teaching) by extension 'colcon_pkg'
+[0.284s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/teaching) by extensions ['colcon_meta']
+[0.284s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/teaching) by extension 'colcon_meta'
+[0.284s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/teaching) by extensions ['ros']
+[0.284s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/teaching) by extension 'ros'
+[0.284s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/teaching) by extensions ['cmake', 'python']
+[0.284s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/teaching) by extension 'cmake'
+[0.284s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/teaching) by extension 'python'
+[0.284s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/teaching) by extensions ['python_setup_py']
+[0.284s] Level 1:colcon.colcon_core.package_identification:_identify(/home/kang/ws/git/jgkang1210.github.io/teaching) by extension 'python_setup_py'
+[0.284s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
