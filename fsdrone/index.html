@@ -93,8 +93,6 @@
                 </div>
         </div>
 
-
-
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <video id="v0" width="100%" autoplay loop muted controls>
@@ -169,7 +167,9 @@
                 <p class="text-justify">
                     Custom built elastic silicone membrane wings that mimics the flying squirrel in real world.
                 </p>
-                <img class="image" width=100% src="img/silicone_wing.png">
+                <center>
+                    <img class="image" width=85% src="img/silicone_wing.png">
+                </center>
             </div>
         </div>
         <br>
@@ -184,11 +184,27 @@
                 <p class="text-justify">
                     When drone following acceleration trajectory it fold its wings to accelerate more quickly. And to follow sudden deceleration trajectory it automatically unfold its wings to gain more aerodynamic drag force.
                 </p>
-                <img class="image" width=100% src="img/transition.png">
+                <center>
+                    <img class="image" width=85% src="img/transition.png">
+                </center>
                 
             </div>
         </div>
-           
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Learning from human demonstration
+                </h3>
+                <p class="text-justify">
+                    We first obtain offline dataset to be pretrained using supervised learning from human demonstrated data. Next we train with simulator using pretrained policy as base controller and learn the auxiliary policy for stable and fast learning performance. Star marked encoder, decoder is fixed during RL training.
+                </p>
+                <center>
+                    <img class="image" width=85% src="img/leraning_from_demo.png">
+                </center>
+                
+            </div>
+        </div>
 
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
