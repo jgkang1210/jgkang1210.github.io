@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>Flying Squirrel Drone</title>
+    <title>Fast, Perceptive Quadrupedal Locomotion in Complex Terrain</title>
 
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,9 +16,9 @@
     <meta property="og:image:width" content="1296">
     <meta property="og:image:height" content="840">
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://jgkang1210.github.io/fsdrone/"/>
-    <meta property="og:title" content="A Highly Maneuverable Flying Squirrel Drone with Controllable Foldable Wings" />
-    <meta property="og:description" content="Build and control non-linear dynamics governed flying squirrel inspired quadrotor using reinforcement learning." />
+    <meta property="og:url" content="https://jgkang1210.github.io/icra_hound/"/>
+    <meta property="og:title" content="Fast, Perceptive Quadrupedal Locomotion in Complex Terrain" />
+    <meta property="og:description" content="Control of full sized quadruped robot with vision pipeline." />
 
     <!-- <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Zip-NeRF: Anti-Aliased Grid-Based Neural Radiance Fields" />
@@ -48,9 +48,9 @@
     <div class="container" id="main">
         <div class="row">
             <h2 class="col-md-12 text-center">
-                A Highly Maneuverable Flying Squirrel Drone with Controllable Foldable Wings</br> 
+                Fast, Perceptive Quadrupedal Locomotion in Complex Terrain</br> 
                 <small>
-                IROS2023
+                ICRA Workshop 2024
                 </small>
             </h2>
         </div>
@@ -59,16 +59,19 @@
                 <ul class="list-inline">
                     <li>
                         <a href="https://jgkang1210.github.io/">
-                          Jun-Gill Kang
+                          Jun-Gill Kang 1
                         </a>
                     </li>
                     <li>
-                        Dohyeon Lee
+                        JaeHyun Park 2
                     </li>
                     <li>
-                        Soohee Han
+                        Tae-Gyu Song 2
                     </li>
-                    </br>POSTECH
+                    <li>
+                        Hae-Won Park 2
+                    </li>
+                    </br>1 ADD, 2 KAIST
                 </ul>
             </div>
         </div>
@@ -77,14 +80,14 @@
         <div class="row">
                 <div class="col-md-6 col-md-offset-3 text-center">
                     <ul class="nav nav-pills nav-justified">
-                        <li>
+                        <!-- <li>
                             <a href=https://ieeexplore.ieee.org/abstract/document/10341386">
                             <image src="img/zip_paper_image.jpg" height="60px">
                                 <h4><strong>Paper</strong></h4>
                             </a>
-                        </li>
+                        </li> -->
                         <li>
-                            <a href="https://www.youtube.com/watch?v=Cfc-llDb3_k">
+                            <a href="https://youtu.be/zqrd2cBLFrE?si=FhHYd1u5N1jroeWS">
                             <image src="img/youtube_icon.png" height="60px">
                                 <h4><strong>Video</strong></h4>
                             </a>
@@ -93,24 +96,13 @@
                 </div>
         </div>
 
-
-
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <video id="v0" width="100%" autoplay loop muted controls>
-                  <source src="img/fsdrone_full.mp4" type="video/mp4" />
-                </video>
-						</div>
-        </div>
-
-
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
                     Abstract
                 </h3>
                 <p class="text-justify">
-                    Typical drones with multi rotors are generally less maneuverable due to unidirectional thrust, which may be unfavorable to agile flight in very narrow and confined spaces. This paper suggests a new bio-inspired drone that is empowered with high maneuverability in a lightweight and easy-to-carry way. The proposed flying squirrel inspired drone has controllable foldable wings to cover a wider range of flight attitudes and provide more maneuverable flight capability with stable tracking performance. The wings of a drone are fabricated with silicone membranes and sophisticatedly controlled by reinforcement learning based on human-demonstrated data. Specially, such learning based wing control serves to capture even the complex aerodynamics that are often impossible to model mathematically. It is shown through experiment that the proposed flying squirrel drone intentionally induces aerodynamic drag and hence provides the desired additional repulsive force even under saturated mechanical thrust. This work is very meaningful in demonstrating the potential of biomimicry and machine learning for realizing an animal-like agile drone.
+                    We present APT-RL(Action Pretrained Transformer based Reinforcement Learning) which achieves highspeed vision-based quadrupedal locomotion over complex terrain by encompassing two main quadruped locomotion skills, trotting and bounding. Unlike traditional pretraining-based reinforcement learning controllers, APT-RL does not rely on the acquisition of costly motion capture datasets or highly specialized policies for distinct tasks. Instead, it leverages a 2D simplified quadrupedal running dataset on flat terrain, coupled with a straightforward and cost-effective trajectory optimization technique. Our rigorous evaluation in real-world scenarios with the KAIST Hound, a 45kg full-sized quadrupedal robot, yielded experimental results including climbing over 60 centimeters high step at a speed of 4 meters per second while leveraging various gaits.
                 </p>
             </div>
         </div>
@@ -119,86 +111,75 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
-                    Video
+                    Gait change to overcome high obstacle
                 </h3>
                 <div class="text-center">
                     <div style="position:relative;padding-top:56.25%;">
-                        <iframe src="https://www.youtube.com/embed/Cfc-llDb3_k" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+                        <iframe src="https://www.youtube.com/embed/BlR_Twqn7ik?list=PLBNfPyVh4RiHCt_UGkd1wNGzNNhOo5LQn" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
                     </div>
                 </div>
             </div>
         </div>
-<br>
+        <br>
+
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
-                    Fixed control test
+                    Indoor hurdle and high stair
                 </h3>
                 <div class="text-center">
                     <div style="position:relative;padding-top:56.25%;">
-                        <iframe src="https://youtube.com/embed/yp3Fd-iEvfc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+                        <iframe src="https://www.youtube.com/embed/lFRcQDZhvhU?list=PLBNfPyVh4RiHCt_UGkd1wNGzNNhOo5LQn" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
                     </div>
                 </div>
             </div>
         </div>
-<br>
+        <br>   
+        
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
-                    Multisampling
+                    Outdoor hurdle and step
                 </h3>
-				<table style="width: 100%; border-collapse: collapse;">
-				  <tr>
-				    <td style="text-align: center;">
-		                <video id="v0" width="100%" autoplay loop muted>
-		                  <source src="img/hexify_train.mp4" type="video/mp4" />
-		                </video>
-					</td>
-				    <td style="text-align: center;">
-		                <video id="v0" width="100%" autoplay loop muted>
-		                  <source src="img/hexify_test.mp4" type="video/mp4" />
-		                </video>
-					</td>
-				  </tr>
-				  <tr>
-				    <td style="text-align: center;">When Training</td>
-				    <td style="text-align: center;">When Rendering</td>
-				  </tr>
-				</table>
-                <p class="text-justify">
-                    We use multisampling to approximate the average NGP feature over a conical frustum, by constructing a 6-sample pattern that exactly matches the frustum's first and second moments. When training, we randomly rotate and flip (along the ray axis) each pattern, and when rendering we deterministically flip and rotate each adjacent pattern by 30 degrees.
-                </p>
+                <div class="text-center">
+                    <div style="position:relative;padding-top:56.25%;">
+                        <iframe src="https://www.youtube.com/embed/zqrd2cBLFrE?list=PLBNfPyVh4RiHCt_UGkd1wNGzNNhOo5LQn" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+                    </div>
+                </div>
             </div>
         </div>
-<br>
+        <br> 
+        
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
-                    XY aliasing
+                    Outdoor running experiment
                 </h3>
-                <video class="video" width=100% id="xyalias" loop playsinline autoplay muted src="img/xy_alias_swipe_crf27.mp4" onplay="resizeAndPlay(this)"></video>
-                <canvas height=0 class="videoMerge" id="xyaliasMerge"></canvas>
-                <p class="text-justify">
-                    A naive baseline (left) combining mip-NeRF 360 and Instant NGP results in aliasing as the camera moves laterally. Our full method (right) produces prefiltered renderings that do not flicker or shimmer.
-                </p>
+                <div class="text-center">
+                    <div style="position:relative;padding-top:56.25%;">
+                        <iframe src="https://www.youtube.com/embed/N5FnkAPD-4U?list=PLBNfPyVh4RiHCt_UGkd1wNGzNNhOo5LQn" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+                    </div>
+                </div>
             </div>
         </div>
-           
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <h3>
-                    Z aliasing
-                </h3>
-                <video id="v0" width="100%" autoplay loop muted>
-                  <source src="img/z_alias_pdf_labeled.m4v" type="video/mp4" />
-                </video>
-                <p class="text-justify">
-                    The proposal network used for resampling points along rays in mip-NeRF 360 results in an artifact we refer to as <em>z-aliasing</em>, where foreground content alternately appears and disappears as the camera moves toward or away from scene content. Z-aliasing occurs when the initial set of samples from the proposal network is not dense enough and misses thin structures, such as the chair above. Missed content can not be recovered by later rounds of sampling, since no future samples will be placed at that location along the ray. Our improvements to proposal network supervision result in a prefiltered proposal output that preserves the foreground object for all frames in this sequence. The plots above depict samples along a ray for three rounds of resampling (blue, orange, and green lines), with the y axis showing rendering weight (how much each interval contributes to the final rendered color), as a normalized probability density.
-                </p>
-            </div>
-        </div>
+        <br>
 
         <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Demonstration infront of Marc Raibert!
+                </h3>
+                <div class="text-center">
+                    <img src="img/raibert.JPG" width=100%>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+
+        
+
+        <!-- <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
                     Citation
@@ -210,9 +191,9 @@ author={Kang, Jun-Gill and Lee, Dohyeon and Han, Soohee}, booktitle={2023 IEEE/R
 </textarea>
                 </div>
             </div>
-        </div>
+        </div> -->
 
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
                     Acknowledgements
@@ -223,7 +204,7 @@ author={Kang, Jun-Gill and Lee, Dohyeon and Han, Soohee}, booktitle={2023 IEEE/R
                 The website template was borrowed from <a href="http://mgharbi.com/">Michaël Gharbi</a> and <a href="https://dorverbin.github.io/refnerf">Ref-NeRF</a>.
                 </p>
             </div>
-        </div>
+        </div> -->
     </div>
 </body>
 </html>
