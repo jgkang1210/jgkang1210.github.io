@@ -1,135 +1,558 @@
-/* latin-ext */
-@font-face {
-  font-family: 'Lato';
-  font-style: italic;
-  font-weight: 400;
-  src: local('Lato Italic'), local('Lato-Italic'), url(https://fonts.gstatic.com/s/lato/v15/S6u8w4BMUTPHjxsAUi-qNiXg7eU0.woff2) format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Lato';
-  font-style: italic;
-  font-weight: 400;
-  src: local('Lato Italic'), local('Lato-Italic'), url(https://fonts.gstatic.com/s/lato/v15/S6u8w4BMUTPHjxsAXC-qNiXg7Q.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Lato';
-  font-style: italic;
-  font-weight: 700;
-  src: local('Lato Bold Italic'), local('Lato-BoldItalic'), url(https://fonts.gstatic.com/s/lato/v15/S6u_w4BMUTPHjxsI5wq_FQftx9897sxZ.woff2) format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Lato';
-  font-style: italic;
-  font-weight: 700;
-  src: local('Lato Bold Italic'), local('Lato-BoldItalic'), url(https://fonts.gstatic.com/s/lato/v15/S6u_w4BMUTPHjxsI5wq_Gwftx9897g.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Lato Regular'), local('Lato-Regular'), url(https://fonts.gstatic.com/s/lato/v15/S6uyw4BMUTPHjxAwXiWtFCfQ7A.woff2) format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Lato Regular'), local('Lato-Regular'), url(https://fonts.gstatic.com/s/lato/v15/S6uyw4BMUTPHjx4wXiWtFCc.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 700;
-  src: local('Lato Bold'), local('Lato-Bold'), url(https://fonts.gstatic.com/s/lato/v15/S6u9w4BMUTPHh6UVSwaPGQ3q5d0N7w.woff2) format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 700;
-  src: local('Lato Bold'), local('Lato-Bold'), url(https://fonts.gstatic.com/s/lato/v15/S6u9w4BMUTPHh6UVSwiPGQ3q5d0.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+/* Base layout */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-a {
-  color: #1772d0;
-  text-decoration: none;
-}
-
-a:focus,
-a:hover {
-  color: #f09228;
-  text-decoration: none;
-}
-
-body,
-td,
-th,
-tr,
-p,
-a {
-  font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 14px;
-}
-
-strong {
-  font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 14px;
-}
-
-h2 {
+body {
   margin: 0;
-  font-weight: normal;
-  font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 22px;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  line-height: 1.6;
+  background: #ffffff; /* #f4f4f4 */
+  color: #222;
 }
 
-.papertitle {
-  font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 14px;
-  font-weight: 700;
+a {
+  color: #004c8c;
+  text-decoration: none;
 }
+
+a:hover {
+  text-decoration: underline;
+}
+
+.page {
+  max-width: 1000px;
+  margin: 40px auto 60px auto;
+  padding: 0 20px 40px 20px;
+  background: #ffffff;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.03);
+}
+
+/* Header */
+
+.header {
+  border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 20px;
+  margin-bottom: 24px;
+}
+
+.header-main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.header-text {
+  flex: 1 1 60%;
+  min-width: 260px;
+}
+
+.header-photo {
+  flex: 0 0 300px;
+  max-width: 300px;
+}
+
+.header-photo img {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Name + nav */
 
 .name {
-  padding-top: 20px;
-  margin: 0;
-  font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 32px;
+  font-size: 2.2rem;
+  margin: 0 0 6px 0;
 }
 
-.one {
-  width: 160px;
-  height: 160px;
+.nav {
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+}
+
+.nav a {
+  margin-right: 14px;
+}
+
+.nav a:last-child {
+  margin-right: 0;
+}
+
+/* Tagline / info */
+
+.tagline {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.info {
+  margin: 4px 0;
+}
+
+.highlight-text {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.meta-links {
+  margin-top: 10px;
+  font-size: 0.95rem;
+}
+
+/* Sections */
+
+.section {
+  margin-bottom: 30px;
+}
+
+.section h2 {
+  font-size: 1.4rem;
+  margin: 0 0 8px 0;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 4px;
+}
+
+/* Subsection titles */
+
+.subsection-title {
+  font-size: 1.02rem;
+  margin: 14px 0 6px 0;
+  font-weight: 600;
+}
+
+/* Highlight text span */
+
+.highlight {
+  background: #fff5a8;
+  padding: 0 3px;
+  border-radius: 2px;
+}
+
+/* Publications / projects */
+
+.pub-item {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 14px 0 16px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.pub-item:last-child {
+  border-bottom: none;
+}
+
+.pub-media {
+  flex: 0 0 210px;
+  max-width: 230px;
+}
+
+.pub-media img,
+.pub-media video {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+.pub-text {
+  flex: 1 1 55%;
+  min-width: 260px;
+}
+
+.pub-title {
+  font-weight: 600;
+  font-size: 1.02rem;
+}
+
+.pub-authors,
+.pub-venue,
+.pub-links {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.pub-venue {
+  font-style: italic;
+  margin-top: 2px;
+}
+
+.pub-links {
+  margin-top: 4px;
+}
+
+.pub-links a {
+  margin-right: 10px;
+}
+
+.pub-desc {
+  margin-top: 6px;
+  margin-bottom: 0;
+  font-size: 0.93rem;
+}
+
+/* Highlighted cards (for "representative" papers) */
+
+.highlight-card {
+  background: #fffbe6;
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin: 10px 0 14px 0;
+  border: 1px solid #f3e9b3;
+  border-bottom-color: #f3e9b3; /* override normal pub-item border color */
+}
+
+.non-highlight-card {
+  background: #fafafa;
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin: 10px 0 14px 0;
+  border: 1px solid #dcdcdc;   /* darker border for visibility */
+  
+}
+
+
+
+/* Project list */
+
+.project-list {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0 0;
+}
+
+.project-item {
+  margin-bottom: 14px;
+  padding: 8px 0;
+  border-bottom: 1px solid #f4f4f4;
+}
+
+.project-item:last-child {
+  border-bottom: none;
+}
+
+.project-title {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.project-meta {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 2px;
+}
+
+.project-desc {
+  font-size: 0.93rem;
+  margin: 4px 0 0 0;
+}
+
+/* Service */
+
+#service p {
+  margin-top: 4px;
+}
+
+/* Footer */
+
+.footer {
+  border-top: 1px solid #e5e5e5;
+  padding-top: 12px;
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: #777;
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.footer-right img {
+  max-width: 160px;
+  height: auto;
+}
+
+
+/* ---- Project slider ---- */
+
+.project-slider {
   position: relative;
+  margin-top: 12px;
 }
 
-.two {
-  width: 160px;
-  height: 160px;
+.project-track {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 8px 6px 12px 6px;
+  scrollbar-width: thin;
+}
+
+/* optional: thin scrollbar */
+.project-track::-webkit-scrollbar {
+  height: 6px;
+}
+.project-track::-webkit-scrollbar-track {
+  background: transparent;
+}
+.project-track::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.15);
+  border-radius: 3px;
+}
+
+/* Project Highlights slider */
+
+.projects-section {
+  margin-top: 30px;
+}
+
+/* ---- Project Highlights slider ---- */
+
+.projects-section {
+  margin-top: 30px;
+}
+
+/* Let the slider extend slightly beyond the main text column
+   but keep the heading aligned */
+.projects-slider {
+  position: relative;
+  margin: 10px -32px 0 -32px;   /* tune to match your .page side padding */
+  padding: 0 32px 20px 32px;
+}
+
+/* Scroll container */
+.slider-track {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 24px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  padding-bottom: 6px;
+}
+
+/* Cards */
+.slider-card {
+  flex: 0 0 340px;            /* card width: make larger/smaller if you want */
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.06);
+  overflow: hidden;
+}
+
+/* Media on top of card */
+.slider-media {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 12px 12px 0 0; /* optional */
+}
+
+.slider-media video,
+.slider-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.slider-media video.video-scale {
+  object-fit: contain;        /* so the entire rotated frame fits */
+  background: #ffffff;
+  transform: scale(0.1);
+  transform-origin: center center;
+}
+
+.slider-media video.video-rot {
+  object-fit: contain;        /* so the entire rotated frame fits */
+  background: #ffffff;
+  transform: rotate(-90deg) scale(2.0);
+  transform-origin: center center;
+}
+
+/* Text on card */
+
+.capTitle {
+  font-size: 1.0rem;
+  font-weight: 600;
+  margin: 10px 14px 4px 14px;
+}
+
+.capSubtitle {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 0 14px 12px 14px;
+}
+
+.capSubtitle a {
+  color: #004c8c;
+}
+
+/* Arrows */
+
+.slider-arrow {
   position: absolute;
-  transition: opacity .2s ease-in-out;
-  -moz-transition: opacity .2s ease-in-out;
-  -webkit-transition: opacity .2s ease-in-out;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #151E3F;
+  color: #fcfaf3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  font-size: 18px;
 }
 
-.fade {
-  transition: opacity .2s ease-in-out;
-  -moz-transition: opacity .2s ease-in-out;
-  -webkit-transition: opacity .2s ease-in-out;
+.slider-arrow-left {
+  left: 8px;
 }
 
-span.highlight {
-  background-color: #ffffd0;
+.slider-arrow-right {
+  right: 8px;
+}
+
+.slider-arrow:hover {
+  background-color: #1f2958;
+}
+
+/* Gradient fades at edges (optional) */
+
+/* Base fade visuals */
+.slider-fade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 70px;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 1;
+  transition: opacity 0.25s ease;
+}
+
+/* Match your page / card background here (probably white) */
+.slider-fade-left {
+  left: 32px;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.96),
+    rgba(255, 255, 255, 0)
+  );
+}
+
+.slider-fade-right {
+  right: 32px;
+  background: linear-gradient(
+    to left,
+    rgba(255, 255, 255, 0.96),
+    rgba(255, 255, 255, 0)
+  );
+}
+
+/* At far LEFT: hide left fade */
+.projects-slider.at-left .slider-fade-left {
+  opacity: 0;
+}
+
+/* At far RIGHT: hide right fade */
+.projects-slider.at-right .slider-fade-right {
+  opacity: 0;
+}
+
+/* Default: both arrows visible */
+.slider-arrow-left,
+.slider-arrow-right {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.25s ease;
+}
+
+/* At LEFT edge – hide left arrow */
+.projects-slider.at-left .slider-arrow-left {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* At RIGHT edge – hide right arrow */
+.projects-slider.at-right .slider-arrow-right {
+  opacity: 0;
+  pointer-events: none;
+}
+
+
+/* Mobile: narrower cards, less horizontal offset */
+
+@media (max-width: 700px) {
+  .projects-slider {
+    margin: 10px -16px 0 -16px;
+    padding: 0 16px 20px 16px;
+  }
+
+  .slider-card {
+    flex: 0 0 75%;
+  }
+}
+
+
+
+
+
+/* Responsive tweaks */
+
+@media (max-width: 700px) {
+  .page {
+    margin-top: 24px;
+    margin-bottom: 40px;
+  }
+
+  .name {
+    font-size: 1.9rem;
+  }
+
+  .header-main {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+  }
+
+  .header-photo {
+    flex: 0 0 auto;
+    max-width: 160px;
+  }
+
+  .pub-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+
+    padding: 16px;
+    margin: 22px 0;
+
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    background: #ffffff;
+
+    box-shadow: 0 1px 1px rgba(0,0,0,0.04);
+  }
+
+  .pub-media {
+    flex: 0 0 auto;
+    max-width: 100%;
+  }
 }

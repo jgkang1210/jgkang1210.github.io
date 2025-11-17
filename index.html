@@ -9,315 +9,706 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="images/kang.jpg" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
-    
   </head>
 
   <body>
-    <table style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-      <tr style="padding:0px">
-        <td style="padding:0px">
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr style="padding:0px">
-              <td style="padding:2.5%;width:63%;vertical-align:middle">
-                <p class="name" style="text-align: center;">
-                  Jun-Gill Kang
-                </p>
-                <p>I'm a researcher at Defense AI Center of the <a href="https://www.add.re.kr/eps">Agency for Defense Development (ADD)</a> in South Korea. I completed my undegraduated studies in <a href="https://international.postech.ac.kr/user/index.do">POSTECH</a>, South Korea advised by Prof. <a href="https://scholar.google.co.kr/citations?user=bZNLufsAAAAJ&hl=en">Soohee Han</a>. I also worked with Prof. <a href="https://scholar.google.com/citations?user=q7v_ewQAAAAJ&hl=en">Hae-Won Park</a> as visiting researcher in <a href="https://dynamicrobot.kaist.ac.kr/">KAIST DRCD Lab.</a>
-                </p>
-                <p>
-                  I've selected as graduate representative and gave <a href="https://youtu.be/Z0MflNVyfgg?t=7117">Commencement Speeches</a> in POSTECH at 2022. Also my <a href="https://www.youtube.com/channel/UCFgIAOABOFVNxNqHJX5T1Qg">research youtube channel</a> has >13K subscriber with >8M views total.
-                </p>
-                <p>
-                  I have built and controlled a wall-climbing robot, a flying-squirrel-inspired drone, a quadrupedal robot, an off-road self-driving car, and an autonomous tunnel exploration robot.
-                </p>
-                <p>
-                  <strong>
-                    I am currently seeking a PhD opportunity for Fall 2026 to further pursue research in Robotics and AI. If you believe my background and interests align with your program or lab, I would be glad to connect.
-                  </strong>
-                </p>
-                <p style="text-align:center">
-                  <a href="mailto:jungillkang@gmail.com">Email</a> &nbsp;/&nbsp;
-                  <a href="data/CV.pdf">CV</a> &nbsp;/&nbsp;
-                  <!-- <a href="data/JonBarron-bio.txt">Bio</a> &nbsp;/&nbsp; -->
-                  <a href="https://scholar.google.com/citations?user=nLzEIlcAAAAJ&hl=en&authuser=1">Scholar</a> &nbsp;/&nbsp;
-                  <a href="https://www.youtube.com/channel/UCFgIAOABOFVNxNqHJX5T1Qg">Youtube</a>
-                  <!-- <a href="https://twitter.com/jon_barron">Twitter</a> &nbsp;/&nbsp;
-                  <a href="https://github.com/jonbarron/">Github</a> -->
-                </p>
-              </td>
-              <td style="padding:2.5%;width:40%;max-width:40%">
-                <a href="images/kang.jpg"><img style="width:100%;max-width:100%;object-fit: cover; border-radius: 50%;" alt="profile photo" src="images/kang.jpg" class="hoverZoomLink"></a>
-              </td>
-            </tr>
-          </tbody></table>
+    <div class="page">
 
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-              <tr>
-              <td style="padding:20px;width:100%;vertical-align:middle">
-                <h2>Research</h2>
-                <p>
-                  I'm interested in robotics, control, reinforcement learning, and deep learning. Most of my research start from building robot, fixing it and controlling it. Representative papers are <span class="highlight">highlighted</span>. (Equal contributions are denoted by *)
-                </p>
-              </td>
-            </tr>
-          </tbody></table>
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+      <!-- Header / top block -->
+      <header class="header">
+        <div class="header-main">
+          <div class="header-text">
+            <h1 class="name">Jun-Gill Kang</h1>
 
-            <tr bgcolor="#ffffd0">
-              <td style="padding:20px;width:25%;vertical-align:middle">
-                <div class="one">
-                  <div class="two" id='smerf_image'><video  width=100% muted autoplay loop playsInline>
-                  <source src="images/dmcm.mp4" type="video/mp4">
-                  Your browser does not support the video tag.
-                  </video></div>
-                </div>
-              </td>
-              <td style="padding:20px;width:75%;vertical-align:middle">
-                <a href="https://seonsoo-p1.github.io/DMCM/">
-                  <span class="papertitle">Disentangled Multi-Context Meta-Learning : Unlocking Robust and Generalized Task Learning</span>
-                </a>
-                <br>
-                <strong><a href="https://seonsoo-p1.github.io/SeonsooKim.github.io/">Seonsoo Kim*</a></strong>,
-                <strong><a href="http://jgkang1210.github.io">Jun-Gill Kang*</a></strong>,
-                Taehong Kim,
-                Seongil Hong
-                <br>
-                <em>Conference on Robot Learning (CoRL)</em>, 2025
-                <br>
-                <a href="https://seonsoo-p1.github.io/DMCM/">project page</a>
-                /
-                <a href="https://www.youtube.com/watch?v=CoQRz-rN3dg&t=1s">video</a>
-                /
-                <a href="https://arxiv.org/abs/2509.01297">arxiv</a>
-                <p></p>
-                <p>
-                Disentangling context vector in meta learning enables robust and generalizable regression and locomotion.
-                </p>
-              </td>
-            </tr>
+            <!-- <nav class="nav">
+              <a href="#about">Home</a>
+              <a href="#research">Research</a>
+              <a href="#projects">Projects</a>
+              <a href="#service">Service</a>
+              <a href="data/CV.pdf" target="_blank" rel="noopener">CV</a>
+              <a href="mailto:jungillkang@gmail.com">Contact</a>
+            </nav> -->
 
-            <tr bgcolor="#ffffd0">
-              <td style="padding:20px;width:25%;vertical-align:middle">
-                <div class="one">
-                  <div class="two" id='smerf_image'><video  width=100% muted autoplay loop playsInline>
-                  <source src="images/ral.mp4" type="video/mp4">
-                  Your browser does not support the video tag.
-                  </video></div>
-                </div>
-              </td>
-              <td style="padding:20px;width:75%;vertical-align:middle">
-                <a href="http://jgkang1210.github.io/fsdrone_ral">
-                  <span class="papertitle">A Highly Maneuverable Flying Squirrel Drone with agility-improving Foldable Wings</span>
-                </a>
-                <br>
-                <strong><a href="https://dohyeon-lee.github.io/">Dohyeon Lee*</a></strong>,
-                <strong><a href="http://jgkang1210.github.io">Jun-Gill Kang*</a></strong>,
+            <p class="tagline">
+              I'm a researcher at the Defense AI Center of the
+              <a href="https://www.add.re.kr/eps" target="_blank" rel="noopener">
+                Agency for Defense Development (ADD)
+              </a>
+              in South Korea. I completed my undergraduate studies at
+              <a href="https://international.postech.ac.kr/user/index.do" target="_blank" rel="noopener">
+                POSTECH
+              </a>,
+              advised by Prof.
+              <a href="https://scholar.google.co.kr/citations?user=bZNLufsAAAAJ&hl=en" target="_blank" rel="noopener">
                 Soohee Han
-                <br>
-                <em>IEEE Robotics and Automation Letters (RA-L)</em>, 2025
-                <br>
-                <a href="http://jgkang1210.github.io/fsdrone_ral">project page</a>
-                /
-                <a href="https://youtu.be/tckIF3KCJig?si=eKfdiEKgCLkARJma">video</a>
-                /
-                <a href="https://arxiv.org/abs/2504.09609">arxiv</a>
-                <p></p>
-                <p>
-                Develop general trajectory tracking controller of flying squirrel with learned wing dynamics.
-                </p>
-              </td>
-            </tr>
+              </a>.
+              I also worked with Prof.
+              <a href="https://scholar.google.com/citations?user=q7v_ewQAAAAJ&hl=en" target="_blank" rel="noopener">
+                Hae-Won Park
+              </a>
+              as a visiting researcher in the
+              <a href="https://dynamicrobot.kaist.ac.kr/" target="_blank" rel="noopener">
+                KAIST DRCD Lab
+              </a>.
+            </p>
 
-          <tr bgcolor="#ffffd0">
-            <td style="padding:20px;width:25%;vertical-align:middle">
-              <div class="one">
-                <div class="two" id='smerf_image'>
-                <img src="images/jump_60.png" width=100%>
-                <!-- <video  width=100% muted autoplay loop playsInline>
+            <p class="info">
+              I've been selected as a graduate representative and gave
+              <a href="https://youtu.be/Z0MflNVyfgg?t=7117" target="_blank" rel="noopener">
+                commencement speeches
+              </a>
+              at POSTECH in 2022 graduation ceremony. My
+              <a href="https://www.youtube.com/channel/UCFgIAOABOFVNxNqHJX5T1Qg" target="_blank" rel="noopener">
+                research YouTube channel
+              </a>
+              has &gt;13k subscribers and &gt;8.4M total views.
+            </p>
+
+            <p class="info">
+              I have built and controlled a wall-climbing robot, a flying-squirrel-inspired drone,
+              a quadrupedal robot, an off-road self-driving car, and an autonomous tunnel exploration robot.
+            </p>
+
+            <p class="highlight-text">
+              <strong>
+                I am currently seeking a Ph.D. opportunity for Fall 2026 to further pursue research in
+                Robotics and AI. If you believe my background and interests align with your program or lab,
+                I would be glad to connect.
+              </strong>
+            </p>
+
+            <p class="meta-links">
+              <a href="mailto:jungillkang@gmail.com">Email</a> ·
+              <a href="data/CV.pdf" target="_blank" rel="noopener">CV</a> ·
+              <a href="https://scholar.google.com/citations?user=nLzEIlcAAAAJ&hl=en&authuser=1"
+                 target="_blank" rel="noopener">Scholar</a> ·
+              <a href="https://www.youtube.com/channel/UCFgIAOABOFVNxNqHJX5T1Qg"
+                 target="_blank" rel="noopener">YouTube</a>
+            </p>
+          </div>
+
+          <div class="header-photo">
+            <img src="images/kang.jpg" alt="Profile photo of Jun-Gill Kang">
+          </div>
+        </div>
+      </header>
+
+      <main>
+
+        <!-- About / short research blurb -->
+        <section id="about" class="section">
+          <h2>About</h2>
+          <p>
+            I believe that <span class="highlight">computational modeling of physics</span> as the representational core of intelligence will form 
+            the foundation for building robots with genuine physical understanding.
+            Most of my research starts from <span class="highlight">building</span> real robots, <span class="highlight">simulating</span> them, and then
+            ends up by <span class="highlight">controlling</span> them in the wild.
+          </p>
+          <p>
+            Representative papers are <span class="highlight">highlighted</span>.
+            (Equal contributions are denoted by <strong>*</strong>.)
+          </p>
+        </section>
+
+        <!-- Research / publications -->
+        <section id="research" class="section">
+          <h2>Selected Research</h2>
+
+          <!-- Occupancy mapping (highlight) -->
+          <article class="pub-item non-highlight-card">
+            <div class="pub-media">
+              <video width="100%" muted autoplay loop playsinline>
+                <source src="images/om.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div class="pub-text">
+              <a href="https://seonsoo-p1.github.io/DMCM/" class="pub-title" target="_blank" rel="noopener">
+                Task-Oriented Occupancy Grid Mapping through Active Data Management
+              </a>
+              <div class="pub-authors">
+                Jinche La,
+                <strong>
+                  <a href="http://jgkang1210.github.io" target="_blank" rel="noopener">
+                    Jun-Gill Kang
+                  </a>
+                </strong>,
+                Dasol Lee
+              </div>
+              <div class="pub-venue">
+                IEEE Robotics and Automation Letters (RA-L), 2025
+              </div>
+              <div class="pub-links">
+                <a href="https://www.youtube.com/watch?v=lM-Y5ktqRXo&t=1s" target="_blank" rel="noopener">Video</a> ·
+                <a href="https://ieeexplore.ieee.org/document/11217196/" target="_blank" rel="noopener">Paper</a>
+              </div>
+              <p class="pub-desc">
+                Task-Oriented Hash-structured Occupancy Grid Mapping for efficient planning.
+              </p>
+            </div>
+          </article>
+
+          <!-- DMCM (highlight) -->
+          <article class="pub-item highlight-card">
+            <div class="pub-media">
+              <video width="100%" muted autoplay loop playsinline>
+                <source src="images/dmcm.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div class="pub-text">
+              <a href="https://seonsoo-p1.github.io/DMCM/" class="pub-title" target="_blank" rel="noopener">
+                Disentangled Multi-Context Meta-Learning: Unlocking Robust and Generalized Task Learning
+              </a>
+              <div class="pub-authors">
+                <strong>
+                  <a href="https://seonsoo-p1.github.io/SeonsooKim.github.io/" target="_blank" rel="noopener">
+                    Seonsoo Kim*
+                  </a>
+                </strong>,
+                <strong>
+                  <a href="http://jgkang1210.github.io" target="_blank" rel="noopener">
+                    Jun-Gill Kang*
+                  </a>
+                </strong>,
+                Taehong Kim, Seongil Hong
+              </div>
+              <div class="pub-venue">
+                Conference on Robot Learning (CoRL), 2025
+              </div>
+              <div class="pub-links">
+                <a href="https://seonsoo-p1.github.io/DMCM/" target="_blank" rel="noopener">Project page</a> ·
+                <a href="https://www.youtube.com/watch?v=CoQRz-rN3dg&t=1s" target="_blank" rel="noopener">Video</a> ·
+                <a href="https://arxiv.org/abs/2509.01297" target="_blank" rel="noopener">arXiv</a>
+              </div>
+              <p class="pub-desc">
+                Disentangling context vectors in meta-learning enables robust and generalizable regression
+                and locomotion across diverse tasks.
+              </p>
+            </div>
+          </article>
+
+          <!-- Flying squirrel RA-L (highlight) -->
+          <article class="pub-item highlight-card">
+            <div class="pub-media">
+              <video width="100%" muted autoplay loop playsinline>
+                <source src="images/ral.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div class="pub-text">
+              <a href="http://jgkang1210.github.io/fsdrone_ral" class="pub-title" target="_blank" rel="noopener">
+                A Highly Maneuverable Flying Squirrel Drone with Agility-Improving Foldable Wings
+              </a>
+              <div class="pub-authors">
+                <strong>
+                  <a href="https://dohyeon-lee.github.io/" target="_blank" rel="noopener">
+                    Dohyeon Lee*
+                  </a>
+                </strong>,
+                <strong>
+                  <a href="http://jgkang1210.github.io" target="_blank" rel="noopener">
+                    Jun-Gill Kang*
+                  </a>
+                </strong>,
+                Soohee Han
+              </div>
+              <div class="pub-venue">
+                IEEE Robotics and Automation Letters (RA-L) with IROS, 2025
+              </div>
+              <div class="pub-links">
+                <a href="http://jgkang1210.github.io/fsdrone_ral" target="_blank" rel="noopener">Project page</a> ·
+                <a href="https://youtu.be/tckIF3KCJig?si=eKfdiEKgCLkARJma" target="_blank" rel="noopener">Video</a> ·
+                <a href="https://arxiv.org/abs/2504.09609" target="_blank" rel="noopener">arXiv</a>
+              </div>
+              <p class="pub-desc">
+                Developing a general trajectory tracking controller for a flying squirrel drone by learning
+                wing dynamics and coordinating thrust–wing control for agile maneuvers.
+              </p>
+            </div>
+          </article>
+
+          <!-- HOUND ICRA workshop (highlight) -->
+          <article class="pub-item highlight-card">
+            <div class="pub-media">
+              <img src="images/jump_60.png" alt="HOUND quadruped jump" />
+            </div>
+            <div class="pub-text">
+              <a href="http://jgkang1210.github.io/icra_hound" class="pub-title" target="_blank" rel="noopener">
+                Fast, Perceptive Quadrupedal Locomotion in Complex Terrain
+              </a>
+              <div class="pub-authors">
+                <strong>
+                  <a href="http://jgkang1210.github.io" target="_blank" rel="noopener">
+                    Jun-Gill Kang
+                  </a>
+                </strong>,
+                JaeHyun Park, Tae-Gyu Song, Hae-Won Park
+              </div>
+              <div class="pub-venue">
+                IEEE International Conference on Robotics and Automation Workshop (ICRAW), 2024
+              </div>
+              <div class="pub-links">
+                <a href="http://jgkang1210.github.io/icra_hound" target="_blank" rel="noopener">Project page</a> ·
+                <a href="https://youtu.be/zqrd2cBLFrE?si=FhHYd1u5N1jroeWS" target="_blank" rel="noopener">Video</a> ·
+                <a href="https://openreview.net/pdf?id=Zfxlsa0M5F" target="_blank" rel="noopener">Paper</a>
+              </div>
+              <p class="pub-desc">
+                Vision-based control of a full-sized quadruped robot in complex outdoor terrain using a perception pipeline
+                and learned locomotion policies.
+              </p>
+            </div>
+          </article>
+
+          <!-- Flying squirrel IROS (highlight) -->
+          <article class="pub-item highlight-card">
+            <div class="pub-media">
+              <video width="100%" muted autoplay loop playsinline>
                 <source src="images/fsdrone.mp4" type="video/mp4">
                 Your browser does not support the video tag.
-                </video> -->
-              </div>
-              </div>
-            </td>
-            <td style="padding:20px;width:75%;vertical-align:middle">
-              <a href="http://jgkang1210.github.io/icra_hound">
-                <span class="papertitle">Fast, Perceptive Quadrupedal Locomotion in Complex Terrain</span>
+              </video>
+            </div>
+            <div class="pub-text">
+              <a href="http://jgkang1210.github.io/fsdrone" class="pub-title" target="_blank" rel="noopener">
+                A Highly Maneuverable Flying Squirrel Drone with Controllable Foldable Wings
               </a>
-              <br>
-              <strong><a href="http://jgkang1210.github.io">Jun-Gill Kang</a></strong>,
-              JaeHyun Park,
-              Tae-Gyu Song,
-              Hae-Won Park
-              <br>
-              <em>IEEE International Conference on Robotics and Automation Workshop (ICRA)</em>, 2024
-              <br>
-              <a href="http://jgkang1210.github.io/icra_hound">project page</a>
-              /
-              <a href="https://youtu.be/zqrd2cBLFrE?si=FhHYd1u5N1jroeWS">video</a>
-              /
-              <a href="https://openreview.net/pdf?id=Zfxlsa0M5F">paper</a>
-              <p></p>
-              <p>
-              Control of full sized quadruped robot with vision pipeline.
+              <div class="pub-authors">
+                <strong>
+                  <a href="http://jgkang1210.github.io" target="_blank" rel="noopener">
+                    Jun-Gill Kang*
+                  </a>
+                </strong>,
+                <strong>
+                  <a href="https://dohyeon-lee.github.io/" target="_blank" rel="noopener">
+                    Dohyeon Lee*
+                  </a>
+                </strong>,
+                Soohee Han
+              </div>
+              <div class="pub-venue">
+                IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS), 2023
+              </div>
+              <div class="pub-links">
+                <a href="http://jgkang1210.github.io/fsdrone" target="_blank" rel="noopener">Project page</a> ·
+                <a href="https://www.youtube.com/watch?v=Cfc-llDb3_k" target="_blank" rel="noopener">Video</a> ·
+                <a href="https://arxiv.org/abs/2504.09478" target="_blank" rel="noopener">arXiv</a>
+              </div>
+              <p class="pub-desc">
+                Building and controlling a highly nonlinear flying-squirrel-inspired quadrotor using
+                reinforcement learning to manage foldable wings and thrust in challenging maneuvers.
               </p>
-            </td>
-          </tr>
+            </div>
+          </article>
 
-          <tr bgcolor="#ffffd0">
-            <td style="padding:20px;width:25%;vertical-align:middle">
-              <div class="one">
-                <div class="two" id='smerf_image'><video  width=100% muted autoplay loop playsInline>
-                <source src="images/fsdrone.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-                </video></div>
-              </div>
-            </td>
-            <td style="padding:20px;width:75%;vertical-align:middle">
-              <a href="http://jgkang1210.github.io/fsdrone">
-                <span class="papertitle">A Highly Maneuverable Flying Squirrel Drone with Controllable Foldable Wings</span>
-              </a>
-              <br>
-              <strong><a href="http://jgkang1210.github.io">Jun-Gill Kang*</a></strong>,
-              <strong><a href="https://dohyeon-lee.github.io/">Dohyeon Lee*</a></strong>,
-              Soohee Han
-              <br>
-              <em>IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)</em>, 2023
-              <br>
-              <a href="http://jgkang1210.github.io/fsdrone">project page</a>
-              /
-              <a href="https://www.youtube.com/watch?v=Cfc-llDb3_k">video</a>
-              /
-              <a href="https://arxiv.org/abs/2504.09478">arxiv</a>
-              <p></p>
-              <p>
-              Build and control non-linear dynamics governed flying squirrel inspired quadrotor using reinforcement learning.
-              </p>
-            </td>
-          </tr>
-        
-          <tr>
-            <td style="padding:20px;width:25%;vertical-align:middle">
-              <div class="one">
-                <div class="two" id='wcbot_video'><video  width=100% height=100% muted autoplay loop playsInline>
+          <!-- Wall climbing robot (non-highlight) -->
+          <article class="pub-item non-highlight-card">
+            <div class="pub-media">
+              <video width="100%" muted autoplay loop playsinline>
                 <source src="images/wcbot_main.mp4" type="video/mp4">
                 Your browser does not support the video tag.
-                </video></div>
-              </div>
-            </td>
-            <td style="padding:20px;width:75%;vertical-align:middle">
-              <a href="http://jgkang1210.github.io/wcbot">
-                <span class="papertitle">Development of Dual-Unit Ceiling Adhesion Robot System With Passive Hinge for Obstacle Traversal Under Kinodynamic Constraints</span>
+              </video>
+            </div>
+            <div class="pub-text">
+              <a href="http://jgkang1210.github.io/wcbot" class="pub-title" target="_blank" rel="noopener">
+                Development of Dual-Unit Ceiling Adhesion Robot System With Passive Hinge for Obstacle Traversal Under Kinodynamic Constraints
               </a>
-              <br>
-              Young-Woon Song,
-              <strong><a href="http://jgkang1210.github.io">Jun-Gill Kang</a></strong>,
-              Son-Cheol Yu
-              <br>
-              <em>IEEE Access</em>, 2023 &nbsp
-              <br>
-              <a href="http://jgkang1210.github.io/wcbot">project page</a>
-              /
-              <a href="https://www.youtube.com/watch?v=BNwbIVhYMMk">video</a>
-              /
-              <a href="https://ieeexplore.ieee.org/abstract/document/10015013">paper</a>
-              <p></p>
-              <p>
-              Developed dual-unit wall climbing robot that can attach to fixed wall and traverse obstacle using both body.
+              <div class="pub-authors">
+                Young-Woon Song,
+                <strong>
+                  <a href="http://jgkang1210.github.io" target="_blank" rel="noopener">
+                    Jun-Gill Kang
+                  </a>
+                </strong>,
+                Son-Cheol Yu
+              </div>
+              <div class="pub-venue">
+                IEEE Access, 2023
+              </div>
+              <div class="pub-links">
+                <a href="http://jgkang1210.github.io/wcbot" target="_blank" rel="noopener">Project page</a> ·
+                <a href="https://www.youtube.com/watch?v=BNwbIVhYMMk" target="_blank" rel="noopener">Video</a> ·
+                <a href="https://ieeexplore.ieee.org/abstract/document/10015013" target="_blank" rel="noopener">Paper</a>
+              </div>
+              <p class="pub-desc">
+                A dual-unit wall-climbing robot that can adhere to ceilings and traverse obstacles using
+                a passive hinge under kinodynamic constraints.
               </p>
-            </td>
-          </tr>
-      
-
-          
-          <!-- <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20"><tbody>
-            <tr>
-              <td>
-                <h2>Miscellanea</h2>
-              </td>
-            </tr>
-          </tbody></table>
-          <table width="100%" align="center" border="0" cellpadding="20"><tbody>
-            
-            <tr>
-              <td style="padding:20px;width:25%;vertical-align:middle"><img src="images/cvf.jpg"></td>
-              <td width="75%" valign="center">
-                <a href="https://cvpr.thecvf.com/Conferences/2024/Organizers">Area Chair, CVPR 2024</a>
-                <br>
-                <a href="https://cvpr2023.thecvf.com/Conferences/2023/Organizers">Demo Chair, CVPR 2023</a>
-                <br>
-                <a href="https://cvpr2022.thecvf.com/area-chairs">Area Chair, CVPR 2022</a>
-                <br>
-                <a href="http://cvpr2021.thecvf.com/area-chairs">Area Chair & Award Committee Member, CVPR 2021</a>
-                <br>
-                <a href="http://cvpr2019.thecvf.com/area_chairs">Area Chair, CVPR 2019</a>
-                <br>
-                <a href="http://cvpr2018.thecvf.com/organizers/area_chairs">Area Chair, CVPR 2018</a>
-              </td>
-            </tr>
-            <tr>
-              <td style="padding:20px;width:25%;vertical-align:middle">
-                <img src="images/cs188.jpg" alt="cs188">
-              </td>
-              <td width="75%" valign="center">
-                <a href="http://inst.eecs.berkeley.edu/~cs188/sp11/announcements.html">Graduate Student Instructor, CS188 Spring 2011</a>
-                <br>
-                <a href="http://inst.eecs.berkeley.edu/~cs188/fa10/announcements.html">Graduate Student Instructor, CS188 Fall 2010</a>
-                <br>
-                <a href="http://aima.cs.berkeley.edu/">Figures, "Artificial Intelligence: A Modern Approach", 3rd Edition</a>
-              </td>
-            </tr>
-            
-
-            <tr>
-              <td align="center" style="padding:20px;width:25%;vertical-align:middle">
-                <h2>Basically <br> Blog Posts</h2>
-              </td>
-              <td width="75%" valign="middle">
-                <a href="https://arxiv.org/abs/2112.11687">Squareplus: A Softplus-Like Algebraic Rectifier</a>
-                <br>
-                <a href="https://arxiv.org/abs/2010.09714">A Convenient Generalization of Schlick's Bias and Gain Functions</a>
-                <br>
-                <a href="https://arxiv.org/abs/1704.07483">Continuously Differentiable Exponential Linear Units</a>
-                <br>
-                <a href="https://jonbarron.info/data/cvpr2023_llm_workshop_annotated.pdf">Scholars & Big Models: How Can Academics Adapt?</a>
-              </td>
-            </tr>
-             -->
-            
-          </tbody></table>
-
-
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr>
-            <td style="padding:20px;width:100%;vertical-align:middle">
-              <h2>Service</h2>
-              <p>
-                Reviewer for IROS2024, IROS2025, CoRL2025
-              </p>
-            </td>
-          </tr>
-        </tbody></table>
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+            </div>
+          </article>
+        </section>
         
-          <div style="text-align: right;">
+        <!-- Project Highlights -->
+        <section id="projects" class="section projects-section">
+          <h2>Project Highlights</h2>
+
+          <div class="projects-slider">
+            <!-- Left arrow -->
+            <button class="slider-arrow slider-arrow-left" type="button" aria-label="Previous project">
+              &#10094;
+            </button>
+
+            <!-- Scrollable track -->
+            <div class="slider-track" id="projects-slider-track">
+              <article class="slider-card">
+                <div class="slider-media">
+                  <video loop autoplay muted playsinline>
+                    <source src="images/cut_quad.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+                <h3 class="capTitle">KAIST HOUND</h3>
+                <p class="capSubtitle">
+                  06.2022~Current <br>
+                  Full-size quadruped · outdoor terrain · vision-based control.<br>
+                  Skills: Trajectory Optimization, RL, Representation learning, Perception <br>
+                  <a href="https://youtu.be/duDYVmiQLTs" target="_blank" rel="noopener">Video</a>
+                </p>
+              </article>
+
+              <article class="slider-card">
+                <div class="slider-media">
+                  <video class="video-rot" loop autoplay muted playsinline>
+                    <source src="fsdrone/img/fs_render.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+                <h3 class="capTitle">Flying squirrel drone with foldable wings</h3>
+                <p class="capSubtitle">
+                  01.2022~06.2025 <br>
+                  Thrust-limited quadrotor with deployable wings, trained with residual RL.<br>
+                  Skills: Robot design, RL, Learning from Demonstration, Non-linear control <br>
+                  <a href="http://jgkang1210.github.io/fsdrone" target="_blank" rel="noopener">Project page</a> ·
+                  <a href="https://www.youtube.com/watch?v=Cfc-llDb3_k" target="_blank" rel="noopener">Video</a>
+                </p>
+              </article>
+
+              <article class="slider-card">
+                <div class="slider-media">
+                  <img src="images/dust.png" alt="mppi" />
+                </div>
+                <h3 class="capTitle">Off-road self-drvining (MPPI)</h3>
+                <p class="capSubtitle">
+                  08.2023~08.2024 <br>
+                  Off-road traversal of self-driving car for military purpose. <br>
+                  Skills: Model predictive path integral (MPPI). Neural network dynamics. LiDAR perception. <br>
+                </p>
+              </article>
+
+              <article class="slider-card">
+                <div class="slider-media">
+                  <div class="slider-media">
+                    <img src="images/u2.jpg" alt="u2" />
+                  </div>
+                </div>
+                <h3 class="capTitle">Multi-robot exploration</h3>
+                <p class="capSubtitle">
+                  08.2023~10.2025 <br>
+                  Multi-robot exploration with limited communication band. <br>
+                  Skills: ROS2. Lidar-Inertial-Odometry Algorithms. Navigation & Exploration algorithms. <br>
+                  <a href="https://www.youtube.com/watch?v=qzgoSJuRv9c" target="_blank" rel="noopener">Video</a>
+                </p>
+              </article>
+
+              <article class="slider-card">
+                <div class="slider-media">
+                  <div class="slider-media">
+                    <img src="images/avoid.png" alt="pointnt" />
+                  </div>
+                </div>
+                <h3 class="capTitle">Navigation Foundation model</h3>
+                <p class="capSubtitle">
+                  12.2024~Current <br>
+                  Implement LiDAR based navigation foundation model. <br>
+                  Skills: VLM, Large transformer training. Imitation learning. <br>
+                  <a href="https://openreview.net/pdf?id=GiXJuo9LzK" target="_blank" rel="noopener">Technical report</a> ·
+                  <a href="https://www.youtube.com/watch?v=__zW5giG77M" target="_blank" rel="noopener">Video</a>
+                </p>
+              </article>
+
+              <article class="slider-card">
+                <div class="slider-media">
+                  <div class="slider-media">
+                    <img src="images/wleg.jpg" alt="wleg" />
+                  </div>
+                </div>
+                <h3 class="capTitle">Development of wheel legged robot</h3>
+                <p class="capSubtitle">
+                  06.2021~12.2021 <br>
+                  Develop wheel-legged robot with CAN protocol. <br>
+                  Skills: 3D CAD. 3D printing. Simulating whole-body lagrangian dynamics. Sequential QP based motion planning. <br>
+                  <a href="https://www.youtube.com/watch?v=h0rfJGk2Oy4" target="_blank" rel="noopener">Video</a>
+                </p>
+              </article>
+
+
+              <article class="slider-card">
+                <div class="slider-media">
+                  <div class="slider-media">
+                    <img src="images/fs_low.jpg" alt="fslow" />
+                  </div>
+                </div>
+                <h3 class="capTitle">Development of glidable drone</h3>
+                <p class="capSubtitle">
+                  02.2022~06.2022 <br>
+                  Develop glidable drone with foldabe wings. <br>
+                  Skills: 3D CAD. 3D printing. State estimation. Kalman filter. <br>
+                  <a href="https://www.youtube.com/watch?v=TLPIMUOYdQM" target="_blank" rel="noopener">Video</a>
+                </p>
+              </article>
+
+              <article class="slider-card">
+                <div class="slider-media">
+                  <div class="slider-media">
+                    <img src="images/wcbot_panorama.png" alt="wcbot" />
+                  </div>
+                </div>
+                <h3 class="capTitle">Dual-unit wall-climbing robot</h3>
+                <p class="capSubtitle">
+                  06.2020~06.2022 <br>
+                  Ceiling adhesion robot with laser projector based inspection mission plannig. <br>
+                  Skills: 3D Printing. Physics modelling. STM32 board programming. <br>
+                  <a href="http://jgkang1210.github.io/wcbot" target="_blank" rel="noopener">Project page</a> ·
+                  <a href="https://www.youtube.com/watch?v=BNwbIVhYMMk" target="_blank" rel="noopener">Video</a>
+                </p>
+              </article>
+
+              <article class="slider-card">
+                <div class="slider-media">
+                  <video loop autoplay muted playsinline>
+                    <source src="images/engine.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+                <h3 class="capTitle">CAD Design & Arduino development</h3>
+                <p class="capSubtitle">
+                  09.2020~12.2020 <br>
+                  Developped 3D printing engine & Arduino with E-CAD <br>
+                  Skills: 3D CAD & Rendering. E-CAD. <br>
+                  <a href="https://www.youtube.com/watch?v=lrcbyQ81mPU" target="_blank" rel="noopener">Video</a>
+                </p>
+              </article>
+
+              <article class="slider-card">
+                <div class="slider-media">
+                  <video loop autoplay muted playsinline>
+                    <source src="images/reducer.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+                <h3 class="capTitle">Cycloidal motor reducer development</h3>
+                <p class="capSubtitle">
+                  09.2020~12.2020 <br>
+                  Developped cycloidal motor reducer with ROS2 interface <br>
+                  Skills: 3D CAD & Rendering. ROS2. <br>
+                  <a href="https://www.youtube.com/watch?v=zV1uLj3kbPU" target="_blank" rel="noopener">Video</a>
+                </p>
+              </article>
+
+              
+            </div>
+
+            <!-- Right arrow -->
+            <button class="slider-arrow slider-arrow-right" type="button" aria-label="Next project">
+              &#10095;
+            </button>
+
+            <!-- Optional fade edges (purely visual) -->
+            <div class="slider-fade slider-fade-left"></div>
+            <div class="slider-fade slider-fade-right"></div>
+          </div>
+        </section>
+
+
+
+
+        <!-- Media & Press -->
+        <section id="projects" class="section">
+          <h2>Media & Press</h2>
+          
+          I’ve had the opportunity to outreach & demonstrate my works to public.
+          
+          <img src="images/outreach.JPG" alt="outreach" width="600" />
+          
+
+          <ul class="project-list">
+            <li class="project-item">
+              <div class="project-title">
+                Flying squirrel drone
+              </div>
+              <div class="project-meta">
+                Foldable wings · Bio-inspired robot
+              </div>
+              <p class="project-desc">
+                Informal interview from IEEE Spectrum (Evan Ackerman),
+                <a href="https://newatlas.com/drones/flying-squirrel-inspired-drone/" target="_blank" rel="noopener">
+                  New atlas (Cover article),
+                </a>
+                <a href="https://techxplore.com/news/2025-04-flying-squirrel-drone-foldable-wings.html#google_vignette" target="_blank" rel="noopener">
+                  Tech Xplore (Cover article),
+                </a>
+                <a href="https://news.sbs.co.kr/news/endPage.do?news_id=N1008090098" target="_blank" rel="noopener">
+                  SBS (Korea major press),
+                </a>
+                <a href="https://www.yna.co.kr/view/AKR20250502150800017" target="_blank" rel="noopener">
+                  YTN (Korea major press),
+                </a>
+                and many others.
+              </p>
+            </li>
+          </ul>
+        </section>
+        
+        <!-- Robot demonstrations -->
+        <section id="projects" class="section projects-section">
+          <h2>Robot demonstrations</h2>
+          
+          I’ve had the opportunity to demonstrate robots running my controllers in front of leading researchers and government leadership, presenting both the technical contributions and real-world performance.
+
+          <div class="projects-slider">
+            <!-- Left arrow -->
+            
+            <!-- Scrollable track -->
+            <div class="slider-track" id="projects-slider-track">
+              <!-- CARD 1 -->
+              <article class="slider-card">
+                <div class="slider-media">
+                  <img src="icra_hound/img/raibert.JPG" alt="raibert" />
+                </div>
+                <h3 class="capTitle">Controller demonstration: Marc Raibert (Boston Dynamics)</h3>
+                <p class="capSubtitle">
+                  Demonstration of developed hurdle jumping controller.<br>
+                  <a href="https://www.youtube.com/watch?v=KatRHfB2QUc" target="_blank" rel="noopener">Video</a>
+                </p>
+              </article>
+
+              <!-- CARD 2 -->
+              <article class="slider-card">
+                <div class="slider-media">
+                  <img src="images/jmlee.jpg" alt="jmlee" />
+                </div>
+                <h3 class="capTitle">System demonstration: Jae Myung Lee (14th President of South Korea)</h3>
+                <p class="capSubtitle">
+                  Demonstration of designed experimental system with quadruped.<br>
+                  <a href="https://www.youtube.com/watch?v=S4_dE0AIUDc" target="_blank" rel="noopener">Video</a>
+                </p>
+              </article>
+
+            <!-- Right arrow -->
+            
+
+            <!-- Optional fade edges (purely visual) -->
+            
+          </div>
+        </section>
+
+        <!-- Service -->
+        <section id="service" class="section">
+          <h2>Service</h2>
+          <p>
+            Reviewer for IROS 2024, IROS 2025, CoRL 2025.
+          </p>
+        </section>
+
+      </main>
+
+      <footer class="footer">
+        <div class="footer-inner">
+          <div class="footer-left">
+            <p>
+              Template inspired by
+              <a href="https://jonbarron.info" target="_blank" rel="noopener">Jon Barron</a>.
+            </p>
+          </div>
+          <div class="footer-right">
             <a title="Visit tracker">
-              <img src="https://mapmyvisitors.com/map.png?d=SijAMOwwWONM_AoAV6xjcCevqANx_aLBmjGXNC3U5Ns&cl=ffffff" />
+              <img src="https://mapmyvisitors.com/map.png?d=SijAMOwwWONM_AoAV6xjcCevqANx_aLBmjGXNC3U5Ns&cl=ffffff"
+                   alt="Visitor map">
             </a>
           </div>
-          
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr>
-              <td style="padding:0px">
-                <br>
-                <p style="text-align:right;font-size:small;">
-                  <a href="https://github.com/jonbarron/jonbarron_website">template</a>
-                </p>
-              </td>
-            </tr>
-          </tbody></table>
-        </td>
-      </tr>
-    </table>
+        </div>
+      </footer>
+
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const slider = document.querySelector('.projects-slider');
+        const track = document.getElementById('projects-slider-track');
+        const leftArrow = document.querySelector('.slider-arrow-left');
+        const rightArrow = document.querySelector('.slider-arrow-right');
+
+        if (!slider || !track) return;
+
+        function updateUI() {
+          const scrollLeft = track.scrollLeft;
+          const maxScroll = track.scrollWidth - track.clientWidth;
+
+          // At LEFT edge
+          if (scrollLeft <= 5) {
+            slider.classList.add("at-left");
+          } else {
+            slider.classList.remove("at-left");
+          }
+
+          // At RIGHT edge
+          if (scrollLeft >= maxScroll - 5) {
+            slider.classList.add("at-right");
+          } else {
+            slider.classList.remove("at-right");
+          }
+        }
+
+        // Calculate scroll step = one card + gap
+        function getStep() {
+          const card = track.querySelector('.slider-card');
+          if (!card) return 300;
+
+          const style = getComputedStyle(track);
+          const gap = parseInt(style.gap || '24', 10);
+          return card.getBoundingClientRect().width + gap;
+        }
+
+        // Arrows
+        leftArrow?.addEventListener('click', () => {
+          track.scrollBy({ left: -getStep(), behavior: 'smooth' });
+        });
+
+        rightArrow?.addEventListener('click', () => {
+          track.scrollBy({ left: getStep(), behavior: 'smooth' });
+        });
+
+        track.addEventListener('scroll', updateUI);
+
+        // Initialize state on load
+        updateUI();
+
+        // scroll one full card
+        function autoStep() {
+          const step = getStep();
+          const maxScroll = track.scrollWidth - track.clientWidth;
+
+          // if at end → loop back smoothly
+          if (track.scrollLeft + step >= maxScroll - 5) {
+            track.scrollTo({ left: 0, behavior: 'smooth' });
+          } else {
+            track.scrollBy({ left: step, behavior: 'smooth' });
+          }
+        }
+
+        // run every 3.5 seconds (feel free to adjust)
+        let autoScroll = setInterval(autoStep, 3500);
+
+        // Stop auto scroll on hover
+        slider.addEventListener("mouseenter", () => {
+          clearInterval(autoScroll);
+        });
+
+        // Resume on mouse leave
+        slider.addEventListener("mouseleave", () => {
+          autoScroll = setInterval(autoStep, 4000);
+        });
+        
+      });
+    </script>
   </body>
 </html>
