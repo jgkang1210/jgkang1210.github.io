@@ -367,8 +367,8 @@
 
               <article class="slider-card">
                 <div class="slider-media">
-                  <video class="video-rot" loop autoplay muted playsinline>
-                    <source src="fsdrone/img/fs_render.mp4" type="video/mp4">
+                  <video loop autoplay muted playsinline>
+                    <source src="fsdrone/img/fsrender_rot-90.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                   </video>
                 </div>
@@ -561,16 +561,19 @@
         </section>
         
         <!-- Robot demonstrations -->
-        <section id="projects" class="section projects-section">
+        <section id="robot-demos" class="section projects-section">
           <h2>Robot demonstrations</h2>
-          
+                  
           I’ve had the opportunity to demonstrate robots running my controllers in front of leading researchers and government leadership, presenting both the technical contributions and real-world performance.
 
-          <div class="projects-slider">
-            <!-- Left arrow -->
-            
+          <div class="projects-slider robot-demo-slider">
+            <!-- Left arrow (mobile-only) -->
+            <button class="slider-arrow slider-arrow-left" type="button" aria-label="Previous demo">
+              &#10094;
+            </button>
+
             <!-- Scrollable track -->
-            <div class="slider-track" id="projects-slider-track">
+            <div class="slider-track">
               <!-- CARD 1 -->
               <article class="slider-card">
                 <div class="slider-media">
@@ -595,13 +598,16 @@
                 </p>
               </article>
 
-            <!-- Right arrow -->
-            
+              <!-- add more cards here if you want -->
+            </div>
 
-            <!-- Optional fade edges (purely visual) -->
-            
+            <!-- Right arrow (mobile-only) -->
+            <button class="slider-arrow slider-arrow-right" type="button" aria-label="Next demo">
+              &#10095;
+            </button>
           </div>
         </section>
+
 
         <!-- Service -->
         <section id="service" class="section">

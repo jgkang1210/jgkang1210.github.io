@@ -576,6 +576,21 @@ a:hover {
 }
 
 
+@media (min-width: 701px) {
+  .robot-demo-slider .slider-arrow {
+    display: none !important;
+  }
+}
+
+/* Mobile: show arrows ONLY for robot demos */
+@media (max-width: 700px) {
+  .robot-demo-slider {
+    position: relative;
+  }
+  .robot-demo-slider .slider-arrow {
+    display: flex !important;
+  }
+}
 
 /* Responsive tweaks */
 
