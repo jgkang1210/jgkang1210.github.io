@@ -209,6 +209,12 @@ a:hover {
   border-bottom-color: #f3e9b3; /* override normal pub-item border color */
 }
 
+@media (max-width: 700px) {
+  .highlight-card {
+    background: #fff6c4 !important;
+  }
+}
+
 .non-highlight-card {
   background: #fafafa;
   border-radius: 8px;
@@ -510,7 +516,64 @@ a:hover {
   }
 }
 
+/* Mobile settings */
+@media (max-width: 700px) {
 
+  /* Remove fade edges on mobile */
+  .slider-fade,
+  .slider-fade-left,
+  .slider-fade-right {
+    display: none;
+  }
+
+  /* Card width on mobile */
+  .slider-card {
+    flex: 0 0 90vw;
+    max-width: 90vw;
+  }
+
+  /* Media container stays responsive */
+  .slider-media {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+  }
+
+  .slider-media video,
+  .slider-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Rotated video — prevent clipping on mobile */
+  .slider-media video.video-rot {
+    object-fit: contain !important;
+    background: #000;
+    transform: rotate(-90deg) scale(2.0);
+    transform-origin: center;
+  }
+}
+
+
+
+/* Outreach image – desktop: centered, not too huge */
+.outreach-img {
+  width: 100%;
+  max-width: 600px;   /* tune this for desktop size */
+  height: auto;
+  display: block;
+  margin: 16px 0 0 0; /* centers it */
+  border-radius: 12px; /* optional, to match cards */
+}
+
+/* Mobile: let it fully fill the screen width */
+@media (max-width: 600px) {
+  .outreach-img {
+    max-width: 100%;
+    margin: 16px 0 0 0;  /* flush with text if you prefer */
+  }
+}
 
 
 
