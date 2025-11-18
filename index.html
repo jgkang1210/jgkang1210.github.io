@@ -567,13 +567,13 @@
           I’ve had the opportunity to demonstrate robots running my controllers in front of leading researchers and government leadership, presenting both the technical contributions and real-world performance.
 
           <div class="projects-slider robot-demo-slider">
-            <!-- Left arrow (mobile-only) -->
+            <!-- Left arrow -->
             <button class="slider-arrow slider-arrow-left" type="button" aria-label="Previous demo">
               &#10094;
             </button>
 
             <!-- Scrollable track -->
-            <div class="slider-track">
+            <div class="slider-track" id="robot-demo-track">
               <!-- CARD 1 -->
               <article class="slider-card">
                 <div class="slider-media">
@@ -597,11 +597,9 @@
                   <a href="https://www.youtube.com/watch?v=S4_dE0AIUDc" target="_blank" rel="noopener">Video</a>
                 </p>
               </article>
-
-              <!-- add more cards here if you want -->
             </div>
 
-            <!-- Right arrow (mobile-only) -->
+            <!-- Right arrow -->
             <button class="slider-arrow slider-arrow-right" type="button" aria-label="Next demo">
               &#10095;
             </button>
@@ -718,5 +716,75 @@
         
       });
     </script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+      
+        const slider = document.querySelector('.robot-demo-slider');
+        const track = document.getElementById('robot-demo-track');
+        if (!slider || !track) return;
+      
+        const leftArrow = slider.querySelector('.slider-arrow-left');
+        const rightArrow = slider.querySelector('.slider-arrow-right');
+      
+        function updateUI() {
+          const scrollLeft = track.scrollLeft;
+          const maxScroll = track.scrollWidth - track.clientWidth;
+      
+          if (scrollLeft <= 5) {
+            slider.classList.add("at-left");
+          } else {
+            slider.classList.remove("at-left");
+          }
+      
+          if (scrollLeft >= maxScroll - 5) {
+            slider.classList.add("at-right");
+          } else {
+            slider.classList.remove("at-right");
+          }
+        }
+      
+        function getStep() {
+          const card = track.querySelector('.slider-card');
+          if (!card) return 300;
+      
+          const style = getComputedStyle(track);
+          const gap = parseInt(style.gap || '24', 10);
+          return card.getBoundingClientRect().width + gap;
+        }
+      
+        leftArrow?.addEventListener('click', () => {
+          track.scrollBy({ left: -getStep(), behavior: 'smooth' });
+        });
+      
+        rightArrow?.addEventListener('click', () => {
+          track.scrollBy({ left: getStep(), behavior: 'smooth' });
+        });
+      
+        track.addEventListener('scroll', updateUI);
+        updateUI();
+      
+        // Auto-scroll for robot demos
+        function autoStep() {
+          const step = getStep();
+          const maxScroll = track.scrollWidth - track.clientWidth;
+      
+          if (track.scrollLeft + step >= maxScroll - 5) {
+            track.scrollTo({ left: 0, behavior: 'smooth' });
+          } else {
+            track.scrollBy({ left: step, behavior: 'smooth' });
+          }
+        }
+      
+        let autoScroll = setInterval(autoStep, 3500);
+      
+        slider.addEventListener("mouseenter", () => clearInterval(autoScroll));
+        slider.addEventListener("mouseleave", () =>
+          autoScroll = setInterval(autoStep, 3500)
+        );
+      
+      });
+    </script>
+  
   </body>
 </html>
