@@ -125,7 +125,8 @@
             </div>
 
             <figcaption class="quad-caption">
-              A 2D physics simulation summarizing my research on legged locomotion, flight, and perception.
+              A 2D physics simulation summarizing my research on legged robot, quadrotor, and perception.
+              Optimization is done at runtime. Feel free to turn the knob!
             </figcaption>
           </figure>
 
@@ -1140,6 +1141,13 @@
         const BASE_T = 0.6; // s, base pronk period
         let pronkSpeedFactor = 1.0; // 1.0 = base speed
 
+        // Fixed panel scales (tweak as you like)
+        const Z_PANEL_MIN = 0.20;              // m
+        const Z_PANEL_MAX = 1.00;              // m
+        const FZ_PANEL_MIN = 0.0;              // N
+        const FZ_PANEL_MAX = 5.0 * m * g;      // e.g. up to 3× body weight
+
+
         // LiDAR cone angle (degrees) – controlled by slider
         let lidarSpreadDeg = 75.0;
 
@@ -1689,121 +1697,132 @@
         }
 
         function drawRightPanel(sPhase) {
-      if (!isFinite(zMin) || !isFinite(zMax) || FzMax <= 0) return;
+          if (!isFinite(zMin) || !isFinite(zMax) || FzMax <= 0) return;
 
-      const panelMargin = 16;
-      const panelW = W * 0.28;
-      const panelH = H * 0.8;
+          const panelMargin = 16;
+          const panelW = W * 0.28;
+          const panelH = H * 0.8;
 
-      const x0 = W - panelW - panelMargin;
-      const y0 = (H - panelH) / 2;
+          const x0 = W - panelW - panelMargin;
+          const y0 = (H - panelH) / 2;
 
-      ctx.save();
-      ctx.translate(x0, y0);
+          ctx.save();
+          ctx.translate(x0, y0);
 
-      // Panel background + border
-      ctx.fillStyle = '#f9fafb';
-      ctx.fillRect(0, 0, panelW, panelH);
-      ctx.strokeStyle = '#e5e7eb';
-      ctx.lineWidth = 1;
-      ctx.strokeRect(0, 0, panelW, panelH);
+          // Panel background + border
+          ctx.fillStyle = '#f9fafb';
+          ctx.fillRect(0, 0, panelW, panelH);
+          ctx.strokeStyle = '#e5e7eb';
+          ctx.lineWidth = 1;
+          ctx.strokeRect(0, 0, panelW, panelH);
 
-      const innerX = 10;
-      const innerY = 10;
-      const innerW = panelW - 2 * innerX;
-      const midY   = panelH * 0.5;
+          const innerX = 10;
+          const innerY = 10;
+          const innerW = panelW - 2 * innerX;
+          const midY   = panelH * 0.5;
 
-      // ---------- z(t) in the top half ----------
-      const topBottom = innerY;
-      const topHeight = midY - innerY * 2;
+          // ---------- z(t) in the top half ----------
+          const topBottom = innerY;
+          const topHeight = midY - innerY * 2;
 
-      ctx.strokeStyle = '#9ca3af';
-      ctx.lineWidth = 1;
-      // baseline (min z)
-      ctx.beginPath();
-      ctx.moveTo(innerX, topBottom + topHeight);
-      ctx.lineTo(innerX + innerW, topBottom + topHeight);
-      // ctx.stroke();
+          ctx.strokeStyle = '#9ca3af';
+          ctx.lineWidth = 1;
+          // baseline at Z_PANEL_MIN
+          const zRange = Math.max(Z_PANEL_MAX - Z_PANEL_MIN, 1e-6);
+          const zBaseY = topBottom + topHeight * (1.0 - (0 - Z_PANEL_MIN) / zRange); // if you want 0m baseline
+          // or simply:
+          // const zBaseY = topBottom + topHeight; // baseline at panel bottom
+          ctx.beginPath();
+          ctx.moveTo(innerX, topBottom + topHeight);
+          ctx.lineTo(innerX + innerW, topBottom + topHeight);
+          // ctx.stroke();
 
-      // z curve
-      ctx.strokeStyle = '#1f2933';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      for (let k = 0; k < N_CYCLE; k++) {
-        const s = k / (N_CYCLE - 1);
-        const x = innerX + s * innerW;
+          // z curve with fixed physical scale
+          ctx.strokeStyle = '#1f2933';
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          for (let k = 0; k < N_CYCLE; k++) {
+            const s = k / (N_CYCLE - 1);
+            const x = innerX + s * innerW;
 
-        const zVal = zCycle[k];
-        const zNorm = (zMax > zMin) ? (zVal - zMin) / (zMax - zMin) : 0.0;
-        const y = topBottom + topHeight * (1.0 - zNorm);
+            const zVal = zCycle[k];
+            // map Z_PANEL_MIN..Z_PANEL_MAX -> [0,1], clamp outside
+            let zNorm = (zVal - Z_PANEL_MIN) / zRange;
+            zNorm = Math.max(0, Math.min(1, zNorm));
 
-        if (k === 0) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
-      }
-      ctx.stroke();
+            const y = topBottom + topHeight * (1.0 - zNorm);
 
-      // ---------- Fz(t) in the bottom half ----------
-      const bottomTop    = midY + innerY;
-      const bottomHeight = panelH - innerY - bottomTop;
+            if (k === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+          }
+          ctx.stroke();
 
-      ctx.strokeStyle = '#9ca3af';
-      ctx.lineWidth = 1;
-      // baseline (zero force)
-      ctx.beginPath();
-      ctx.moveTo(innerX, bottomTop + bottomHeight);
-      ctx.lineTo(innerX + innerW, bottomTop + bottomHeight);
-      // ctx.stroke();
+          // ---------- Fz(t) in the bottom half ----------
+          const bottomTop    = midY + innerY;
+          const bottomHeight = panelH - innerY - bottomTop;
 
-      ctx.strokeStyle = '#b91c1c';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      for (let k = 0; k < N_CYCLE; k++) {
-        const s = k / (N_CYCLE - 1);
-        const x = innerX + s * innerW;
+          ctx.strokeStyle = '#9ca3af';
+          ctx.lineWidth = 1;
+          // baseline (zero force)
+          ctx.beginPath();
+          ctx.moveTo(innerX, bottomTop + bottomHeight);
+          ctx.lineTo(innerX + innerW, bottomTop + bottomHeight);
+          // ctx.stroke();
 
-        const Fval = FzCycle[k];
-        const FNorm = FzMax > 0 ? (Fval / FzMax) : 0.0;
-        const y = bottomTop + bottomHeight * (1.0 - FNorm);
+          const FRange = Math.max(FZ_PANEL_MAX - FZ_PANEL_MIN, 1e-6);
 
-        if (k === 0) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
-      }
-      ctx.stroke();
+          ctx.strokeStyle = '#b91c1c';
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          for (let k = 0; k < N_CYCLE; k++) {
+            const s = k / (N_CYCLE - 1);
+            const x = innerX + s * innerW;
 
-      // ---------- vertical marker for current phase ----------
-      const kNow = Math.floor(sPhase * N_CYCLE) % N_CYCLE;
-      const sNow = kNow / (N_CYCLE - 1);
-      const xNow = innerX + sNow * innerW;
+            const Fval = FzCycle[k];
+            // map FZ_PANEL_MIN..FZ_PANEL_MAX -> [0,1], clamp outside
+            let FNorm = (Fval - FZ_PANEL_MIN) / FRange;
+            FNorm = Math.max(0, Math.min(1, FNorm));
 
-      ctx.strokeStyle = 'rgba(55,65,81,0.7)';
-      ctx.lineWidth = 1.5;
-      ctx.beginPath();
-      ctx.moveTo(xNow, innerY);
-      ctx.lineTo(xNow, panelH - innerY);
-      ctx.stroke();
+            const y = bottomTop + bottomHeight * (1.0 - FNorm);
 
-      // ---------- labels at bottom-right of each plot ----------
-      ctx.fillStyle = '#374151';
-      ctx.font = '10px sans-serif';
-      ctx.textAlign = 'right';
-      ctx.textBaseline = 'bottom';
+            if (k === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+          }
+          ctx.stroke();
 
-      // COM height label (bottom-right of top plot)
-      ctx.fillText(
-        'COM height z(t)',
-        innerX + innerW - 5,
-        topBottom + topHeight - 5
-      );
+          // ---------- vertical marker for current phase ----------
+          const kNow = Math.floor(sPhase * N_CYCLE) % N_CYCLE;
+          const sNow = kNow / (N_CYCLE - 1);
+          const xNow = innerX + sNow * innerW;
 
-      // GRF label (bottom-right of bottom plot)
-      ctx.fillText(
-        'GRF Fz(t)',
-        innerX + innerW - 5,
-        bottomTop + bottomHeight - 5
-      );
+          ctx.strokeStyle = 'rgba(55,65,81,0.7)';
+          ctx.lineWidth = 1.5;
+          ctx.beginPath();
+          ctx.moveTo(xNow, innerY);
+          ctx.lineTo(xNow, panelH - innerY);
+          ctx.stroke();
 
-      ctx.restore();
-    }
+          // ---------- labels at bottom-right of each plot ----------
+          ctx.fillStyle = '#374151';
+          ctx.font = '10px sans-serif';
+          ctx.textAlign = 'right';
+          ctx.textBaseline = 'bottom';
+
+          ctx.fillText(
+            'COM height z(t)',
+            innerX + innerW - 5,
+            topBottom + topHeight - 5
+          );
+
+          ctx.fillText(
+            'GRF Fz(t)',
+            innerX + innerW - 5,
+            bottomTop + bottomHeight - 5
+          );
+
+          ctx.restore();
+        }
+
 
 
 
