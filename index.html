@@ -109,7 +109,8 @@
 
           <figure class="quad-dyn-container">
             <canvas id="quad-dyn-canvas" width="540" height="180"></canvas>
-          
+
+
             <div class="quad-dyn-controls">
               <label>
                 LiDAR cone angle
@@ -122,60 +123,12 @@
                 <span id="pronk-speed-value">1.0×</span>
               </label>
             </div>
-          
+
             <figcaption class="quad-caption">
               A simple simulation summarizing my research on legged locomotion, flight, and perception.
             </figcaption>
-
-            <style>
-              .quad-dyn-container {
-                max-width: 680px;
-                margin: 0 auto;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-              }
-            
-              /* Canvas styling (optional subtle border) */
-              #quad-dyn-canvas {
-                border-radius: 6px;
-                border: 1px solid #ddd;
-                background: #fafafa;
-              }
-            
-              /* Slider controls */
-              .quad-dyn-controls {
-                margin-top: 8px;
-                display: flex;
-                gap: 1.8rem;
-                font-size: 0.85rem;
-                align-items: center;
-                flex-wrap: wrap;
-                justify-content: center;
-              }
-            
-              .quad-dyn-controls label {
-                display: flex;
-                align-items: center;
-                gap: 0.45rem;
-                white-space: nowrap;
-              }
-            
-              .quad-dyn-controls input[type="range"] {
-                width: 140px;
-              }
-            
-              /* Caption */
-              .quad-caption {
-                margin-top: 6px;
-                font-size: 0.82rem;
-                color: #555;
-                text-align: center;
-                line-height: 1.35;
-                max-width: 95%;
-              }
-            </style>
           </figure>
+
 
           <p>
             Representative papers are <span class="highlight">highlighted</span>.
@@ -1158,686 +1111,699 @@
       });
     </script>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const canvas = document.getElementById('quad-dyn-canvas');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const canvas = document.getElementById('quad-dyn-canvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
 
-    const W = canvas.width;
-    const H = canvas.height;
+        const W = canvas.width;   // 540
+        const H = canvas.height;  // 180
+        let scale_doc = 120;   // will be updated
+        let groundY_doc = 0;
 
-    // --- Toy "physical" params ---
-    const m   = 35.0;    // kg
-    const g   = 9.81;    // m/s^2
-    const lcm = 0.40;    // m, COM to hip
-    const BASE_T = 0.6; // s, base pronk period
-    let pronkSpeedFactor = 1.0; // 1.0 = base speed
-
-    // LiDAR cone angle (degrees) – controlled by slider
-    let lidarSpreadDeg = 75.0;
-
-    const l1 = 0.33;     // thigh
-    const l2 = 0.35;     // calf
-
-    // stance vs flight
-    const stanceFrac = 0.4;  // first 50% stance, rest flight
-    const swingAmp   = 0.3; // m, max foot height above ground
-    // Foot swing shape (0 -> up -> forward -> down -> 0)
-
-    const ctrlFootZ = [
-      0.0,
-      swingAmp * 0.3,
-      swingAmp * 1.0,
-      swingAmp * 1.0,
-      swingAmp * 0.4,
-      0.0
-    ];
-
-    const swingStep = 0.0;   // m, horizontal step length for the feet
-    const ctrlFootX = [
-      0.0,
-      0.25 * swingStep,
-      0.55 * swingStep,
-      0.80 * swingStep,
-      1.0  * swingStep,
-      1.05 * swingStep
-    ];
-
-    // Drone motion params
-    const T_drone     = 12.0;   // s, drone period
-    const droneOffset = 1.95;   // m, front/back relative to COM
-    const droneHeight = 1.25;   // m, height above ground
-
-    // Quadruped thickness parameter
-    const QUAD_BODY_THICKNESS = 8.0; // px
-    const QUAD_LEG_THICKNESS  = 6.0; // px
-
-    // Screen transform (static camera)
-    const scale   = 120;         // px per meter
-    const groundY = H * 0.96;
-
-    const lidarAngleSlider   = document.getElementById('lidar-angle-slider');
-    const lidarAngleValue    = document.getElementById('lidar-angle-value');
-    const pronkSpeedSlider   = document.getElementById('pronk-speed-slider');
-    const pronkSpeedValue    = document.getElementById('pronk-speed-value');
-
-    if (lidarAngleSlider && lidarAngleValue) {
-      lidarAngleSlider.addEventListener('input', () => {
-        lidarSpreadDeg = parseFloat(lidarAngleSlider.value);
-        lidarAngleValue.textContent = lidarSpreadDeg.toFixed(0) + '°';
-      });
-    }
-
-    if (pronkSpeedSlider && pronkSpeedValue) {
-      pronkSpeedSlider.addEventListener('input', () => {
-        const raw = parseFloat(pronkSpeedSlider.value); // 50–200
-        pronkSpeedFactor = raw / 100.0;                 // 0.5×–2.0×
-
-        pronkSpeedValue.textContent = pronkSpeedFactor.toFixed(2) + '×';
-
-        const T = BASE_T / pronkSpeedFactor;
-        precomputeVerticalCycleForPeriod(T);            // <-- recompute vertical motion
-      });
-    }
-
-
-    function worldToScreen(x, z) {
-      const sx = W * 0.5 + x * scale;  // center body around screen mid
-      const sy = groundY - z * scale;
-      return [sx, sy];
-    }
-
-    // === Quintic Bezier helpers ===
-    function bezier5(ctrl, s) {
-      const c0 = (1 - s) ** 5;
-      const c1 = 5 * s * (1 - s) ** 4;
-      const c2 = 10 * s ** 2 * (1 - s) ** 3;
-      const c3 = 10 * s ** 3 * (1 - s) ** 2;
-      const c4 = 5 * s ** 4 * (1 - s);
-      const c5 = s ** 5;
-      return ctrl[0]*c0 + ctrl[1]*c1 + ctrl[2]*c2 +
-             ctrl[3]*c3 + ctrl[4]*c4 + ctrl[5]*c5;
-    }
-
-    function bezier5WithDerivs(ctrl, s) {
-      const eps = 1e-3;
-      const s1 = Math.max(0, Math.min(1, s));
-      const sp = Math.max(0, Math.min(1, s1 + eps));
-      const sm = Math.max(0, Math.min(1, s1 - eps));
-
-      const f0 = bezier5(ctrl, s1);
-      const fp = bezier5(ctrl, sp);
-      const fm = bezier5(ctrl, sm);
-
-      const df  = (fp - fm) / (2 * eps);
-      const d2f = (fp - 2 * f0 + fm) / (eps * eps);
-      return { f: f0, df: df, d2f: d2f };
-    }
-
-    // Horizontal COM (no forward motion here)
-    const stepLength = 0.0;
-    const ctrlX = [
-      0.0,
-      0.2 * stepLength,
-      0.4 * stepLength,
-      0.6 * stepLength,
-      0.8 * stepLength,
-      stepLength
-    ];
-
-    // // Body pitch over the cycle (currently zero)
-    const thAmp = 0 * Math.PI / 180;
-    const ctrlTheta = [
-      0.0,
-      +0.6 * thAmp,
-      +thAmp,
-      +0.3 * thAmp,
-      -0.4 * thAmp,
-      0.0
-    ];
-
-    // === GRF shape g(s) over stance (0..1, nonnegative) ===
-    const ctrlGRFShape = [
-      0.0,
-      0.2,
-      1.0,
-      1.0,
-      0.2,
-      0.0
-    ];
-
-    // === Vertical motion: periodic COM, GRF profile & plotting support ===
-
-    const N_CYCLE = 400;
-    // --- Vertical motion with given initial height, periodicity, and peak check ---
-    const zCycle  = new Array(N_CYCLE);   // COM height over one cycle
-    const vCycle  = new Array(N_CYCLE);   // COM vertical velocity
-    const FzCycle = new Array(N_CYCLE);   // GRF(t) over cycle (extra, no mg)
-
-    let Kstar = 0.0;
-    let zMin  = Infinity;
-    let zMax  = -Infinity;
-    let FzMax = 0.0;
-
-    // User parameters
-    const zInitUser = 0.57;  // initial COM height (m)
-    const zPeakMax  = 0.63;  // allowed maximum COM height (m)
-
-    // 1) Integral of GRF shape over [0,1]
-    function grfShapeIntegral() {
-      const N_INT = 400;
-      let sum = 0;
-      for (let i = 0; i < N_INT; i++) {
-        const u0 = i / N_INT;
-        const u1 = (i + 1) / N_INT;
-        const f0 = bezier5(ctrlGRFShape, u0);
-        const f1 = bezier5(ctrlGRFShape, u1);
-        sum += 0.5 * (f0 + f1) * (u1 - u0);  // trapezoid
-      }
-      return sum;
-    }
-
-    // 2) Particular solution with z(0)=0, v(0)=0, for a given real period T
-    function integrateVerticalParticular(K, T) {
-      // Choose dt so that the last sample lands exactly at t = T
-      const dt  = T / (N_CYCLE - 1);
-      const zPart = new Array(N_CYCLE);
-      const vPart = new Array(N_CYCLE);
-
-      let z = 0.0;
-      let v = 0.0;
-      let localFzMax = 0.0;
-
-      for (let k = 0; k < N_CYCLE; k++) {
-        const t = k * dt;
-        const s = t / T;          // phase in [0,1] over the real period
-        const inStance = (s < stanceFrac);
-
-        let az, FzExtra;
-        if (inStance) {
-          const sStance  = s / stanceFrac;        // 0..1 over stance
-          const shapeVal = bezier5(ctrlGRFShape, sStance);
-
-          const extraAcc = K * g * shapeVal;      // extra accel from GRF
-          az      = -g + extraAcc;
-          FzExtra = m * extraAcc;                 // GRF(t) (no mg)
-        } else {
-          az      = -g;
-          FzExtra = 0.0;
+        // Hi-DPI: increase internal pixel resolution but keep same logical coords
+        function updateResolutionForHiDPI() {
+          const dpr = window.devicePixelRatio || 1;
+          canvas.width  = W * dpr;
+          canvas.height = H * dpr;
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);  // draw in [0..W]×[0..H]
         }
 
-        // integrate dynamics in real time
-        v += az * dt;
-        z += v * dt;
+        updateResolutionForHiDPI();
+        window.addEventListener('resize', updateResolutionForHiDPI);
 
-        zPart[k] = z;
-        vPart[k] = v;
-        FzCycle[k] = FzExtra;
+        // --- Toy "physical" params ---
+        const m   = 35.0;    // kg
+        const g   = 9.81;    // m/s^2
+        const lcm = 0.40;    // m, COM to hip
+        const BASE_T = 0.6; // s, base pronk period
+        let pronkSpeedFactor = 1.0; // 1.0 = base speed
 
-        if (FzExtra > localFzMax) localFzMax = FzExtra;
-      }
+        // LiDAR cone angle (degrees) – controlled by slider
+        let lidarSpreadDeg = 75.0;
 
-      return { zPart, vPart, FzMax: localFzMax, dt };
-    }
+        const l1 = 0.33;     // thigh
+        const l2 = 0.35;     // calf
 
+        // stance vs flight
+        const stanceFrac = 0.4;  // first 50% stance, rest flight
+        const swingAmp   = 0.3; // m, max foot height above ground
+        // Foot swing shape (0 -> up -> forward -> down -> 0)
 
-    function precomputeVerticalCycleForPeriod(T) {
-      // (a) Impulse condition => periodic velocity
-      const G = grfShapeIntegral();      // ∫_0^1 shape(u) du
-      Kstar   = 1.0 / (stanceFrac * G);  // K * stanceFrac * G = 1 (independent of T)
+        const ctrlFootZ = [
+          0.0,
+          swingAmp * 0.3,
+          swingAmp * 1.0,
+          swingAmp * 1.0,
+          swingAmp * 0.4,
+          0.0
+        ];
 
-      // (b) particular solution with z(0)=0, v(0)=0
-      const { zPart, vPart, FzMax: localFzMax, dt } =
-        integrateVerticalParticular(Kstar, T);
+        const swingStep = 0.0;   // m, horizontal step length for the feet
+        const ctrlFootX = [
+          0.0,
+          0.25 * swingStep,
+          0.55 * swingStep,
+          0.80 * swingStep,
+          1.0  * swingStep,
+          1.05 * swingStep
+        ];
 
-      // (c) choose v0 so that z(T) = zInitUser (periodic height)
-      const zPartEnd = zPart[N_CYCLE - 1];  // z_p(T)
-      const v0 = -zPartEnd / T;             // z_init + v0*T + z_p(T) = z_init
+        // Drone motion params
+        const T_drone     = 12.0;   // s, drone period
+        const droneOffset = 1.95;   // m, front/back relative to COM
+        const droneHeight = 1.25;   // m, height above ground
 
-      // (d) build full periodic trajectory with z(0) = zInitUser
-      let localZmin = Infinity;
-      let localZmax = -Infinity;
+        // Quadruped thickness parameter
+        const QUAD_BODY_THICKNESS = 8.0; // px
+        const QUAD_LEG_THICKNESS  = 6.0; // px
 
-      for (let k = 0; k < N_CYCLE; k++) {
-        const t    = k * dt;
-        const zVal = zInitUser + v0 * t + zPart[k];
-        const vVal = v0 + vPart[k];
+        // Screen transform (static camera)
+        const scale   = 120;         // px per meter
+        const groundY = H * 0.96;
 
-        zCycle[k] = zVal;
-        vCycle[k] = vVal;
+        const lidarAngleSlider   = document.getElementById('lidar-angle-slider');
+        const lidarAngleValue    = document.getElementById('lidar-angle-value');
+        const pronkSpeedSlider   = document.getElementById('pronk-speed-slider');
+        const pronkSpeedValue    = document.getElementById('pronk-speed-value');
 
-        if (zVal < localZmin) localZmin = zVal;
-        if (zVal > localZmax) localZmax = zVal;
-      }
+        if (lidarAngleSlider && lidarAngleValue) {
+          lidarAngleSlider.addEventListener('input', () => {
+            lidarSpreadDeg = parseFloat(lidarAngleSlider.value);
+            lidarAngleValue.textContent = lidarSpreadDeg.toFixed(0) + '°';
+          });
+        }
 
-      zMin  = localZmin;
-      zMax  = localZmax;
-      FzMax = localFzMax;
+        if (pronkSpeedSlider && pronkSpeedValue) {
+          pronkSpeedSlider.addEventListener('input', () => {
+            const raw = parseFloat(pronkSpeedSlider.value); // 50–200
+            pronkSpeedFactor = raw / 100.0;                 // 0.5×–2.0×
 
-      // peak constraint check (now depends on T)
-      if (zMax > zPeakMax + 1e-6) {
-        console.warn(
-          "Jump peak", zMax.toFixed(3),
-          "exceeds cap", zPeakMax.toFixed(3),
-          "with T =", T.toFixed(3),
-          "and zInit =", zInitUser
-        );
-      }
+            pronkSpeedValue.textContent = pronkSpeedFactor.toFixed(2) + '×';
 
-      // optional debug:
-      // console.log("T =", T, "z_init =", zCycle[0], "v_init =", vCycle[0], "z_max =", zMax);
-    }
-
-    precomputeVerticalCycleForPeriod(BASE_T);
-
-
-    // --- IK: as in your MATLAB ik(x, y) (body frame) ---
-    function ikLeg(x, y) {
-      const l1_2 = l1 * l1;
-      const l2_2 = l2 * l2;
-      const x_2 = x * x;
-      const y_2 = y * y;
-      const r2 = x_2 + y_2;
-      const r = Math.sqrt(Math.max(r2, 1e-9));
-
-      const c_beta = (l1_2 + l2_2 - r2) / (2 * l1 * l2);
-      const beta = Math.acos(Math.min(1, Math.max(-1, c_beta)));
-
-      const c_alpha = (l1_2 + r2 - l2_2) / (2 * l1 * r);
-      const alpha = Math.acos(Math.min(1, Math.max(-1, c_alpha)));
-
-      const gamma = Math.atan2(y, x);
-
-      const angle1 = gamma - alpha;
-      const angle2 = Math.PI - beta;
-      return [angle1, angle2];
-    }
+            const T = BASE_T / pronkSpeedFactor;
+            precomputeVerticalCycleForPeriod(T);            // <-- recompute vertical motion
+          });
+        }
 
 
-    // === Drawing helpers (same as before) ===
-    function drawGround() {
-      ctx.strokeStyle = '#333333';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.moveTo(0, groundY + 0.5);
-      ctx.lineTo(W, groundY + 0.5);
-      ctx.stroke();
+        function worldToScreen(x, z) {
+          const sx = W * 0.5 + x * scale;  // center body around screen mid
+          const sy = groundY - z * scale;
+          return [sx, sy];
+        }
 
-      ctx.strokeStyle = 'rgba(0,0,0,0.18)';
-      ctx.lineWidth = 2;
-      const tickCount = 18;
-      const tickSpacing = W / tickCount;
-      for (let i = -1; i <= tickCount + 1; i++) {
-        const x = i * tickSpacing;
-        ctx.beginPath();
-        ctx.moveTo(x, groundY + 1);
-        ctx.lineTo(x + 14, groundY + 5);
-        ctx.stroke();
-      }
-    }
+        // === Quintic Bezier helpers ===
+        function bezier5(ctrl, s) {
+          const c0 = (1 - s) ** 5;
+          const c1 = 5 * s * (1 - s) ** 4;
+          const c2 = 10 * s ** 2 * (1 - s) ** 3;
+          const c3 = 10 * s ** 3 * (1 - s) ** 2;
+          const c4 = 5 * s ** 4 * (1 - s);
+          const c5 = s ** 5;
+          return ctrl[0]*c0 + ctrl[1]*c1 + ctrl[2]*c2 +
+                ctrl[3]*c3 + ctrl[4]*c4 + ctrl[5]*c5;
+        }
 
-    function drawSegment(p1, p2, color, width) {
-      ctx.strokeStyle = color;
-      ctx.lineWidth = width;
-      ctx.beginPath();
-      ctx.moveTo(p1[0], p1[1]);
-      ctx.lineTo(p2[0], p2[1]);
-      ctx.stroke();
-    }
+        function bezier5WithDerivs(ctrl, s) {
+          const eps = 1e-3;
+          const s1 = Math.max(0, Math.min(1, s));
+          const sp = Math.max(0, Math.min(1, s1 + eps));
+          const sm = Math.max(0, Math.min(1, s1 - eps));
 
-    function drawCOM(x, z, theta) {
-      const [cx, cz] = worldToScreen(x, z);
+          const f0 = bezier5(ctrl, s1);
+          const fp = bezier5(ctrl, sp);
+          const fm = bezier5(ctrl, sm);
 
-      ctx.fillStyle = '#000000';
-      ctx.beginPath();
-      ctx.arc(cx, cz, 11, 0, 2 * Math.PI);
-      ctx.fill();
+          const df  = (fp - fm) / (2 * eps);
+          const d2f = (fp - 2 * f0 + fm) / (eps * eps);
+          return { f: f0, df: df, d2f: d2f };
+        }
 
-      ctx.beginPath();
-      ctx.fillStyle = '#ffffff';
-      ctx.arc(cx, cz, 9, 0, 2 * Math.PI);
-      ctx.fill();
+        // Horizontal COM (no forward motion here)
+        const stepLength = 0.0;
+        const ctrlX = [
+          0.0,
+          0.2 * stepLength,
+          0.4 * stepLength,
+          0.6 * stepLength,
+          0.8 * stepLength,
+          stepLength
+        ];
 
-      const rWedge = 9;
-      function fillWedge(startAngle, endAngle) {
-        ctx.beginPath();
-        ctx.moveTo(cx, cz);
-        ctx.arc(cx, cz, rWedge, startAngle + theta, endAngle + theta, false);
-        ctx.closePath();
-        ctx.fillStyle = '#000000';
-        ctx.fill();
-      }
-      fillWedge(Math.PI / 2, Math.PI);
-      fillWedge(3 * Math.PI / 2, 2 * Math.PI);
+        // // Body pitch over the cycle (currently zero)
+        const thAmp = 0 * Math.PI / 180;
+        const ctrlTheta = [
+          0.0,
+          +0.6 * thAmp,
+          +thAmp,
+          +0.3 * thAmp,
+          -0.4 * thAmp,
+          0.0
+        ];
 
-      const r = 9;
-      const ex  = cx + r * Math.cos(theta);
-      const ez  = cz - r * Math.sin(theta);
-      const ex2 = cx - r * Math.cos(theta);
-      const ez2 = cz + r * Math.sin(theta);
+        // === GRF shape g(s) over stance (0..1, nonnegative) ===
+        const ctrlGRFShape = [
+          0.0,
+          0.2,
+          1.0,
+          1.0,
+          0.2,
+          0.0
+        ];
 
-      ctx.strokeStyle = '#000000';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.moveTo(ex2, ez2);
-      ctx.lineTo(ex, ez);
-      ctx.stroke();
-    }
+        // === Vertical motion: periodic COM, GRF profile & plotting support ===
 
-    function drawBody(theta, x, z) {
-      const cTh = Math.cos(theta);
-      const sTh = Math.sin(theta);
+        const N_CYCLE = 400;
+        // --- Vertical motion with given initial height, periodicity, and peak check ---
+        const zCycle  = new Array(N_CYCLE);   // COM height over one cycle
+        const vCycle  = new Array(N_CYCLE);   // COM vertical velocity
+        const FzCycle = new Array(N_CYCLE);   // GRF(t) over cycle (extra, no mg)
 
-      const xb = x - lcm * cTh;
-      const zb = z - lcm * sTh;
-      const xf = x + lcm * cTh;
-      const zf = z + lcm * sTh;
+        let Kstar = 0.0;
+        let zMin  = Infinity;
+        let zMax  = -Infinity;
+        let FzMax = 0.0;
 
-      const [bx, bz] = worldToScreen(xb, zb);
-      const [fx, fz] = worldToScreen(xf, zf);
+        // User parameters
+        const zInitUser = 0.57;  // initial COM height (m)
+        const zPeakMax  = 0.63;  // allowed maximum COM height (m)
 
-      ctx.strokeStyle = '#e3342f';
-      ctx.lineWidth = QUAD_BODY_THICKNESS;
-      ctx.beginPath();
-      ctx.moveTo(bx, bz);
-      ctx.lineTo(fx, fz);
-      ctx.stroke();
-
-      ctx.fillStyle = '#000000';
-      [ [bx, bz], [fx, fz] ].forEach(([px, py]) => {
-        ctx.beginPath();
-        ctx.arc(px, py, 4, 0, 2 * Math.PI);
-        ctx.fill();
-      });
-
-      return {
-        shoulderBack:  { x: xb, z: zb },
-        shoulderFront: { x: xf, z: zf }
-      };
-    }
-
-    function drawFoot(x, z) {
-      const [fx, fz] = worldToScreen(x, z);
-      ctx.fillStyle = '#000000';
-      ctx.beginPath();
-      ctx.arc(fx, fz, 4, 0, 2 * Math.PI);
-      ctx.fill();
-    }
-
-    function drawForce(footX, footZ, Fx, Fz) {
-      const Fnorm = Math.sqrt(Fx*Fx + Fz*Fz);
-      if (Fnorm < 1e-3) return;
-
-      const scaleF = 0.0012;
-      const dirX = Fx / Fnorm;
-      const dirZ = Fz / Fnorm;
-
-      const len = scaleF * Fnorm;
-      const headLen = 10;
-      const lineShrink = 6;
-
-      const x_tail = footX;
-      const z_tail = footZ;
-      const x_tip  = x_tail + dirX * len;
-      const z_tip  = z_tail + dirZ * len;
-
-      const x_lineEnd = x_tail + dirX * (len - lineShrink/scale);
-      const z_lineEnd = z_tail + dirZ * (len - lineShrink/scale);
-
-      const [tx, tz] = worldToScreen(x_tail,    z_tail);
-      const [lx, lz] = worldToScreen(x_lineEnd, z_lineEnd);
-      const [hx, hz] = worldToScreen(x_tip,     z_tip);
-
-      ctx.strokeStyle = '#1d4ed8';
-      ctx.lineWidth = 4;
-      ctx.beginPath();
-      ctx.moveTo(tx, tz);
-      ctx.lineTo(lx, lz);
-      ctx.stroke();
-
-      const ang = Math.atan2(hz - lz, hx - lx);
-
-      ctx.beginPath();
-      ctx.moveTo(hx, hz);
-      ctx.lineTo(
-        hx - headLen * Math.cos(ang - Math.PI / 7),
-        hz - headLen * Math.sin(ang - Math.PI / 7)
-      );
-      ctx.lineTo(
-        hx - headLen * Math.cos(ang + Math.PI / 7),
-        hz - headLen * Math.sin(ang + Math.PI / 7)
-      );
-      ctx.closePath();
-      ctx.fillStyle = '#1d4ed8';
-      ctx.fill();
-    }
-
-    // Simple quadrotor drawing with folding "wings"
-    function drawDrone(x, z, wingFrac) {
-      const [cx, cz] = worldToScreen(x, z);
-
-      const baseArm = 26;
-      const armLen  = baseArm * (0.35 + 0.65 * wingFrac);
-
-      const bodyW = 28;
-      const bodyH = 10;
-      const rotorR = 5 * (0.6 + 0.4 * wingFrac);
-
-      ctx.strokeStyle = '#444';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.moveTo(cx - armLen, cz);
-      ctx.lineTo(cx + armLen, cz);
-      ctx.moveTo(cx, cz - armLen * 0.55);
-      ctx.lineTo(cx, cz + armLen * 0.55);
-      ctx.stroke();
-
-      ctx.fillStyle = '#111';
-      ctx.beginPath();
-      if (ctx.roundRect) {
-        ctx.roundRect(
-          cx - bodyW/2,
-          cz - bodyH/2,
-          bodyW,
-          bodyH,
-          4
-        );
-      } else {
-        ctx.rect(cx - bodyW/2, cz - bodyH/2, bodyW, bodyH);
-      }
-      ctx.fill();
-
-      const rotorOffsets = [
-        [ armLen,  0],
-        [-armLen,  0],
-        [ 0,  armLen*0.55],
-        [ 0, -armLen*0.55]
-      ];
-      ctx.fillStyle = '#666';
-      rotorOffsets.forEach(([ox, oy]) => {
-        ctx.beginPath();
-        ctx.arc(cx + ox, cz + oy, rotorR, 0, 2*Math.PI);
-        ctx.fill();
-      });
-    }
-
-    function drawDroneLidar(xDrone, zDrone, segments, numRays = 40, maxRange = 2.0, spreadRad = Math.PI / 8) {
-      const [sx0, sy0] = worldToScreen(xDrone, zDrone);
-
-      for (let i = 0; i < numRays; i++) {
-        const spread = spreadRad;
-        const angle = Math.PI / 2 + (i / numRays - 0.5) * spread;
-
-        const dx = Math.cos(angle);
-        const dz = -Math.sin(angle);
-
-        let bestT = Infinity;
-        let hitX = xDrone;
-        let hitZ = zDrone;
-
-        let tGround = Infinity;
-        if (dz < -1e-6) {
-          const t = (0 - zDrone) / dz;
-          if (t > 0 && t < maxRange) {
-            tGround = t;
+        // 1) Integral of GRF shape over [0,1]
+        function grfShapeIntegral() {
+          const N_INT = 400;
+          let sum = 0;
+          for (let i = 0; i < N_INT; i++) {
+            const u0 = i / N_INT;
+            const u1 = (i + 1) / N_INT;
+            const f0 = bezier5(ctrlGRFShape, u0);
+            const f1 = bezier5(ctrlGRFShape, u1);
+            sum += 0.5 * (f0 + f1) * (u1 - u0);  // trapezoid
           }
+          return sum;
         }
 
-        for (const seg of segments) {
-          const { x1, z1, x2, z2 } = seg;
-          const ux = x2 - x1;
-          const uz = z2 - z1;
+        // 2) Particular solution with z(0)=0, v(0)=0, for a given real period T
+        function integrateVerticalParticular(K, T) {
+          // Choose dt so that the last sample lands exactly at t = T
+          const dt  = T / (N_CYCLE - 1);
+          const zPart = new Array(N_CYCLE);
+          const vPart = new Array(N_CYCLE);
 
-          const denom = dx * uz - dz * ux;
-          if (Math.abs(denom) < 1e-9) continue;
+          let z = 0.0;
+          let v = 0.0;
+          let localFzMax = 0.0;
 
-          const t = ((x1 - xDrone) * uz - (z1 - zDrone) * ux) / denom;
-          const s = ((x1 - xDrone) * dz - (z1 - zDrone) * dx) / denom;
+          for (let k = 0; k < N_CYCLE; k++) {
+            const t = k * dt;
+            const s = t / T;          // phase in [0,1] over the real period
+            const inStance = (s < stanceFrac);
 
-          if (t > 0 && t < maxRange && s >= 0 && s <= 1) {
-            if (t < bestT) {
-              bestT = t;
+            let az, FzExtra;
+            if (inStance) {
+              const sStance  = s / stanceFrac;        // 0..1 over stance
+              const shapeVal = bezier5(ctrlGRFShape, sStance);
+
+              const extraAcc = K * g * shapeVal;      // extra accel from GRF
+              az      = -g + extraAcc;
+              FzExtra = m * extraAcc;                 // GRF(t) (no mg)
+            } else {
+              az      = -g;
+              FzExtra = 0.0;
             }
+
+            // integrate dynamics in real time
+            v += az * dt;
+            z += v * dt;
+
+            zPart[k] = z;
+            vPart[k] = v;
+            FzCycle[k] = FzExtra;
+
+            if (FzExtra > localFzMax) localFzMax = FzExtra;
+          }
+
+          return { zPart, vPart, FzMax: localFzMax, dt };
+        }
+
+
+        function precomputeVerticalCycleForPeriod(T) {
+          // (a) Impulse condition => periodic velocity
+          const G = grfShapeIntegral();      // ∫_0^1 shape(u) du
+          Kstar   = 1.0 / (stanceFrac * G);  // K * stanceFrac * G = 1 (independent of T)
+
+          // (b) particular solution with z(0)=0, v(0)=0
+          const { zPart, vPart, FzMax: localFzMax, dt } =
+            integrateVerticalParticular(Kstar, T);
+
+          // (c) choose v0 so that z(T) = zInitUser (periodic height)
+          const zPartEnd = zPart[N_CYCLE - 1];  // z_p(T)
+          const v0 = -zPartEnd / T;             // z_init + v0*T + z_p(T) = z_init
+
+          // (d) build full periodic trajectory with z(0) = zInitUser
+          let localZmin = Infinity;
+          let localZmax = -Infinity;
+
+          for (let k = 0; k < N_CYCLE; k++) {
+            const t    = k * dt;
+            const zVal = zInitUser + v0 * t + zPart[k];
+            const vVal = v0 + vPart[k];
+
+            zCycle[k] = zVal;
+            vCycle[k] = vVal;
+
+            if (zVal < localZmin) localZmin = zVal;
+            if (zVal > localZmax) localZmax = zVal;
+          }
+
+          zMin  = localZmin;
+          zMax  = localZmax;
+          FzMax = localFzMax;
+
+          // peak constraint check (now depends on T)
+          if (zMax > zPeakMax + 1e-6) {
+            console.warn(
+              "Jump peak", zMax.toFixed(3),
+              "exceeds cap", zPeakMax.toFixed(3),
+              "with T =", T.toFixed(3),
+              "and zInit =", zInitUser
+            );
+          }
+
+          // optional debug:
+          // console.log("T =", T, "z_init =", zCycle[0], "v_init =", vCycle[0], "z_max =", zMax);
+        }
+
+        precomputeVerticalCycleForPeriod(BASE_T);
+
+
+        // --- IK: as in your MATLAB ik(x, y) (body frame) ---
+        function ikLeg(x, y) {
+          const l1_2 = l1 * l1;
+          const l2_2 = l2 * l2;
+          const x_2 = x * x;
+          const y_2 = y * y;
+          const r2 = x_2 + y_2;
+          const r = Math.sqrt(Math.max(r2, 1e-9));
+
+          const c_beta = (l1_2 + l2_2 - r2) / (2 * l1 * l2);
+          const beta = Math.acos(Math.min(1, Math.max(-1, c_beta)));
+
+          const c_alpha = (l1_2 + r2 - l2_2) / (2 * l1 * r);
+          const alpha = Math.acos(Math.min(1, Math.max(-1, c_alpha)));
+
+          const gamma = Math.atan2(y, x);
+
+          const angle1 = gamma - alpha;
+          const angle2 = Math.PI - beta;
+          return [angle1, angle2];
+        }
+
+
+        // === Drawing helpers (same as before) ===
+        function drawGround() {
+          ctx.strokeStyle = '#333333';
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.moveTo(0, groundY + 0.5);
+          ctx.lineTo(W, groundY + 0.5);
+          ctx.stroke();
+
+          ctx.strokeStyle = 'rgba(0,0,0,0.18)';
+          ctx.lineWidth = 2;
+          const tickCount = 18;
+          const tickSpacing = W / tickCount;
+          for (let i = -1; i <= tickCount + 1; i++) {
+            const x = i * tickSpacing;
+            ctx.beginPath();
+            ctx.moveTo(x, groundY + 1);
+            ctx.lineTo(x + 14, groundY + 5);
+            ctx.stroke();
           }
         }
 
-        if (bestT < Infinity || tGround < Infinity) {
-          const tHit = Math.min(bestT, tGround);
-          hitX = xDrone + dx * tHit;
-          hitZ = zDrone + dz * tHit;
-        } else {
-          hitX = xDrone + dx * maxRange;
-          hitZ = zDrone + dz * maxRange;
+        function drawSegment(p1, p2, color, width) {
+          ctx.strokeStyle = color;
+          ctx.lineWidth = width;
+          ctx.beginPath();
+          ctx.moveTo(p1[0], p1[1]);
+          ctx.lineTo(p2[0], p2[1]);
+          ctx.stroke();
         }
 
-        const [sx1, sy1] = worldToScreen(hitX, hitZ);
+        function drawCOM(x, z, theta) {
+          const [cx, cz] = worldToScreen(x, z);
 
-        ctx.strokeStyle = "rgba(30,30,30,0.35)";
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(sx0, sy0);
-        ctx.lineTo(sx1, sy1);
-        ctx.stroke();
+          ctx.fillStyle = '#000000';
+          ctx.beginPath();
+          ctx.arc(cx, cz, 11, 0, 2 * Math.PI);
+          ctx.fill();
+
+          ctx.beginPath();
+          ctx.fillStyle = '#ffffff';
+          ctx.arc(cx, cz, 9, 0, 2 * Math.PI);
+          ctx.fill();
+
+          const rWedge = 9;
+          function fillWedge(startAngle, endAngle) {
+            ctx.beginPath();
+            ctx.moveTo(cx, cz);
+            ctx.arc(cx, cz, rWedge, startAngle + theta, endAngle + theta, false);
+            ctx.closePath();
+            ctx.fillStyle = '#000000';
+            ctx.fill();
+          }
+          fillWedge(Math.PI / 2, Math.PI);
+          fillWedge(3 * Math.PI / 2, 2 * Math.PI);
+
+          const r = 9;
+          const ex  = cx + r * Math.cos(theta);
+          const ez  = cz - r * Math.sin(theta);
+          const ex2 = cx - r * Math.cos(theta);
+          const ez2 = cz + r * Math.sin(theta);
+
+          ctx.strokeStyle = '#000000';
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.moveTo(ex2, ez2);
+          ctx.lineTo(ex, ez);
+          ctx.stroke();
+        }
+
+        function drawBody(theta, x, z) {
+          const cTh = Math.cos(theta);
+          const sTh = Math.sin(theta);
+
+          const xb = x - lcm * cTh;
+          const zb = z - lcm * sTh;
+          const xf = x + lcm * cTh;
+          const zf = z + lcm * sTh;
+
+          const [bx, bz] = worldToScreen(xb, zb);
+          const [fx, fz] = worldToScreen(xf, zf);
+
+          ctx.strokeStyle = '#e3342f';
+          ctx.lineWidth = QUAD_BODY_THICKNESS;
+          ctx.beginPath();
+          ctx.moveTo(bx, bz);
+          ctx.lineTo(fx, fz);
+          ctx.stroke();
+
+          ctx.fillStyle = '#000000';
+          [ [bx, bz], [fx, fz] ].forEach(([px, py]) => {
+            ctx.beginPath();
+            ctx.arc(px, py, 4, 0, 2 * Math.PI);
+            ctx.fill();
+          });
+
+          return {
+            shoulderBack:  { x: xb, z: zb },
+            shoulderFront: { x: xf, z: zf }
+          };
+        }
+
+        function drawFoot(x, z) {
+          const [fx, fz] = worldToScreen(x, z);
+          ctx.fillStyle = '#000000';
+          ctx.beginPath();
+          ctx.arc(fx, fz, 4, 0, 2 * Math.PI);
+          ctx.fill();
+        }
+
+        function drawForce(footX, footZ, Fx, Fz) {
+          const Fnorm = Math.sqrt(Fx*Fx + Fz*Fz);
+          if (Fnorm < 1e-3) return;
+
+          const scaleF = 0.0012;
+          const dirX = Fx / Fnorm;
+          const dirZ = Fz / Fnorm;
+
+          const len = scaleF * Fnorm;
+          const headLen = 10;
+          const lineShrink = 6;
+
+          const x_tail = footX;
+          const z_tail = footZ;
+          const x_tip  = x_tail + dirX * len;
+          const z_tip  = z_tail + dirZ * len;
+
+          const x_lineEnd = x_tail + dirX * (len - lineShrink/scale);
+          const z_lineEnd = z_tail + dirZ * (len - lineShrink/scale);
+
+          const [tx, tz] = worldToScreen(x_tail,    z_tail);
+          const [lx, lz] = worldToScreen(x_lineEnd, z_lineEnd);
+          const [hx, hz] = worldToScreen(x_tip,     z_tip);
+
+          ctx.strokeStyle = '#1d4ed8';
+          ctx.lineWidth = 4;
+          ctx.beginPath();
+          ctx.moveTo(tx, tz);
+          ctx.lineTo(lx, lz);
+          ctx.stroke();
+
+          const ang = Math.atan2(hz - lz, hx - lx);
+
+          ctx.beginPath();
+          ctx.moveTo(hx, hz);
+          ctx.lineTo(
+            hx - headLen * Math.cos(ang - Math.PI / 7),
+            hz - headLen * Math.sin(ang - Math.PI / 7)
+          );
+          ctx.lineTo(
+            hx - headLen * Math.cos(ang + Math.PI / 7),
+            hz - headLen * Math.sin(ang + Math.PI / 7)
+          );
+          ctx.closePath();
+          ctx.fillStyle = '#1d4ed8';
+          ctx.fill();
+        }
+
+        // Simple quadrotor drawing with folding "wings"
+        function drawDrone(x, z, wingFrac) {
+          const [cx, cz] = worldToScreen(x, z);
+
+          const baseArm = 26;
+          const armLen  = baseArm * (0.35 + 0.65 * wingFrac);
+
+          const bodyW = 28;
+          const bodyH = 10;
+          const rotorR = 5 * (0.6 + 0.4 * wingFrac);
+
+          ctx.strokeStyle = '#444';
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.moveTo(cx - armLen, cz);
+          ctx.lineTo(cx + armLen, cz);
+          ctx.moveTo(cx, cz - armLen * 0.55);
+          ctx.lineTo(cx, cz + armLen * 0.55);
+          ctx.stroke();
+
+          ctx.fillStyle = '#111';
+          ctx.beginPath();
+          if (ctx.roundRect) {
+            ctx.roundRect(
+              cx - bodyW/2,
+              cz - bodyH/2,
+              bodyW,
+              bodyH,
+              4
+            );
+          } else {
+            ctx.rect(cx - bodyW/2, cz - bodyH/2, bodyW, bodyH);
+          }
+          ctx.fill();
+
+          const rotorOffsets = [
+            [ armLen,  0],
+            [-armLen,  0],
+            [ 0,  armLen*0.55],
+            [ 0, -armLen*0.55]
+          ];
+          ctx.fillStyle = '#666';
+          rotorOffsets.forEach(([ox, oy]) => {
+            ctx.beginPath();
+            ctx.arc(cx + ox, cz + oy, rotorR, 0, 2*Math.PI);
+            ctx.fill();
+          });
+        }
+
+        function drawDroneLidar(xDrone, zDrone, segments, numRays = 40, maxRange = 2.0, spreadRad = Math.PI / 8) {
+          const [sx0, sy0] = worldToScreen(xDrone, zDrone);
+
+          for (let i = 0; i < numRays; i++) {
+            const spread = spreadRad;
+            const angle = Math.PI / 2 + (i / numRays - 0.5) * spread;
+
+            const dx = Math.cos(angle);
+            const dz = -Math.sin(angle);
+
+            let bestT = Infinity;
+            let hitX = xDrone;
+            let hitZ = zDrone;
+
+            let tGround = Infinity;
+            if (dz < -1e-6) {
+              const t = (0 - zDrone) / dz;
+              if (t > 0 && t < maxRange) {
+                tGround = t;
+              }
+            }
+
+            for (const seg of segments) {
+              const { x1, z1, x2, z2 } = seg;
+              const ux = x2 - x1;
+              const uz = z2 - z1;
+
+              const denom = dx * uz - dz * ux;
+              if (Math.abs(denom) < 1e-9) continue;
+
+              const t = ((x1 - xDrone) * uz - (z1 - zDrone) * ux) / denom;
+              const s = ((x1 - xDrone) * dz - (z1 - zDrone) * dx) / denom;
+
+              if (t > 0 && t < maxRange && s >= 0 && s <= 1) {
+                if (t < bestT) {
+                  bestT = t;
+                }
+              }
+            }
+
+            if (bestT < Infinity || tGround < Infinity) {
+              const tHit = Math.min(bestT, tGround);
+              hitX = xDrone + dx * tHit;
+              hitZ = zDrone + dz * tHit;
+            } else {
+              hitX = xDrone + dx * maxRange;
+              hitZ = zDrone + dz * maxRange;
+            }
+
+            const [sx1, sy1] = worldToScreen(hitX, hitZ);
+
+            ctx.strokeStyle = "rgba(30,30,30,0.35)";
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(sx0, sy0);
+            ctx.lineTo(sx1, sy1);
+            ctx.stroke();
+          }
+        }
+
+        function drawRightPanel(sPhase) {
+      if (!isFinite(zMin) || !isFinite(zMax) || FzMax <= 0) return;
+
+      const panelMargin = 16;
+      const panelW = W * 0.28;
+      const panelH = H * 0.8;
+
+      const x0 = W - panelW - panelMargin;
+      const y0 = (H - panelH) / 2;
+
+      ctx.save();
+      ctx.translate(x0, y0);
+
+      // Panel background + border
+      ctx.fillStyle = '#f9fafb';
+      ctx.fillRect(0, 0, panelW, panelH);
+      ctx.strokeStyle = '#e5e7eb';
+      ctx.lineWidth = 1;
+      ctx.strokeRect(0, 0, panelW, panelH);
+
+      const innerX = 10;
+      const innerY = 10;
+      const innerW = panelW - 2 * innerX;
+      const midY   = panelH * 0.5;
+
+      // ---------- z(t) in the top half ----------
+      const topBottom = innerY;
+      const topHeight = midY - innerY * 2;
+
+      ctx.strokeStyle = '#9ca3af';
+      ctx.lineWidth = 1;
+      // baseline (min z)
+      ctx.beginPath();
+      ctx.moveTo(innerX, topBottom + topHeight);
+      ctx.lineTo(innerX + innerW, topBottom + topHeight);
+      // ctx.stroke();
+
+      // z curve
+      ctx.strokeStyle = '#1f2933';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      for (let k = 0; k < N_CYCLE; k++) {
+        const s = k / (N_CYCLE - 1);
+        const x = innerX + s * innerW;
+
+        const zVal = zCycle[k];
+        const zNorm = (zMax > zMin) ? (zVal - zMin) / (zMax - zMin) : 0.0;
+        const y = topBottom + topHeight * (1.0 - zNorm);
+
+        if (k === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
       }
+      ctx.stroke();
+
+      // ---------- Fz(t) in the bottom half ----------
+      const bottomTop    = midY + innerY;
+      const bottomHeight = panelH - innerY - bottomTop;
+
+      ctx.strokeStyle = '#9ca3af';
+      ctx.lineWidth = 1;
+      // baseline (zero force)
+      ctx.beginPath();
+      ctx.moveTo(innerX, bottomTop + bottomHeight);
+      ctx.lineTo(innerX + innerW, bottomTop + bottomHeight);
+      // ctx.stroke();
+
+      ctx.strokeStyle = '#b91c1c';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      for (let k = 0; k < N_CYCLE; k++) {
+        const s = k / (N_CYCLE - 1);
+        const x = innerX + s * innerW;
+
+        const Fval = FzCycle[k];
+        const FNorm = FzMax > 0 ? (Fval / FzMax) : 0.0;
+        const y = bottomTop + bottomHeight * (1.0 - FNorm);
+
+        if (k === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+
+      // ---------- vertical marker for current phase ----------
+      const kNow = Math.floor(sPhase * N_CYCLE) % N_CYCLE;
+      const sNow = kNow / (N_CYCLE - 1);
+      const xNow = innerX + sNow * innerW;
+
+      ctx.strokeStyle = 'rgba(55,65,81,0.7)';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(xNow, innerY);
+      ctx.lineTo(xNow, panelH - innerY);
+      ctx.stroke();
+
+      // ---------- labels at bottom-right of each plot ----------
+      ctx.fillStyle = '#374151';
+      ctx.font = '10px sans-serif';
+      ctx.textAlign = 'right';
+      ctx.textBaseline = 'bottom';
+
+      // COM height label (bottom-right of top plot)
+      ctx.fillText(
+        'COM height z(t)',
+        innerX + innerW - 5,
+        topBottom + topHeight - 5
+      );
+
+      // GRF label (bottom-right of bottom plot)
+      ctx.fillText(
+        'GRF Fz(t)',
+        innerX + innerW - 5,
+        bottomTop + bottomHeight - 5
+      );
+
+      ctx.restore();
     }
-
-    function drawRightPanel(sPhase) {
-  if (!isFinite(zMin) || !isFinite(zMax) || FzMax <= 0) return;
-
-  const panelMargin = 16;
-  const panelW = W * 0.28;
-  const panelH = H * 0.8;
-
-  const x0 = W - panelW - panelMargin;
-  const y0 = (H - panelH) / 2;
-
-  ctx.save();
-  ctx.translate(x0, y0);
-
-  // Panel background + border
-  ctx.fillStyle = '#f9fafb';
-  ctx.fillRect(0, 0, panelW, panelH);
-  ctx.strokeStyle = '#e5e7eb';
-  ctx.lineWidth = 1;
-  ctx.strokeRect(0, 0, panelW, panelH);
-
-  const innerX = 10;
-  const innerY = 10;
-  const innerW = panelW - 2 * innerX;
-  const midY   = panelH * 0.5;
-
-  // ---------- z(t) in the top half ----------
-  const topBottom = innerY;
-  const topHeight = midY - innerY * 2;
-
-  ctx.strokeStyle = '#9ca3af';
-  ctx.lineWidth = 1;
-  // baseline (min z)
-  ctx.beginPath();
-  ctx.moveTo(innerX, topBottom + topHeight);
-  ctx.lineTo(innerX + innerW, topBottom + topHeight);
-  // ctx.stroke();
-
-  // z curve
-  ctx.strokeStyle = '#1f2933';
-  ctx.lineWidth = 2;
-  ctx.beginPath();
-  for (let k = 0; k < N_CYCLE; k++) {
-    const s = k / (N_CYCLE - 1);
-    const x = innerX + s * innerW;
-
-    const zVal = zCycle[k];
-    const zNorm = (zMax > zMin) ? (zVal - zMin) / (zMax - zMin) : 0.0;
-    const y = topBottom + topHeight * (1.0 - zNorm);
-
-    if (k === 0) ctx.moveTo(x, y);
-    else ctx.lineTo(x, y);
-  }
-  ctx.stroke();
-
-  // ---------- Fz(t) in the bottom half ----------
-  const bottomTop    = midY + innerY;
-  const bottomHeight = panelH - innerY - bottomTop;
-
-  ctx.strokeStyle = '#9ca3af';
-  ctx.lineWidth = 1;
-  // baseline (zero force)
-  ctx.beginPath();
-  ctx.moveTo(innerX, bottomTop + bottomHeight);
-  ctx.lineTo(innerX + innerW, bottomTop + bottomHeight);
-  // ctx.stroke();
-
-  ctx.strokeStyle = '#b91c1c';
-  ctx.lineWidth = 2;
-  ctx.beginPath();
-  for (let k = 0; k < N_CYCLE; k++) {
-    const s = k / (N_CYCLE - 1);
-    const x = innerX + s * innerW;
-
-    const Fval = FzCycle[k];
-    const FNorm = FzMax > 0 ? (Fval / FzMax) : 0.0;
-    const y = bottomTop + bottomHeight * (1.0 - FNorm);
-
-    if (k === 0) ctx.moveTo(x, y);
-    else ctx.lineTo(x, y);
-  }
-  ctx.stroke();
-
-  // ---------- vertical marker for current phase ----------
-  const kNow = Math.floor(sPhase * N_CYCLE) % N_CYCLE;
-  const sNow = kNow / (N_CYCLE - 1);
-  const xNow = innerX + sNow * innerW;
-
-  ctx.strokeStyle = 'rgba(55,65,81,0.7)';
-  ctx.lineWidth = 1.5;
-  ctx.beginPath();
-  ctx.moveTo(xNow, innerY);
-  ctx.lineTo(xNow, panelH - innerY);
-  ctx.stroke();
-
-  // ---------- labels at bottom-right of each plot ----------
-  ctx.fillStyle = '#374151';
-  ctx.font = '10px sans-serif';
-  ctx.textAlign = 'right';
-  ctx.textBaseline = 'bottom';
-
-  // COM height label (bottom-right of top plot)
-  ctx.fillText(
-    'COM height z(t)',
-    innerX + innerW - 5,
-    topBottom + topHeight - 5
-  );
-
-  // GRF label (bottom-right of bottom plot)
-  ctx.fillText(
-    'GRF Fz(t)',
-    innerX + innerW - 5,
-    bottomTop + bottomHeight - 5
-  );
-
-  ctx.restore();
-}
 
 
 
