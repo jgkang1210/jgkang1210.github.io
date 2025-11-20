@@ -1289,6 +1289,9 @@
         const vCycle  = new Array(N_CYCLE);   // COM vertical velocity
         const FzCycle = new Array(N_CYCLE);   // GRF(t) over cycle (extra, no mg)
 
+        let currentPeriod = BASE_T;               // seconds, updated per precompute
+        let currentDt     = BASE_T / (N_CYCLE-1); // seconds per sample
+
         let Kstar = 0.0;
         let zMin  = Infinity;
         let zMax  = -Infinity;
@@ -1357,6 +1360,8 @@
 
 
         function precomputeVerticalCycleForPeriod(T) {
+          currentPeriod = T;
+
           // (a) Impulse condition => periodic velocity
           const G = grfShapeIntegral();      // ∫_0^1 shape(u) du
           Kstar   = 1.0 / (stanceFrac * G);  // K * stanceFrac * G = 1 (independent of T)
@@ -1364,6 +1369,7 @@
           // (b) particular solution with z(0)=0, v(0)=0
           const { zPart, vPart, FzMax: localFzMax, dt } =
             integrateVerticalParticular(Kstar, T);
+          currentDt = dt;
 
           // (c) choose v0 so that z(T) = zInitUser (periodic height)
           const zPartEnd = zPart[N_CYCLE - 1];  // z_p(T)
@@ -1823,187 +1829,184 @@
           ctx.restore();
         }
 
+        // === Animation loop: pronk with foot flight + drone + lidar ===
+        let tSim = 0;
+        let lastTS = null;
+
+        function loop(ts) {
+          if (!lastTS) lastTS = ts;
+          const dt = Math.min((ts - lastTS) / 1000, 0.03);
+          lastTS = ts;
+          tSim += dt;
+
+          const T = BASE_T / pronkSpeedFactor;
+          const s = (tSim / T) % 1.0;
+          const inStance = (s < stanceFrac);
+          const flightPhase = inStance ? 0.0
+                                      : (s - stanceFrac) / (1 - stanceFrac);
+
+          // Precomputed physically consistent COM height
+          const idx = Math.floor(s * N_CYCLE) % N_CYCLE;
+          const zCOM = zCycle[idx];
+
+          // Horizontal COM & pitch
+          const bx = bezier5WithDerivs(ctrlX, s);
+          const bt = bezier5WithDerivs(ctrlTheta, s);
+          const xCOM  = bx.f;
+          const theta = bt.f;
+
+          // GRF (for drawing arrows)
+          let Fz_total = 0.0;
+          if (inStance) {
+            const sStance  = s / stanceFrac;
+            const shapeVal = bezier5(ctrlGRFShape, sStance);
+            const aExtra_t = Kstar * g * shapeVal;
+            Fz_total = m * (g + aExtra_t);
+          }
+
+          const Fz_front = 0.5 * Fz_total;
+          const Fz_back  = 0.5 * Fz_total;
+          const Fx_front = 0.0;
+          const Fx_back  = 0.0;
+
+          // Shoulder positions in world
+          const cTh = Math.cos(theta);
+          const sTh = Math.sin(theta);
+
+          const xb_hip = xCOM - lcm * cTh;
+          const zb_hip = zCOM - lcm * sTh;
+          const xf_hip = xCOM + lcm * cTh;
+          const zf_hip = zCOM + lcm * sTh;
+
+          // Feet: pronk -> all legs in phase
+          let footFrontX, footFrontZ, footBackX, footBackZ;
+
+          if (inStance) {
+            footFrontX = xf_hip;
+            footFrontZ = 0.0;
+            footBackX  = xb_hip;
+            footBackZ  = 0.0;
+          } else {
+            const swingX = bezier5(ctrlFootX, flightPhase);
+            const swingZ = bezier5(ctrlFootZ, flightPhase);
+
+            const liftFrontX = xf_hip - 0.5 * swingStep;
+            const liftBackX  = xb_hip - 0.5 * swingStep;
+
+            footFrontX = liftFrontX + swingX;
+            footFrontZ = swingZ;
+            footBackX  = liftBackX  + swingX;
+            footBackZ  = swingZ;
+          }
+
+          // Drone motion (triangle wave)
+          const dPhase = (tSim / T_drone) % 1.0;
+          let offsetX;
+          if (dPhase < 0.5) {
+            offsetX = -droneOffset + 4 * droneOffset * dPhase;
+          } else {
+            offsetX = droneOffset - 4 * droneOffset * (dPhase - 0.5);
+          }
+          const xDrone = xCOM + offsetX;
+          const zDrone = droneHeight;
+          const wingFrac = 1.0;
+
+          // Clear and draw
+          ctx.clearRect(0, 0, W, H);
+
+          // NEW: right-side plots of z(t) and Fz(t)
+          drawRightPanel(s);
+
+
+          drawGround();
+
+          const shoulders = drawBody(theta, xCOM, zCOM);
+
+          drawFoot(footFrontX, footFrontZ);
+          drawFoot(footBackX,  footBackZ);
+
+        // FRONT leg IK
+        const frontHipX = shoulders.shoulderFront.x;
+          const frontHipZ = shoulders.shoulderFront.z;
+
+          // Declare knees here so they’re visible later
+          let frontKneeX, frontKneeZ;
+          let backKneeX,  backKneeZ;
+
+          {
+            const relX =  (footFrontX - frontHipX) * cTh + (footFrontZ - frontHipZ) * sTh;
+            const relZ = -(footFrontX - frontHipX) * sTh + (footFrontZ - frontHipZ) * cTh;
+
+            const [a1, a2] = ikLeg(relX, relZ);
+
+            const kneeX_body = l1 * Math.cos(a1);
+            const kneeZ_body = l1 * Math.sin(a1);
+
+            // *** assign to outer variables, do NOT redeclare with const ***
+            frontKneeX = frontHipX + kneeX_body * cTh - kneeZ_body * sTh;
+            frontKneeZ = frontHipZ + kneeX_body * sTh + kneeZ_body * cTh;
+
+            const [hx_s, hz_s] = worldToScreen(frontHipX, frontHipZ);
+            const [kx_s, kz_s] = worldToScreen(frontKneeX, frontKneeZ);
+            const [fx_s, fz_s] = worldToScreen(footFrontX, footFrontZ);
+
+            drawSegment([hx_s, hz_s], [kx_s, kz_s], '#555555', QUAD_LEG_THICKNESS);
+            drawSegment([kx_s, kz_s], [fx_s, fz_s], '#555555', QUAD_LEG_THICKNESS);
+          }
+
+          // BACK leg IK
+          const backHipX = shoulders.shoulderBack.x;
+          const backHipZ = shoulders.shoulderBack.z;
+          {
+            const relX =  (footBackX - backHipX) * cTh + (footBackZ - backHipZ) * sTh;
+            const relZ = -(footBackX - backHipX) * sTh + (footBackZ - backHipZ) * cTh;
+
+            const [a1, a2] = ikLeg(relX, relZ);
+
+            const kneeX_body = l1 * Math.cos(a1);
+            const kneeZ_body = l1 * Math.sin(a1);
+
+            // *** assign to outer variables, do NOT redeclare with const ***
+            backKneeX = backHipX + kneeX_body * cTh - kneeZ_body * sTh;
+            backKneeZ = backHipZ + kneeX_body * sTh + kneeZ_body * cTh;
+
+            const [hx_s, hz_s] = worldToScreen(backHipX, backHipZ);
+            const [kx_s, kz_s] = worldToScreen(backKneeX, backKneeZ);
+            const [fx_s, fz_s] = worldToScreen(footBackX, footBackZ);
+
+            drawSegment([hx_s, hz_s], [kx_s, kz_s], '#555555', QUAD_LEG_THICKNESS);
+            drawSegment([kx_s, kz_s], [fx_s, fz_s], '#555555', QUAD_LEG_THICKNESS);
+          }
+
+          const segments = [
+            { x1: backHipX,  z1: backHipZ,  x2: frontHipX, z2: frontHipZ },
+            { x1: frontHipX, z1: frontHipZ, x2: frontKneeX, z2: frontKneeZ },
+            { x1: frontKneeX, z1: frontKneeZ, x2: footFrontX, z2: footFrontZ },
+            { x1: backHipX,  z1: backHipZ,  x2: backKneeX,  z2: backKneeZ },
+            { x1: backKneeX, z1: backKneeZ, x2: footBackX,  z2: footBackZ }
+          ];
+
+          drawCOM(xCOM, zCOM, theta);
+
+          if (inStance) {
+            drawForce(footFrontX, footFrontZ, Fx_front, Fz_front);
+            drawForce(footBackX,  footBackZ,  Fx_back,  Fz_back);
+          }
+
+          drawDrone(xDrone, zDrone, wingFrac);
+          const lidarSpreadRad = (lidarSpreadDeg * Math.PI) / 180.0;
+          drawDroneLidar(xDrone, zDrone, segments, 40, 2.8, lidarSpreadRad);
+
+          
 
 
 
-    // === Animation loop: pronk with foot flight + drone + lidar ===
-    let tSim = 0;
-    let lastTS = null;
+          requestAnimationFrame(loop);
+        }
 
-    function loop(ts) {
-      if (!lastTS) lastTS = ts;
-      const dt = Math.min((ts - lastTS) / 1000, 0.03);
-      lastTS = ts;
-      tSim += dt;
-
-      const T = BASE_T / pronkSpeedFactor;
-      const s = (tSim / T) % 1.0;
-      const inStance = (s < stanceFrac);
-      const flightPhase = inStance ? 0.0
-                                   : (s - stanceFrac) / (1 - stanceFrac);
-
-      // Precomputed physically consistent COM height
-      const idx = Math.floor(s * N_CYCLE) % N_CYCLE;
-      const zCOM = zCycle[idx];
-
-      // Horizontal COM & pitch
-      const bx = bezier5WithDerivs(ctrlX, s);
-      const bt = bezier5WithDerivs(ctrlTheta, s);
-      const xCOM  = bx.f;
-      const theta = bt.f;
-
-      // GRF (for drawing arrows)
-      let Fz_total = 0.0;
-      if (inStance) {
-        const sStance  = s / stanceFrac;
-        const shapeVal = bezier5(ctrlGRFShape, sStance);
-        const aExtra_t = Kstar * g * shapeVal;
-        Fz_total = m * (g + aExtra_t);
-      }
-
-      const Fz_front = 0.5 * Fz_total;
-      const Fz_back  = 0.5 * Fz_total;
-      const Fx_front = 0.0;
-      const Fx_back  = 0.0;
-
-      // Shoulder positions in world
-      const cTh = Math.cos(theta);
-      const sTh = Math.sin(theta);
-
-      const xb_hip = xCOM - lcm * cTh;
-      const zb_hip = zCOM - lcm * sTh;
-      const xf_hip = xCOM + lcm * cTh;
-      const zf_hip = zCOM + lcm * sTh;
-
-      // Feet: pronk -> all legs in phase
-      let footFrontX, footFrontZ, footBackX, footBackZ;
-
-      if (inStance) {
-        footFrontX = xf_hip;
-        footFrontZ = 0.0;
-        footBackX  = xb_hip;
-        footBackZ  = 0.0;
-      } else {
-        const swingX = bezier5(ctrlFootX, flightPhase);
-        const swingZ = bezier5(ctrlFootZ, flightPhase);
-
-        const liftFrontX = xf_hip - 0.5 * swingStep;
-        const liftBackX  = xb_hip - 0.5 * swingStep;
-
-        footFrontX = liftFrontX + swingX;
-        footFrontZ = swingZ;
-        footBackX  = liftBackX  + swingX;
-        footBackZ  = swingZ;
-      }
-
-      // Drone motion (triangle wave)
-      const dPhase = (tSim / T_drone) % 1.0;
-      let offsetX;
-      if (dPhase < 0.5) {
-        offsetX = -droneOffset + 4 * droneOffset * dPhase;
-      } else {
-        offsetX = droneOffset - 4 * droneOffset * (dPhase - 0.5);
-      }
-      const xDrone = xCOM + offsetX;
-      const zDrone = droneHeight;
-      const wingFrac = 1.0;
-
-      // Clear and draw
-      ctx.clearRect(0, 0, W, H);
-
-      // NEW: right-side plots of z(t) and Fz(t)
-      drawRightPanel(s);
-
-
-      drawGround();
-
-      const shoulders = drawBody(theta, xCOM, zCOM);
-
-      drawFoot(footFrontX, footFrontZ);
-      drawFoot(footBackX,  footBackZ);
-
-     // FRONT leg IK
-     const frontHipX = shoulders.shoulderFront.x;
-      const frontHipZ = shoulders.shoulderFront.z;
-
-      // Declare knees here so they’re visible later
-      let frontKneeX, frontKneeZ;
-      let backKneeX,  backKneeZ;
-
-      {
-        const relX =  (footFrontX - frontHipX) * cTh + (footFrontZ - frontHipZ) * sTh;
-        const relZ = -(footFrontX - frontHipX) * sTh + (footFrontZ - frontHipZ) * cTh;
-
-        const [a1, a2] = ikLeg(relX, relZ);
-
-        const kneeX_body = l1 * Math.cos(a1);
-        const kneeZ_body = l1 * Math.sin(a1);
-
-        // *** assign to outer variables, do NOT redeclare with const ***
-        frontKneeX = frontHipX + kneeX_body * cTh - kneeZ_body * sTh;
-        frontKneeZ = frontHipZ + kneeX_body * sTh + kneeZ_body * cTh;
-
-        const [hx_s, hz_s] = worldToScreen(frontHipX, frontHipZ);
-        const [kx_s, kz_s] = worldToScreen(frontKneeX, frontKneeZ);
-        const [fx_s, fz_s] = worldToScreen(footFrontX, footFrontZ);
-
-        drawSegment([hx_s, hz_s], [kx_s, kz_s], '#555555', QUAD_LEG_THICKNESS);
-        drawSegment([kx_s, kz_s], [fx_s, fz_s], '#555555', QUAD_LEG_THICKNESS);
-      }
-
-      // BACK leg IK
-      const backHipX = shoulders.shoulderBack.x;
-      const backHipZ = shoulders.shoulderBack.z;
-      {
-        const relX =  (footBackX - backHipX) * cTh + (footBackZ - backHipZ) * sTh;
-        const relZ = -(footBackX - backHipX) * sTh + (footBackZ - backHipZ) * cTh;
-
-        const [a1, a2] = ikLeg(relX, relZ);
-
-        const kneeX_body = l1 * Math.cos(a1);
-        const kneeZ_body = l1 * Math.sin(a1);
-
-        // *** assign to outer variables, do NOT redeclare with const ***
-        backKneeX = backHipX + kneeX_body * cTh - kneeZ_body * sTh;
-        backKneeZ = backHipZ + kneeX_body * sTh + kneeZ_body * cTh;
-
-        const [hx_s, hz_s] = worldToScreen(backHipX, backHipZ);
-        const [kx_s, kz_s] = worldToScreen(backKneeX, backKneeZ);
-        const [fx_s, fz_s] = worldToScreen(footBackX, footBackZ);
-
-        drawSegment([hx_s, hz_s], [kx_s, kz_s], '#555555', QUAD_LEG_THICKNESS);
-        drawSegment([kx_s, kz_s], [fx_s, fz_s], '#555555', QUAD_LEG_THICKNESS);
-      }
-
-      const segments = [
-        { x1: backHipX,  z1: backHipZ,  x2: frontHipX, z2: frontHipZ },
-        { x1: frontHipX, z1: frontHipZ, x2: frontKneeX, z2: frontKneeZ },
-        { x1: frontKneeX, z1: frontKneeZ, x2: footFrontX, z2: footFrontZ },
-        { x1: backHipX,  z1: backHipZ,  x2: backKneeX,  z2: backKneeZ },
-        { x1: backKneeX, z1: backKneeZ, x2: footBackX,  z2: footBackZ }
-      ];
-
-      drawCOM(xCOM, zCOM, theta);
-
-      if (inStance) {
-        drawForce(footFrontX, footFrontZ, Fx_front, Fz_front);
-        drawForce(footBackX,  footBackZ,  Fx_back,  Fz_back);
-      }
-
-      drawDrone(xDrone, zDrone, wingFrac);
-      const lidarSpreadRad = (lidarSpreadDeg * Math.PI) / 180.0;
-      drawDroneLidar(xDrone, zDrone, segments, 40, 2.8, lidarSpreadRad);
-
-      
-
-
-
-      requestAnimationFrame(loop);
-    }
-
-    requestAnimationFrame(loop);
-  });
-</script>
+        requestAnimationFrame(loop);
+      });
+    </script>
 
 
   
