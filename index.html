@@ -70,7 +70,7 @@
               <a href="https://www.youtube.com/channel/UCFgIAOABOFVNxNqHJX5T1Qg" target="_blank" rel="noopener">
                 research YouTube channel
               </a>
-              has &gt;13k subscribers and &gt;8.4M total views.
+              has &gt;13k subscribers and &gt;8.7M total views.
             </p>
 
             <!-- <p class="info">
@@ -150,10 +150,47 @@
         <section id="research" class="section">
           <h2>Selected Publications</h2>
 
-          <!-- SkillQuad / APT-RL (highlight) -->
+          <!-- Diffusion ReRoll (highlight) -->
           <article class="pub-item highlight-card">
             <div class="pub-media">
-              <video width="100%" muted autoplay loop playsinline>
+              <img src="images/reroll_task4.gif" width="100%" alt="Diffusion ReRoll task demonstration">
+            </div>
+            <div class="pub-text">
+              <a href="https://seonsoo-p1.github.io/DiffusionReRoll/" class="pub-title" target="_blank" rel="noopener">
+                Diffusion ReRoll: Revisable Denoising for Robotic Sequential Prediction
+              </a>
+              <div class="pub-authors">
+                <strong>
+                  <a href="https://seonsoo-p1.github.io/SeonsooKim.github.io/" target="_blank" rel="noopener">
+                    Seonsoo Kim
+                  </a>
+                </strong>,
+                Seongil Hong,
+                <strong>
+                  <a href="http://jgkang1210.github.io" target="_blank" rel="noopener">
+                    Jun-Gill Kang
+                  </a>
+                </strong>
+              </div>
+              <div class="pub-venue">
+                Preprint
+              </div>
+              <div class="pub-links">
+                <a href="https://seonsoo-p1.github.io/DiffusionReRoll/" target="_blank" rel="noopener">Project page</a> ·
+                <a href="https://arxiv.org/abs/2607.19919" target="_blank" rel="noopener">arXiv</a>
+              </div>
+              <p class="pub-desc">
+                Revisable denoising for robotic sequential prediction through structured re-noising and
+                cross-horizon refinement.
+              </p>
+            </div>
+          </article>
+
+          <!-- SkillQuad / APT-RL (highlight) -->
+          <article class="pub-item highlight-card">
+            <div class="pub-media media-sequence">
+              <img class="seq-image" src="images/scirobotics.2026.11.issue-116.largecover.jpg" alt="Science Robotics cover" width="100%">
+              <video class="seq-video" width="100%" muted playsinline style="display: none;">
                 <source src="images/skill_quad_square.mp4" type="video/mp4">
                 Your browser does not support the video tag.
               </video>
@@ -170,7 +207,7 @@
                 </strong>,
                 Jaehyun Park*, Tae-Gyu Song, Joon-Ha Kim, Seungwoo Hong, Hae-Won Park
               </div>
-              <div class="pub-venue">
+              <div class="pub-venue" style="color: red;">
                 Science Robotics, Cover Article, 2026
               </div>
               <div class="pub-links">
@@ -219,8 +256,8 @@
             </div>
           </article>
 
-          <!-- DMCM (highlight) -->
-          <article class="pub-item highlight-card">
+          <!-- DMCM -->
+          <article class="pub-item non-highlight-card">
             <div class="pub-media">
               <video width="100%" muted autoplay loop playsinline>
                 <source src="images/dmcm.mp4" type="video/mp4">
@@ -448,7 +485,7 @@
                 </div>
                 <h3 class="capTitle">KAIST HOUND</h3>
                 <p class="capSubtitle">
-                  06.2022~Current <br>
+                  06.2022~06.2026 <br>
                   Learning based control combined with Trajector optimization.<br>
                   Skills: Trajectory Optimization, RL, Representation learning, Perception <br>
                   <a href="https://youtu.be/duDYVmiQLTs" target="_blank" rel="noopener">Video</a>
@@ -537,7 +574,7 @@
                 </div>
                 <h3 class="capTitle">Perceptive locomotion</h3>
                 <p class="capSubtitle">
-                  06.2022~Current <br>
+                  06.2022~06.2026 <br>
                   Full-size quadruped · outdoor terrain · vision-based control.<br>
                   Skills: Perception, Depth Camera, 2D LiDAR, Sim-to-real <br>
                   <a href="https://youtu.be/duDYVmiQLTs" target="_blank" rel="noopener">Video</a>
@@ -552,7 +589,7 @@
                 </div>
                 <h3 class="capTitle">Navigation Foundation model</h3>
                 <p class="capSubtitle">
-                  12.2024~Current <br>
+                  12.2024~06.2026 <br>
                   Implement LiDAR based navigation foundation model. <br>
                   Skills: VLM, Large transformer training. Imitation learning. <br>
                   <a href="https://openreview.net/pdf?id=GiXJuo9LzK" target="_blank" rel="noopener">Technical report</a> ·
@@ -2049,7 +2086,31 @@
       });
     </script>
 
+    <script>
+      document.querySelectorAll('.media-sequence').forEach(function (container) {
+        var img = container.querySelector('.seq-image');
+        var video = container.querySelector('.seq-video');
+        if (!img || !video) return;
 
-  
+        function showImage() {
+          video.pause();
+          video.style.display = 'none';
+          img.style.display = 'block';
+          setTimeout(showVideo, 3000);
+        }
+
+        function showVideo() {
+          img.style.display = 'none';
+          video.style.display = 'block';
+          video.currentTime = 0;
+          video.play();
+        }
+
+        video.addEventListener('ended', showImage);
+        showImage();
+      });
+    </script>
+
+
   </body>
 </html>
